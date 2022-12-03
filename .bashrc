@@ -33,6 +33,11 @@ if ! shopt -oq posix; then
   fi
 fi
 
+# ^L to clear screen in vi mode
+set -o vi
+bind -m vi-command 'Control-l: clear-screen'
+bind -m vi-insert 'Control-l: clear-screen'
+
 # alias definitions, see .bash_aliases
 if [ -f ~/.bash_aliases ]; then
     . ~/.bash_aliases
@@ -77,12 +82,12 @@ esac
 ###### LANGUAGE AND TOOL CONFIGS
 
 # go path
-export GOPATH=$HOME/go
-export PATH=$PATH:/usr/local/go/bin:$GOPATH/bin
-export GPG_TTY=$(tty)
+#export GOPATH=$HOME/go
+#export PATH=$PATH:/usr/local/go/bin:$GOPATH/bin
+#export GPG_TTY=$(tty)
 
 # nvm path and dir
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+#export NVM_DIR="$HOME/.nvm"
+#[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+#[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
