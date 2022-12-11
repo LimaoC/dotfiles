@@ -1,4 +1,4 @@
-##### MISC
+# ----- MISC BASH CONFIG --------------------------------------------------------------------------------------------- #
 # if not running interactively, don't do anything
 case $- in
     *i*) ;;
@@ -14,6 +14,9 @@ shopt -s histappend    # append to the history file, don't overwrite it
 shopt -s checkwinsize  # check window size after each command and, if necessary, update LINES and COLUMNS
 
 set -o vi  # use vim bindings on command line
+# ^L to clear screen in vi mode
+bind -m vi-command 'Control-l: clear-screen'
+bind -m vi-insert 'Control-l: clear-screen'
 
 # make less more friendly for non-text input files, see lesspipe(1)
 [ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
@@ -33,17 +36,12 @@ if ! shopt -oq posix; then
   fi
 fi
 
-# ^L to clear screen in vi mode
-set -o vi
-bind -m vi-command 'Control-l: clear-screen'
-bind -m vi-insert 'Control-l: clear-screen'
-
 # alias definitions, see .bash_aliases
 if [ -f ~/.bash_aliases ]; then
     . ~/.bash_aliases
 fi
 
-##### COLOUR
+# ----- COLOUR ------------------------------------------------------------------------------------------------------- #
 # set a fancy prompt (non-color, unless we know we "want" color)
 case "$TERM" in
     xterm-color|*-256color) color_prompt=yes;;
@@ -55,7 +53,8 @@ if [ -n "$force_colour_prompt" ]; then
 	# We have color support; assume it's compliant with Ecma-48
 	# (ISO/IEC-6429). (Lack of such support is extremely rare, and such
 	# a case would tend to support setf rather than setaf.)
-    PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u \[\033[01;35m\]@\[\033[00m\] \[\033[01;34m\]\w\[\033[00m\] \[\033[01;35m\]» \[\033[00m\]'
+    PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u \[\033[01;35m\]@\[\033[00m\] '
+    PS1+='\[\033[01;34m\]\w\[\033[00m\] \[\033[01;35m\]» \[\033[00m\]'
     else
     PS1='${debian_chroot:+($debian_chroot)}\u @ \w » '
     fi
@@ -79,12 +78,11 @@ xterm*|rxvt*)
     ;;
 esac
 
-###### LANGUAGE AND TOOL CONFIGS
+# ----- LANGUAGE AND PROGRAM CONFIGS --------------------------------------------------------------------------------- #
 
 # go path
-#export GOPATH=$HOME/go
-#export PATH=$PATH:/usr/local/go/bin:$GOPATH/bin
-#export GPG_TTY=$(tty)
+export GOPATH=$HOME/.go
+export PATH=$PATH:/usr/local/go/bin:$GOPATH/bin
 
 # nvm path and dir
 #export NVM_DIR="$HOME/.nvm"
