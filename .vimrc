@@ -6,6 +6,7 @@ set background=dark             " use a dark background by default
 set backspace=indent,eol,start  " allow backspace to work across lines
 set expandtab                   " write tabs as spaces
 set number                      " show line numbers
+set relativenumber              " relative line numbering
 set ruler                       " display ruler in bottom right corner
 set shiftwidth=4                " set number of columns to indent with '>' & '<'
 set softtabstop=4               " set the number of spaces a tab counts as
