@@ -13,11 +13,6 @@ PROMPT_DIRTRIM=3         # shorten directory path to 3 max
 shopt -s histappend    # append to the history file, don't overwrite it
 shopt -s checkwinsize  # check window size after each command and, if necessary, update LINES and COLUMNS
 
-set -o vi  # use vim bindings on command line
-# ^L to clear screen in vi mode
-bind -m vi-command 'Control-l: clear-screen'
-bind -m vi-insert 'Control-l: clear-screen'
-
 # make less more friendly for non-text input files, see lesspipe(1)
 [ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
 
@@ -83,6 +78,10 @@ esac
 # go path
 export GOPATH=$HOME/.go
 export PATH=$PATH:/usr/local/go/bin:$GOPATH/bin
+
+# set nvim as default
+export EDITOR=nvim
+export VISUAL=nvim
 
 # nvm path and dir
 #export NVM_DIR="$HOME/.nvm"
