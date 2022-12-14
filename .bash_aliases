@@ -1,9 +1,6 @@
 # for managing dotfiles repository. see https://www.atlassian.com/git/tutorials/dotfiles
 alias config='/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME'
 
-# see https://github.com/NVIDIA/egl-wayland/issues/41
-alias gnome-extensions-app='__EGL_VENDOR_LIBRARY_FILENAMES=/usr/share/glvnd/egl_vendor.d/50_mesa.json gnome-extensions-app'
-
 # ls, dir, grep color support
 if [ -x /usr/bin/dircolors ]; then
     alias ls='ls --color=auto'
