@@ -79,7 +79,7 @@ esac
 export GOPATH=$HOME/.go
 export PATH=$PATH:/usr/local/go/bin:$GOPATH/bin
 
-# set nvim as default
+# set nvim as default editor
 export EDITOR=nvim
 export VISUAL=nvim
 
@@ -87,4 +87,39 @@ export VISUAL=nvim
 #export NVM_DIR="$HOME/.nvm"
 #[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 #[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+# ----- WELCOME MESSAGE ---------------------------------------------------------------------------------------------- #
+
+red='\033[1;31m'  # red
+ylw='\033[1;33m'  # yellow
+grn='\033[1;32m'  # green
+cyn='\033[1;36m'  # cyan
+blu='\033[1;34m'  # blue
+mgt='\033[1;35m'  # magenta
+rst='\033[0m'     # default (no colour)
+
+echo -e "
+${grn}   @@@@      %@@                             
+${grn}     @@       @@                             
+${cyn}     @@                                      
+${cyn}     @@                                      
+${blu}     @@      @@@     @@@  /@@@@@ /@@@@@@     
+${blu}     @@       @@       @/@@/   @@@/    @@    
+${mgt}     @@       @@       @@/     @@      @@@   
+${mgt}     @@       @@       @@      @@      @@@   
+${red}     @@       @@       @@      @@      @@@   
+${red}     @@       @@       @@      @@      @@@   
+${ylw}     @@       @@       @@      @@      @@@   
+${ylw}   @@@@@@   @@@@@@   @@@@@@  @@@@@@  @@@@@@@ 
+${rst}                                             
+${grn}                        @@                   
+${grn}    @@@@                 @@         @@@@@    
+${cyn}  &@/   @@                @@      @@      @  
+${cyn}      @@@@    @@@@@@@@@@@@@@@@    @       #@ 
+${blu}  @@&/  @@                @@     .@       #@.
+${blu} @@@   /@@ @             @@       @/      @% 
+${mgt}   @@@@  @@             @@          @@@@@@   
+${rst}                                             "
+
+unset red ylw grn cyn blu mgt rst
 
