@@ -20,7 +20,7 @@ Installation instructions [here](https://sw.kovidgoyal.net/kitty/binary/).
 
 ### Configuration
 Configuration files can be found [here](/.config/kitty) (`./config/kitty/`). Notably:
-- Colour theme: [Tokyo Night](https://github.com/enkia/tokyo-night-vscode-theme)
+- Colour theme: Based on [Tokyo Night](https://github.com/davidmathers/tokyo-night-kitty-theme) with some minor changes
 - Font: [Fira Code](https://github.com/tonsky/FiraCode)
 
 ### Keyboard Shortcuts
@@ -125,9 +125,14 @@ The keyboard shortcuts are mostly based on the default Gnome Terminal shortcuts,
 
 ### Miscellaneous
 
-- To make kitty the default terminal on Ubuntu (which lets you use `ctrl + alt + t` to open kitty), run the following commands:
+- To make kitty the default terminal on Ubuntu (which lets you use `ctrl + alt + t` on Ubuntu to open kitty), run the following commands:
     ```
     sudo update-alternatives --install /usr/bin/x-terminal-emulator x-terminal-emulator `which kitty` 50
     sudo update-alternatives --config x-terminal-emulator
     ```
     and select kitty (this assumes `kitty` is on your `$PATH`).
+
+## Other
+
+- [Wallpaper](https://wall.alphacoders.com/big.php?i=569560)
+
