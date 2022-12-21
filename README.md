@@ -9,6 +9,7 @@
 
 ### Gnome Shell Extensions
 - [Blur my Shell](https://extensions.gnome.org/extension/3193/blur-my-shell/): Adds a blur look to different parts of the GNOME Shell, including the top panel, dash, and overview.
+- [Rounded Window Corners](https://extensions.gnome.org/extension/5237/rounded-window-corners/): Add rounded corners for all windows
 - [Unite](https://extensions.gnome.org/extension/1287/unite/): Makes a few layout tweaks to the top panel and removes window decorations to make it look like Ubuntu Unity Shell.
 
 Tutorial for installing gnome shell extensions [here](https://itsfoss.com/gnome-shell-extensions/).
