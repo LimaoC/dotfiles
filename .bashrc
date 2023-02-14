@@ -75,6 +75,9 @@ esac
 
 # ----- LANGUAGE AND PROGRAM CONFIGS --------------------------------------------------------------------------------- #
 
+# ghcup-env
+[ -f "/home/limao/.ghcup/env" ] && source "/home/limao/.ghcup/env"
+
 # go path
 export GOPATH=$HOME/.go
 export PATH=$PATH:/usr/local/go/bin:$GOPATH/bin
