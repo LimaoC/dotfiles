@@ -2,6 +2,14 @@
     <h1>Limao's Dotfiles</h1>
 </center>
 
+## Overview
+
+- OS: Ubuntu
+- Desktop environment: [Gnome](#gnome)
+- Terminal emulator: [kitty](#kitty)
+- Terminal shell: Bash
+- Text editor: [Neovim](#neovim)
+
 ## Gnome
 
 ### GTK Icons
@@ -12,7 +20,7 @@
 - [Rounded Window Corners](https://extensions.gnome.org/extension/5237/rounded-window-corners/): Add rounded corners for all windows
 - [Unite](https://extensions.gnome.org/extension/1287/unite/): Makes a few layout tweaks to the top panel and removes window decorations to make it look like Ubuntu Unity Shell.
 
-Tutorial for installing gnome shell extensions [here](https://itsfoss.com/gnome-shell-extensions/).
+Tutorial for installing Gnome shell extensions [here](https://itsfoss.com/gnome-shell-extensions/).
 
 ## kitty
 
@@ -20,8 +28,8 @@ Tutorial for installing gnome shell extensions [here](https://itsfoss.com/gnome-
 Installation instructions [here](https://sw.kovidgoyal.net/kitty/binary/). 
 
 ### Configuration
-Configuration files can be found [here](/.config/kitty) (`./config/kitty/`). Notably:
-- Colour theme: Based on [Tokyo Night](https://github.com/davidmathers/tokyo-night-kitty-theme) with some minor changes
+My configuration files can be found [here](/.config/kitty) (`/.config/kitty/`). Notably:
+- Colour theme: Based on [Tokyo Night](https://github.com/davidmathers/tokyo-night-kitty-theme), with some minor changes
 - Font: [Fira Code](https://github.com/tonsky/FiraCode)
 
 ### Keyboard Shortcuts
@@ -133,7 +141,30 @@ The keyboard shortcuts are mostly based on the default Gnome Terminal shortcuts,
     ```
     and select kitty (this assumes `kitty` is on your `$PATH`).
 
+## Neovim
+
+### Installation
+Installation instructions [here](https://github.com/neovim/neovim/wiki/Installing-Neovim).
+
+### Configuration
+My configuration files can be found [here](/.config/nvim) (`/.config/nvim`). The basic configuration derives from `.vimrc`, which is where some of the more "basic" configuration options can be found.
+
+### Generic Plugins
+- [packer.nvim](https://github.com/wbthomason/packer.nvim): Plugin/package management for Neovim.
+  - Note: Cloning my config will automatically install and set up `packer.nvim`.
+- [nvim-lspconfig](https://github.com/neovim/nvim-lspconfig): Configs for the Neovim LSP client.
+  - Make sure you install the language servers for the languages you actually use. Documentation on the LSP configs provided by `nvim-lspconfig` is provided [here](https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md).
+- [nvim-cmp](https://github.com/hrsh7th/nvim-cmp): Completion engine for Neovim.
+- [cmp-nvim-lsp](https://github.com/hrsh7th/cmp-nvim-lsp): `nvim-cmp` source for Neovim's built-in language server client.
+- [nvim-snippy](https://github.com/dcampos/nvim-snippy): Snippets plugin for Neovim.
+- [cmp-snippy](https://github.com/dcampos/cmp-snippy): `nvim-snippy` source for `nvim-cmp`.
+
+### Themes
+- [TokyoNight.nvim](https://github.com/folke/tokyonight.nvim/): Tokyo Night theme for Neovim.
+
+### Miscellaneous
+- If you're using Wayland (like me), you might need to `apt install wl-clipboard` to get copy/paste with the system clipboard working in Neovim.
+
 ## Other
 
-- [Wallpaper](https://wall.alphacoders.com/big.php?i=569560)
-
+- [Wallpaper](https://wall.alphacoders.com/big.php?i=1163116)

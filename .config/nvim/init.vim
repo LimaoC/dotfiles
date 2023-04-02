@@ -4,3 +4,5 @@ source ~/.vimrc
 
 lua require('plugins')
 lua require('lsconfig')
+lua require('themeconfig')
+

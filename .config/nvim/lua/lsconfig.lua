@@ -1,6 +1,11 @@
--- Mappings.
+--{{ LSP config
+-- https://github.com/neovim/nvim-lspconfig
+
+local lspconfig = require('lspconfig')
+
+-- Global mappings.
 -- See `:help vim.diagnostic.*` for documentation on any of the below functions
-local opts = { noremap = true, silent = true }
+local opts = { noremap=true, silent=true }
 vim.keymap.set('n', '<space>e', vim.diagnostic.open_float, opts)
 vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, opts)
 vim.keymap.set('n', ']d', vim.diagnostic.goto_next, opts)
@@ -27,67 +32,81 @@ local on_attach = function(client, bufnr)
     vim.keymap.set('n', '<space>ca', vim.lsp.buf.code_action, bufopts)
     vim.keymap.set('n', 'gr', vim.lsp.buf.references, bufopts)
     vim.keymap.set('n', '<space>f', function() vim.lsp.buf.format { async = true } end, bufopts)
+
+    -- Set some keybinds conditional on server capabilities
+    if client.server_capabilities.document_formatting then
+        vim.keymap.set('n', '<space>f', vim.lsp.buf.formatting, bufopts)
+    elseif client.server_capabilities.document_range_formatting then
+        vim.keymap.set('n', '<space>f', vim.lsp.buf.range_formatting, bufopts)
+    end
 end
 
-local lsp_flags = {
-  debounce_text_changes = 150,  -- This is the default in Nvim 0.7+
-}
+--}}
+--{{ nvim-cmp, cmp-nvim-lsp, nvim-snippy, cmp-snippy config
+-- https://github.com/neovim/nvim-lspconfig/wiki/Autocompletion
+-- https://github.com/hrsh7th/nvim-cmp
+-- https://github.com/hrsh7th/cmp-nvim-lsp
+-- https://github.com/dcampos/nvim-snippy
+-- https://github.com/dcampos/cmp-snippy
 
--- Add additional capabilities supported by nvim-cmp
+-- Additional LSP configs supported by nvim-cmp
 local capabilities = require("cmp_nvim_lsp").default_capabilities()
 
 -- Enable language servers
-local servers = { 'julials' }
+local servers = { 'julials', 'pyright' }
 for _, lsp in ipairs(servers) do
-    require('lspconfig')['julials'].setup {
+    lspconfig[lsp].setup {
         on_attach = on_attach,
-        flags = lsp_flags,
         capabilities = capabilities
     }
 end
 
--- luasnip setup
-local luasnip = require 'luasnip'
+-- Setup snippy
+local snippy = require('snippy')
 
--- nvim-cmp setup
-local cmp = require 'cmp'
+-- Setup nvim-cmp
+local cmp = require('cmp')
 cmp.setup {
-  snippet = {
-    expand = function(args)
-      luasnip.lsp_expand(args.body)
-    end,
-  },
-  mapping = cmp.mapping.preset.insert({
-    ['<C-d>'] = cmp.mapping.scroll_docs(-4),
-    ['<C-f>'] = cmp.mapping.scroll_docs(4),
-    ['<C-Space>'] = cmp.mapping.complete(),
-    ['<CR>'] = cmp.mapping.confirm {
-      behavior = cmp.ConfirmBehavior.Replace,
-      select = true,
+    snippet = {
+        expand = function(args)
+            snippy.expand_snippet(args.body)
+        end,
     },
-    ['<Tab>'] = cmp.mapping(function(fallback)
-      if cmp.visible() then
-        cmp.select_next_item()
-      elseif luasnip.expand_or_jumpable() then
-        luasnip.expand_or_jump()
-      else
-        fallback()
-      end
-    end, { 'i', 's' }),
-    ['<S-Tab>'] = cmp.mapping(function(fallback)
-      if cmp.visible() then
-        cmp.select_prev_item()
-      elseif luasnip.jumpable(-1) then
-        luasnip.jump(-1)
-      else
-        fallback()
-      end
-    end, { 'i', 's' }),
-  }),
-  sources = {
-    { name = 'nvim_lsp' },
-    { name = 'luasnip' },
-  },
+    window = {
+        completion = cmp.config.window.bordered(),
+        documentation = cmp.config.window.bordered(),
+    },
+    mapping = cmp.mapping.preset.insert({
+        ['<C-u>'] = cmp.mapping.scroll_docs(-4),            -- Scroll up in documentation
+        ['<C-d>'] = cmp.mapping.scroll_docs(4),             -- Scroll down in documentation
+        ['<C-Space>'] = cmp.mapping.complete(),             -- Invoke completion
+        ['<CR>'] = cmp.mapping.confirm({ select = true }),  -- Accept currently selected item
+        ['<Tab>'] = cmp.mapping(function(fallback)          -- Select next completion item if 
+            if cmp.visible() then                           --   the completion menu is visible.
+                cmp.select_next_item()                      --   Otherwise, expands the current
+            elseif snippy.can_expand_or_advance() then      --   trigger (if possible) or jumps
+                snippy.expand_or_advance()                  --   to the nextavailable tab stop
+            else                                            --   if either can be performed.
+                fallback()
+            end
+        end, { 'i', 's' }),
+        ['<S-Tab>'] = cmp.mapping(function(fallback)        -- Select previous completion item
+            if cmp.visible() then                           --   if the completion menu is
+                cmp.select_prev_item()                      --   visible.
+            elseif snippy.can_jump(-1) then
+                snippy.previous()
+            else
+                fallback()
+            end
+        end, { 'i', 's' }),
+    }),
+    sources = cmp.config.sources({
+        { name = 'nvim_lsp' },
+        { name = 'snippy' },
+    }),
+    experimental = {
+        ghost_text = true,
+    }
 }
 
 -- haskell-tools setup
@@ -104,6 +123,7 @@ ht.setup {
     end,
   },
 }
+
 -- Suggested keymaps that do not depend on haskell-language-server
 -- Toggle a GHCi repl for the current package
 vim.keymap.set('n', '<leader>rr', ht.repl.toggle, def_opts)
@@ -112,3 +132,33 @@ vim.keymap.set('n', '<leader>rf', function()
   ht.repl.toggle(vim.api.nvim_buf_get_name(0))
 end, def_opts)
 vim.keymap.set('n', '<leader>rq', ht.repl.quit, def_opts)
+
+vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
+	vim.lsp.diagnostic.on_publish_diagnostics, {
+		virtual_text = false,
+		underline = true,
+		signs = true,
+	}
+)
+
+-- https://github.com/folke/trouble.nvim
+-- Trouble keybindings
+vim.keymap.set("n", "<leader>xx", "<cmd>TroubleToggle<cr>",
+  {silent = true, noremap = true}
+)
+vim.keymap.set("n", "<leader>xw", "<cmd>TroubleToggle workspace_diagnostics<cr>",
+  {silent = true, noremap = true}
+)
+vim.keymap.set("n", "<leader>xd", "<cmd>TroubleToggle document_diagnostics<cr>",
+  {silent = true, noremap = true}
+)
+vim.keymap.set("n", "<leader>xl", "<cmd>TroubleToggle loclist<cr>",
+  {silent = true, noremap = true}
+)
+vim.keymap.set("n", "<leader>xq", "<cmd>TroubleToggle quickfix<cr>",
+  {silent = true, noremap = true}
+)
+vim.keymap.set("n", "gR", "<cmd>TroubleToggle lsp_references<cr>",
+  {silent = true, noremap = true}
+)
+

@@ -13,6 +13,7 @@ set softtabstop=4               " set the number of spaces a tab counts as
 set tabstop=4                   " set number of visual spaces per tab
 set t_Co=256                    " allow vim to display all colours
 set wildmenu                    " turn on autocomplete menu
+set nowrap                      " no word wrapping (this is my preference)
 
 " use block cursor in normal mode and i-beam in insert mode
 let &t_SI = "\e[6 q"
