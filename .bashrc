@@ -94,38 +94,36 @@ export NVM_DIR="$HOME/.nvm"
 # yarn path
 export PATH=$PATH:$HOME/.yarn/bin
 
+# texlive path
+export PATH=$PATH:/usr/local/texlive/2022/bin/x86_64-linux
+
+# spicetify path
+export PATH=$PATH:$HOME/.spicetify
+
 # ----- WELCOME MESSAGE ---------------------------------------------------------------------------------------------- #
 
-red='\033[1;31m'  # red
-ylw='\033[1;33m'  # yellow
-grn='\033[1;32m'  # green
-cyn='\033[1;36m'  # cyan
-blu='\033[1;34m'  # blue
-mgt='\033[1;35m'  # magenta
-rst='\033[0m'     # default (no colour)
-
+# note: you will need to install `lolcat` for this to work
 echo -e "
-${grn}   @@@@      %@@                             
-${grn}     @@       @@                             
-${cyn}     @@                                      
-${cyn}     @@                                      
-${blu}     @@      @@@     @@@  /@@@@@ /@@@@@@     
-${blu}     @@       @@       @/@@/   @@@/    @@    
-${mgt}     @@       @@       @@/     @@      @@@   
-${mgt}     @@       @@       @@      @@      @@@   
-${red}     @@       @@       @@      @@      @@@   
-${red}     @@       @@       @@      @@      @@@   
-${ylw}     @@       @@       @@      @@      @@@   
-${ylw}   @@@@@@   @@@@@@   @@@@@@  @@@@@@  @@@@@@@ 
-${rst}                                             
-${grn}                        @@                   
-${grn}    @@@@                 @@         @@@@@    
-${cyn}  &@/   @@                @@      @@      @  
-${cyn}      @@@@    @@@@@@@@@@@@@@@@    @       #@ 
-${blu}  @@&/  @@                @@     .@       #@.
-${blu} @@@   /@@ @             @@       @/      @% 
-${mgt}   @@@@  @@             @@          @@@@@@   
-${rst}                                             "
+  @@@@      %@@                             
+    @@       @@                             
+    @@                                      
+    @@                                      
+    @@      @@@     @@@  /@@@@@ /@@@@@@     
+    @@       @@       @/@@/   @@@/    @@    
+    @@       @@       @@/     @@      @@@   
+    @@       @@       @@      @@      @@@   
+    @@       @@       @@      @@      @@@   
+    @@       @@       @@      @@      @@@   
+    @@       @@       @@      @@      @@@   
+  @@@@@@   @@@@@@   @@@@@@  @@@@@@  @@@@@@@ 
+                                            
+                       @@                   
+   @@@@                 @@         @@@@@    
+ &@/   @@                @@      @@      @  
+     @@@@    @@@@@@@@@@@@@@@@    @       #@ 
+ @@&/  @@                @@     .@       #@.
+@@@   /@@ @             @@       @/      @% 
+  @@@@  @@             @@          @@@@@@   
+                                            " | lolcat
 
-unset red ylw grn cyn blu mgt rst
 
