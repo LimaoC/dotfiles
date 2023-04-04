@@ -1,6 +1,5 @@
-syntax on  " enable syntax highlighting
-
-filetype indent on  " allow loading of language specific indentation
+syntax on                  " enable syntax highlighting
+filetype plugin indent on  " allow loading of language specific indentation
 
 set background=dark             " use a dark background by default
 set backspace=indent,eol,start  " allow backspace to work across lines
@@ -15,9 +14,8 @@ set t_Co=256                    " allow vim to display all colours
 set wildmenu                    " turn on autocomplete menu
 set nowrap                      " no word wrapping (this is my preference)
 
-" use block cursor in normal mode and i-beam in insert mode
-let &t_SI = "\e[6 q"
-let &t_EI = "\e[2 q"
+let &t_SI = "\e[6 q"  " block cursor in normal mode
+let &t_EI = "\e[2 q"  " i-beam in insert mode
 " reset the cursor on start (for older versions of vim, usually not required)
 augroup myCmds
 au!

@@ -11,6 +11,7 @@
 - Text editor: [Neovim](#neovim)
 
 ## Gnome
+Tutorial for installing Gnome shell extensions [here](https://itsfoss.com/gnome-shell-extensions/).
 
 ### GTK Icons
 - [Papirus](https://www.gnome-look.org/p/1166289)
@@ -19,8 +20,6 @@
 - [Blur my Shell](https://extensions.gnome.org/extension/3193/blur-my-shell/): Adds a blur look to different parts of the GNOME Shell, including the top panel, dash, and overview.
 - [Rounded Window Corners](https://extensions.gnome.org/extension/5237/rounded-window-corners/): Add rounded corners for all windows
 - [Unite](https://extensions.gnome.org/extension/1287/unite/): Makes a few layout tweaks to the top panel and removes window decorations to make it look like Ubuntu Unity Shell.
-
-Tutorial for installing Gnome shell extensions [here](https://itsfoss.com/gnome-shell-extensions/).
 
 ## kitty
 
@@ -161,6 +160,10 @@ My configuration files can be found [here](/.config/nvim) (`/.config/nvim`). The
 
 ### Themes
 - [TokyoNight.nvim](https://github.com/folke/tokyonight.nvim/): Tokyo Night theme for Neovim.
+
+### Language Specific
+- [haskell-tools.nvim](https://github.com/mrcjkb/haskell-tools.nvim): Configures `haskell-language-server` and integrates with other Haskell tools.
+- [vimtex](https://github.com/lervag/vimtex): LaTeX in (Neo)vim.
 
 ### Miscellaneous
 - If you're using Wayland (like me), you might need to `apt install wl-clipboard` to get copy/paste with the system clipboard working in Neovim.
