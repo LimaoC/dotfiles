@@ -163,7 +163,7 @@ My configuration files can be found [here](/.config/nvim) (`/.config/nvim`). The
 
 ### Language Specific
 - [haskell-tools.nvim](https://github.com/mrcjkb/haskell-tools.nvim): Configures `haskell-language-server` and integrates with other Haskell tools.
-- [vimtex](https://github.com/lervag/vimtex): LaTeX in (Neo)vim.
+- [vimtex](https://github.com/lervag/vimtex): LaTeX in (Neo)vim. I use [Zathura](https://pwmt.org/projects/zathura/) as a pdf viewer when editing LaTeX files.
 
 ### Miscellaneous
 - If you're using Wayland (like me), you might need to `apt install wl-clipboard` to get copy/paste with the system clipboard working in Neovim.
