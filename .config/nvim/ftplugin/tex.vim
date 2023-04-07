@@ -17,4 +17,5 @@ let g:vimtex_syntax_conceal = {
     \}
 
 set conceallevel=2  " syntax concealing
+set wrap            " latex lines tend to be longer so wrapping is more desirable
 

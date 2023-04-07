@@ -53,7 +53,7 @@ end
 local capabilities = require("cmp_nvim_lsp").default_capabilities()
 
 -- Enable language servers
-local servers = { 'julials', 'pyright' }
+local servers = { 'julials', 'pyright', 'texlab' }
 for _, lsp in ipairs(servers) do
     lspconfig[lsp].setup {
         on_attach = on_attach,

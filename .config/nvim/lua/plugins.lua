@@ -22,13 +22,22 @@ vim.cmd([[
 
 return require('packer').startup(function(use)
     -- generic plugins
-    use 'wbthomason/packer.nvim'             -- Package manager
-    use 'neovim/nvim-lspconfig'              -- nvim LSP configs
-    use 'hrsh7th/nvim-cmp'                   -- nvim completion engine
-    use 'hrsh7th/cmp-nvim-lsp'               -- nvim-cmp source for nvim LSP
-    use 'dcampos/nvim-snippy'                -- Snippets plugin
-    use 'dcampos/cmp-snippy'                 -- Snippets source for nvim-cmp
-    use {
+    use 'wbthomason/packer.nvim'                 -- Package manager
+    use 'neovim/nvim-lspconfig'                  -- nvim LSP configs
+    use 'hrsh7th/nvim-cmp'                       -- nvim completion engine
+    use 'hrsh7th/cmp-nvim-lsp'                   -- nvim-cmp source for nvim LSP
+    use 'dcampos/nvim-snippy'                    -- Snippets plugin
+    use 'dcampos/cmp-snippy'                     -- Snippets source for nvim-cmp
+    use 'honza/vim-snippets'                     -- Snippets for various languages
+    use 'Raimondi/delimitMate'                   -- Auto close quotes, brackets, etc.
+    use {                                        -- Fuzzy finder
+        'junegunn/fzf.vim',
+        requires = {
+            'junegunn/fzf',
+            run = ':call fzf#install()'
+        }
+    }
+    use {                                        -- Diagnostics, references, quickfixes lists
       'folke/trouble.nvim',
       requires = 'nvim-tree/nvim-web-devicons',
       config = function()
@@ -36,17 +45,17 @@ return require('packer').startup(function(use)
       end
     }
     -- themes
-    use 'folke/tokyonight.nvim'              -- Tokyo Night theme
+    use 'folke/tokyonight.nvim'                  -- Tokyo Night theme
     -- language specific
-    use {                                    -- Configures `haskell-language-server`
-        'mrcjkb/haskell-tools.nvim',         -- and integrates with other haskell tools
+    use {                                        -- Configures `haskell-language-server`
+        'mrcjkb/haskell-tools.nvim',             -- and integrates with other haskell tools
         requires = {
             'nvim-lua/plenary.nvim',
-            -- 'nvim-telescope/telescope.nvim', -- optional
+            -- 'nvim-telescope/telescope.nvim',  -- optional
         },
-        branch = '1.x.x',                    -- recommended (stable branch)
+        branch = '1.x.x',                        -- recommended (stable branch)
     }
-    use 'lervag/vimtex'
+    use 'lervag/vimtex'                          -- latex in vim
 
     -- Automatically install and set up packer.nvim on any machine this config is cloned to
     if packer_bootstrap then
