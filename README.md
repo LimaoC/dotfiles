@@ -7,7 +7,7 @@
 - OS: Ubuntu
 - Desktop environment: [Gnome](#gnome)
 - Terminal emulator: [kitty](#kitty)
-- Terminal shell: Bash
+- Terminal shell: zsh with [Oh My Zsh](#oh-my-zsh)
 - Text editor: [Neovim](#neovim)
 
 ## Gnome
@@ -140,13 +140,28 @@ The keyboard shortcuts are mostly based on the default Gnome Terminal shortcuts,
     ```
     and select kitty (this assumes `kitty` is on your `$PATH`).
 
+## Oh My Zsh
+### Installation
+Installation instructions [here](https://github.com/ohmyzsh/ohmyzsh).
+
+### Configuration
+My configuration files can be found in [here](/.zshrc) (`/.zshrc`) and [here](/.oh-my-zsh-custom) (`/.oh-my-zsh-custom`) (note that I use `$ZSH_CUSTOM = ~/.oh-my-zsh-custom`).
+
+### Plugins
+- [Git](https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/git): Provides some aliases and useful functions. Built-in to Oh My Zsh.
+- [zsh-autosuggestions](https://github.com/zsh-users/zsh-autosuggestions): Suggests commands as you type based on history and completions.
+- [zsh-syntax-highlighting](https://github.com/zsh-users/zsh-syntax-highlighting): Syntax highlighting for zsh.
+
+### Theme
+- I use a custom theme which just changes the prompt. It can be found [here](/.oh-my-zsh-custom/themes/limao.zsh-theme) (`/.oh-my-zsh-custom/themes/limao.zsh-theme`).
+
 ## Neovim
 
 ### Installation
 Installation instructions [here](https://github.com/neovim/neovim/wiki/Installing-Neovim).
 
 ### Configuration
-My configuration files can be found [here](/.config/nvim) (`/.config/nvim`). The basic configuration derives from `.vimrc`, which is where some of the more "basic" configuration options can be found.
+My configuration files can be found [here](/.config/nvim) (`/.config/nvim`). The basic configuration, with settings that are common to regular Vim, can be found in `.vimrc`.
 
 ### Generic Plugins
 - [packer.nvim](https://github.com/wbthomason/packer.nvim): Plugin/package management for Neovim.
@@ -158,7 +173,7 @@ My configuration files can be found [here](/.config/nvim) (`/.config/nvim`). The
 - [nvim-snippy](https://github.com/dcampos/nvim-snippy): Snippets plugin for Neovim.
 - [cmp-snippy](https://github.com/dcampos/cmp-snippy): `nvim-snippy` source for `nvim-cmp`.
 
-### Themes
+### Theme
 - [TokyoNight.nvim](https://github.com/folke/tokyonight.nvim/): Tokyo Night theme for Neovim.
 
 ### Language Specific
