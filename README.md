@@ -163,15 +163,18 @@ Installation instructions [here](https://github.com/neovim/neovim/wiki/Installin
 ### Configuration
 My configuration files can be found [here](/.config/nvim) (`/.config/nvim`). The basic configuration, with settings that are common to regular Vim, can be found in `.vimrc`.
 
-### Generic Plugins
+### General Plugins
 - [packer.nvim](https://github.com/wbthomason/packer.nvim): Plugin/package management for Neovim.
   - Note: Cloning my config will automatically install and set up `packer.nvim`.
 - [nvim-lspconfig](https://github.com/neovim/nvim-lspconfig): Configs for the Neovim LSP client.
   - Make sure you install the language servers for the languages you actually use. Documentation on the LSP configs provided by `nvim-lspconfig` is provided [here](https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md).
 - [nvim-cmp](https://github.com/hrsh7th/nvim-cmp): Completion engine for Neovim.
 - [cmp-nvim-lsp](https://github.com/hrsh7th/cmp-nvim-lsp): `nvim-cmp` source for Neovim's built-in language server client.
-- [nvim-snippy](https://github.com/dcampos/nvim-snippy): Snippets plugin for Neovim.
-- [cmp-snippy](https://github.com/dcampos/cmp-snippy): `nvim-snippy` source for `nvim-cmp`.
+- [ultisnips](https://github.com/SirVer/ultisnips): Snippets engine plugin.
+- [cmp-nvim-ultisnips](https://github.com/quangnguyen30192/cmp-nvim-ultisnips): `ultisnips` source for `nvim-cmp`.
+- [delimitMate](https://github.com/Raimondi/delimitMate): Auto close quotes, brackets, etc.
+- [fzf.vim](https://github.com/junegunn/fzf.vim): Fuzzy finder for Vim
+- [trouble.nvim](https://github.com/folke/trouble.nvim): Diagnostics, references, quickfix lists
 
 ### Theme
 - [TokyoNight.nvim](https://github.com/folke/tokyonight.nvim/): Tokyo Night theme for Neovim.
@@ -186,3 +189,4 @@ My configuration files can be found [here](/.config/nvim) (`/.config/nvim`). The
 ## Other
 
 - [Wallpaper](https://wall.alphacoders.com/big.php?i=1163116)
+

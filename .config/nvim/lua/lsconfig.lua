@@ -62,14 +62,14 @@ for _, lsp in ipairs(servers) do
 end
 
 -- Setup snippy
-local snippy = require('snippy')
 
 -- Setup nvim-cmp
 local cmp = require('cmp')
+local cmp_ultisnips_mappings = require('cmp_nvim_ultisnips.mappings')
 cmp.setup {
     snippet = {
         expand = function(args)
-            snippy.expand_snippet(args.body)
+            vim.fn["UltiSnips#Anon"](args.body)
         end,
     },
     window = {
@@ -81,28 +81,28 @@ cmp.setup {
         ['<C-d>'] = cmp.mapping.scroll_docs(4),             -- Scroll down in documentation
         ['<C-Space>'] = cmp.mapping.complete(),             -- Invoke completion
         ['<CR>'] = cmp.mapping.confirm({ select = true }),  -- Accept currently selected item
-        ['<Tab>'] = cmp.mapping(function(fallback)          -- Select next completion item if 
-            if cmp.visible() then                           --   the completion menu is visible.
-                cmp.select_next_item()                      --   Otherwise, expands the current
-            elseif snippy.can_expand_or_advance() then      --   trigger (if possible) or jumps
-                snippy.expand_or_advance()                  --   to the nextavailable tab stop
-            else                                            --   if either can be performed.
-                fallback()
+        -- Select next completion item if the completion menu is visible. Otherwise, expands
+        -- the current trigger (if possible) or jumps to the next available tab stop if either
+        -- can be performed.
+        ['<Tab>'] = cmp.mapping(function(fallback)
+            if cmp.visible() then
+                cmp.select_next_item()
+            else
+                cmp_ultisnips_mappings.expand_or_jump_forwards(fallback)
             end
         end, { 'i', 's' }),
-        ['<S-Tab>'] = cmp.mapping(function(fallback)        -- Select previous completion item
-            if cmp.visible() then                           --   if the completion menu is
-                cmp.select_prev_item()                      --   visible.
-            elseif snippy.can_jump(-1) then
-                snippy.previous()
+        -- Select previous completion item if the completion menu is visible
+        ['<S-Tab>'] = cmp.mapping(function(fallback)
+            if cmp.visible() then
+                cmp.select_prev_item()
             else
-                fallback()
+                cmp_ultisnips_mappings.jump_backwards(fallback)
             end
         end, { 'i', 's' }),
     }),
     sources = cmp.config.sources({
         { name = 'nvim_lsp' },
-        { name = 'snippy' },
+        { name = 'ultisnips' },
     }),
     experimental = {
         ghost_text = true,

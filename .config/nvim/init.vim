@@ -40,7 +40,7 @@ let g:fzf_colors = {
 noremap <leader>F :FZF <CR>
 "}}
 
-"{{ delimitmate.vim config
+"{{ DelimitMate.vim config
 let delimitMate_expand_cr = 1
 let delimitMate_expand_space = 1
 "}}
