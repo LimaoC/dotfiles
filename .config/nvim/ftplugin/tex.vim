@@ -6,7 +6,7 @@ let g:vimtex_syntax_conceal = {
     \ 'cites': 0,
     \ 'fancy': 0,
     \ 'spacing': 1,
-    \ 'greek': 1,
+    \ 'greek': 0,
     \ 'math_bounds': 0,
     \ 'math_delimiters': 1,
     \ 'math_fracs': 0,

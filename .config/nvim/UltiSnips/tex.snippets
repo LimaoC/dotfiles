@@ -25,7 +25,7 @@ endglobal
 # ===== Environments ============================================================================ #
 
 # begin{} / end{} environment
-snippet beg "begin{} / end{}" bA
+snippet beg "begin{} / end{}" wA
 \begin{$1}
 	${0:${VISUAL}}
 \end{$1}
@@ -40,13 +40,13 @@ if t[2] and t[2][0] not in [',', '.', '?', '-', ' ']:
     snip.rv = ' '
 else:
     snip.rv = ''
-`$0
+`$2
 endsnippet
 
 # `\[\]` display maths
 snippet dm "Display maths" wA
 \[
-$1
+	$1
 .\]
 $0
 endsnippet
@@ -56,14 +56,14 @@ endsnippet
 # Replaces x_yz... with x_{yz...}. Only fires if >= 2 characters are entered. Jumps to the last
 # character just before the ending brace `}`
 context "math()"
-snippet '([A-Za-z0-9])_([A-Za-z0-9][A-Za-z0-9])' "Auto subscript" wrA
+snippet '([A-Za-z0-9])_([A-Za-z0-9\-+][A-Za-z0-9\-+])' "Auto subscript" wrA
 `!p snip.rv = match.group(1)`_{`!p snip.rv = match.group(2)`$1}$0
 endsnippet
 
 # Replaces x^yz... with x^{yz...}. Only fires if >= 2 characters are entered. Jumps to the last
 # character just before the ending brace `}`
 context "math()"
-snippet '([A-Za-z0-9])\^([A-Za-z0-9][A-Za-z0-9])' "Auto superscript" wrA
+snippet '([A-Za-z0-9])\^([A-Za-z0-9\-+][A-Za-z0-9\-+])' "Auto superscript" wrA
 `!p snip.rv = match.group(1)`^{`!p snip.rv = match.group(2)`$1}$0
 endsnippet
 
@@ -77,12 +77,12 @@ endsnippet
 
 # Fraction. Turns foo/ into \frac{foo}{}.
 context "math()"
+priority 1
 snippet '((\d+)|(\d*)(\\)?([A-Za-z]+)((\^|_)(\{\d+\}|\d))*)/' "Fraction" wrA
 \\frac{`!p snip.rv = match.group(1)`}{$1}$0
 endsnippet
 
 # Fraction, takes into account parentheses. Returns curly braces if brackets are mismatched.
-priority 1
 context "math()"
 snippet '^.*\)/' "Fraction" wrA
 `!p
@@ -103,7 +103,8 @@ priority 0
 
 # Fraction for visual mode selections
 context "math()"
-snippet / "Fraction" iA
+snippet / "Fraction" i
+
 \\frac{${VISUAL}}{$1}$0
 endsnippet
 
@@ -126,8 +127,23 @@ priority 0
 # ===== Auto-sized Brackets ====================================================================== #
 
 context "math()"
-snippet lr "\left \right" wA
-\left$1\right$0
+snippet lr( "\left( \right)" iA
+\left(${1:${VISUAL}}\right)$0
+endsnippet
+
+context "math()"
+snippet lr[ "\left[ \right]" iA
+\left[${1:${VISUAL}}\right]$0
+endsnippet
+
+context "math()"
+snippet lr{ "\left{ \right}" iA
+\left{${1:${VISUAL}}\right}$0
+endsnippet
+
+context "math()"
+snippet lr| "\left| \right|" iA
+\left|${1:${VISUAL}}\right|$0
 endsnippet
 
 # ===== Maths symbols ============================================================================ #
@@ -154,5 +170,17 @@ endsnippet
 context "math()"
 snippet Cov "Covariance" wA
 \mathbb{C}\text{ov}
+endsnippet
+
+# Turns sumjk into \sum_{}^{}.
+context "math()"
+snippet sumjk "Summation" wA
+\sum_{$1}^{$2}$0
+endsnippet
+
+# Turns sumk into \sum_{}.
+context "math()"
+snippet sumk "Summation" wA
+\sum_{$1}$0
 endsnippet
 
