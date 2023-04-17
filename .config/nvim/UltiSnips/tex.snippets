@@ -36,7 +36,7 @@ endsnippet
 # `$$` inline maths. Adds a space after the ending `$` if followed by a non-special character
 snippet mk "Inline maths" wA
 $${1}$`!p
-if t[2] and t[2][0] not in [',', '.', '?', '-', ' ']:
+if t[2] and t[2][0].isalpha():
     snip.rv = ' '
 else:
     snip.rv = ''
@@ -46,7 +46,7 @@ endsnippet
 # `\[\]` display maths
 snippet dm "Display maths" wA
 \[
-	$1
+	${1:${VISUAL}}
 .\]
 $0
 endsnippet
@@ -127,23 +127,23 @@ priority 0
 # ===== Auto-sized Brackets ====================================================================== #
 
 context "math()"
-snippet lr( "\left( \right)" iA
-\left(${1:${VISUAL}}\right)$0
+snippet lr() "\left( \right)" wA
+\left( ${1:${VISUAL}} \right)$0
 endsnippet
 
 context "math()"
-snippet lr[ "\left[ \right]" iA
-\left[${1:${VISUAL}}\right]$0
+snippet lr[] "\left[ \right]" wA
+\left[ ${1:${VISUAL}} \right]$0
 endsnippet
 
 context "math()"
-snippet lr{ "\left{ \right}" iA
-\left{${1:${VISUAL}}\right}$0
+snippet lr{} "\left{ \right}" wA
+\left\\{ ${1:${VISUAL}} \right\\}$0
 endsnippet
 
 context "math()"
-snippet lr| "\left| \right|" iA
-\left|${1:${VISUAL}}\right|$0
+snippet lr|| "\left| \right|" wA
+\left| ${1:${VISUAL}} \right|$0
 endsnippet
 
 # ===== Maths symbols ============================================================================ #
@@ -182,5 +182,13 @@ endsnippet
 context "math()"
 snippet sumk "Summation" wA
 \sum_{$1}$0
+endsnippet
+
+# ===== Miscellaneous ============================================================================ #
+
+context "math()"
+snippet nl "Newline" wA
+\\\\
+
 endsnippet
 

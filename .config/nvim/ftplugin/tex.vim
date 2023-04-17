@@ -1,5 +1,11 @@
 " vimtex config
-let g:vimtex_view_method = 'zathura_simple'
+let g:vimtex_view_method = 'zathura_simple'  " need xdotool for zathura
+let g:vimtex_indent_enabled = 0              " disable automatic indenting
+let g:vimtex_imaps_enabled = 0               " disable insert mode mappings
+" disable ']]' as it slows down the 'lr[]' snippet
+let g:vimtex_mappings_disable = {
+    \ 'i': [']]'],
+    \}
 let g:vimtex_syntax_conceal = {
     \ 'accents': 1,
     \ 'ligatures': 1,
@@ -15,7 +21,21 @@ let g:vimtex_syntax_conceal = {
     \ 'sections': 0,
     \ 'styles': 0,
     \}
+let g:vimtex_compiler_latexmk = {
+    \ 'build_dir' : '',
+    \ 'callback' : 1,
+    \ 'continuous' : 1,
+    \ 'executable' : 'latexmk',
+    \ 'hooks' : [],
+    \ 'options' : [
+    \   '-verbose',
+    \   '-file-line-error',
+    \   '-synctex=1',
+    \   '-interaction=nonstopmode',
+    \   '-shell-escape',
+    \ ],
+    \}
 
 set conceallevel=2  " syntax concealing
-set wrap            " latex lines tend to be longer so wrapping is more desirable
+set wrap            " latex code lines tend to be longer so wrapping is more desirable
 
