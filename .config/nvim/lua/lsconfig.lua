@@ -42,12 +42,12 @@ local on_attach = function(client, bufnr)
 end
 
 --}}
---{{ nvim-cmp, cmp-nvim-lsp, nvim-snippy, cmp-snippy config
+--{{ nvim-cmp, cmp-nvim-lsp, ultisnips, cmp-nvim-ultisnips config
 -- https://github.com/neovim/nvim-lspconfig/wiki/Autocompletion
 -- https://github.com/hrsh7th/nvim-cmp
 -- https://github.com/hrsh7th/cmp-nvim-lsp
--- https://github.com/dcampos/nvim-snippy
--- https://github.com/dcampos/cmp-snippy
+-- https://github.com/SirVer/ultisnips
+-- https://github.com/quangnguyen30192/cmp-nvim-ultisnips
 
 -- Additional LSP configs supported by nvim-cmp
 local capabilities = require("cmp_nvim_lsp").default_capabilities()
@@ -60,8 +60,6 @@ for _, lsp in ipairs(servers) do
         capabilities = capabilities
     }
 end
-
--- Setup snippy
 
 -- Setup nvim-cmp
 local cmp = require('cmp')
@@ -77,10 +75,11 @@ cmp.setup {
         documentation = cmp.config.window.bordered(),
     },
     mapping = cmp.mapping.preset.insert({
-        ['<C-u>'] = cmp.mapping.scroll_docs(-4),            -- Scroll up in documentation
-        ['<C-d>'] = cmp.mapping.scroll_docs(4),             -- Scroll down in documentation
-        ['<C-Space>'] = cmp.mapping.complete(),             -- Invoke completion
-        ['<CR>'] = cmp.mapping.confirm({ select = true }),  -- Accept currently selected item
+        ['<C-u>'] = cmp.mapping.scroll_docs(-4),                 -- Scroll up in documentation
+        ['<C-d>'] = cmp.mapping.scroll_docs(4),                  -- Scroll down in documentation
+        ['<C-l>'] = cmp.mapping.close(),                         -- Close completion menu
+        ['<C-y>'] = cmp.mapping.complete(),                      -- Invoke completion
+        ['<C-Space>'] = cmp.mapping.confirm({ select = true }),  -- Accept currently selected item
         -- Select next completion item if the completion menu is visible. Otherwise, expands
         -- the current trigger (if possible) or jumps to the next available tab stop if either
         -- can be performed.
