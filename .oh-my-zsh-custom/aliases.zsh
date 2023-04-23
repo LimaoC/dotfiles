@@ -3,6 +3,8 @@
 alias config='/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME'
 
 alias ,="cd .."
+alias ,,="cd ../.."
+alias ,,,="cd ../../.."
 
 alias python=python3
 
