@@ -41,14 +41,6 @@ local on_attach = function(client, bufnr)
     end
 end
 
---}}
---{{ nvim-cmp, cmp-nvim-lsp, ultisnips, cmp-nvim-ultisnips config
--- https://github.com/neovim/nvim-lspconfig/wiki/Autocompletion
--- https://github.com/hrsh7th/nvim-cmp
--- https://github.com/hrsh7th/cmp-nvim-lsp
--- https://github.com/SirVer/ultisnips
--- https://github.com/quangnguyen30192/cmp-nvim-ultisnips
-
 -- Additional LSP configs supported by nvim-cmp
 local capabilities = require("cmp_nvim_lsp").default_capabilities()
 
@@ -61,50 +53,38 @@ for _, lsp in ipairs(servers) do
     }
 end
 
--- Setup nvim-cmp
-local cmp = require('cmp')
-local cmp_ultisnips_mappings = require('cmp_nvim_ultisnips.mappings')
-cmp.setup {
-    snippet = {
-        expand = function(args)
-            vim.fn["UltiSnips#Anon"](args.body)
-        end,
-    },
-    window = {
-        completion = cmp.config.window.bordered(),
-        documentation = cmp.config.window.bordered(),
-    },
-    mapping = cmp.mapping.preset.insert({
-        ['<C-u>'] = cmp.mapping.scroll_docs(-4),                 -- Scroll up in documentation
-        ['<C-d>'] = cmp.mapping.scroll_docs(4),                  -- Scroll down in documentation
-        ['<C-l>'] = cmp.mapping.close(),                         -- Close completion menu
-        ['<C-y>'] = cmp.mapping.complete(),                      -- Invoke completion
-        ['<C-Space>'] = cmp.mapping.confirm({ select = true }),  -- Accept currently selected item
-        -- Select next completion item if the completion menu is visible. Otherwise, expands
-        -- the current trigger (if possible) or jumps to the next available tab stop if either
-        -- can be performed.
-        ['<Tab>'] = cmp.mapping(function(fallback)
-            if cmp.visible() then
-                cmp.select_next_item()
-            else
-                cmp_ultisnips_mappings.expand_or_jump_forwards(fallback)
-            end
-        end, { 'i', 's' }),
-        -- Select previous completion item if the completion menu is visible
-        ['<S-Tab>'] = cmp.mapping(function(fallback)
-            if cmp.visible() then
-                cmp.select_prev_item()
-            else
-                cmp_ultisnips_mappings.jump_backwards(fallback)
-            end
-        end, { 'i', 's' }),
-    }),
-    sources = cmp.config.sources({
-        { name = 'nvim_lsp' },
-        { name = 'ultisnips' },
-    }),
-    experimental = {
-        ghost_text = true,
-    }
+--}}
+--{{ haskell-tools config
+-- https://github.com/mrcjkb/haskell-tools.nvim
+
+local ht = require('haskell-tools')
+local buffer = vim.api.nvim_get_current_buf()
+local def_opts = { noremap = true, silent = true }
+ht.setup {
+    hls = {
+        on_attach = function(client, bufnr)
+            local opts = vim.tbl_extend('keep', def_opts, { buffer = bufnr })
+            -- haskell-language-server relies heavily on codeLenses,
+            -- so auto-refresh (see advanced configuration) is enabled by default
+            vim.keymap.set('n', '<space>ca', vim.lsp.codelens.run, opts)
+            vim.keymap.set('n', '<space>hs', ht.hoogle.hoogle_signature, opts)
+            vim.keymap.set('n', '<space>ea', ht.lsp.buf_eval_all, opts)
+    end,
+  },
 }
+
+-- Suggested keymaps that do not depend on haskell-language-server
+local bufnr = vim.api.nvim_get_current_buf()
+-- set buffer = bufnr in ftplugin/haskell.lua
+local opts = { noremap = true, silent = true, buffer = bufnr }
+
+-- Toggle a GHCi repl for the current package
+vim.keymap.set('n', '<leader>rr', ht.repl.toggle, def_opts)
+-- Toggle a GHCi repl for the current buffer
+vim.keymap.set('n', '<leader>rf', function()
+    ht.repl.toggle(vim.api.nvim_buf_get_name(0))
+end, def_opts)
+vim.keymap.set('n', '<leader>rq', ht.repl.quit, def_opts)
+
+--}}
 

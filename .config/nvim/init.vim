@@ -5,11 +5,12 @@ let &packpath = &runtimepath
 source ~/.vimrc
 
 lua require('plugins')
-lua require('lsconfig')
-lua require('trouble-config')
-lua require('haskell-config')
+lua require('ls-config')
+lua require('cmp-config')
+lua require('diagnostics-config')
 
 colorscheme tokyonight-night
+set signcolumn=yes            " set sign column to always be on
 
 "{{ fzf.vim config
 " open in new tab, open in horizontal splits, open in vertical splits
@@ -43,5 +44,9 @@ noremap <leader>F :FZF <CR>
 "{{ DelimitMate.vim config
 let delimitMate_expand_cr = 1
 let delimitMate_expand_space = 1
+"}}
+
+"{{ vim-commentary config
+noremap <C-_> <Plug>Commentary
 "}}
 
