@@ -2,7 +2,7 @@
 let g:vimtex_view_method = 'zathura_simple'  " need xdotool for zathura
 let g:vimtex_indent_enabled = 0              " disable automatic indenting
 let g:vimtex_imaps_enabled = 0               " disable insert mode mappings
-let g:vimtex_quickfix_enabled = 0            " disable quickfix (I use trouble.nvim)
+let g:vimtex_quickfix_mode = 0               " disable quickfix window opening automatically (I use trouble.nvim)
 " disable ']]' as it slows down the 'lr[]' snippet
 let g:vimtex_mappings_disable = {
     \ 'i': [']]'],

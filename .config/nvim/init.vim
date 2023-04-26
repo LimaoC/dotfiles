@@ -8,6 +8,7 @@ lua require('plugins')
 lua require('ls-config')
 lua require('cmp-config')
 lua require('diagnostics-config')
+lua require('treesitter-config')
 
 colorscheme tokyonight-night
 set signcolumn=yes            " set sign column to always be on
@@ -42,8 +43,9 @@ noremap <leader>F :FZF <CR>
 "}}
 
 "{{ DelimitMate.vim config
-let delimitMate_expand_cr = 1
+let delimitMate_expand_cr = 2
 let delimitMate_expand_space = 1
+let delimitMate_jump_expansion = 1
 "}}
 
 "{{ vim-commentary config
