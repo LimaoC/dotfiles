@@ -2,7 +2,6 @@
 let g:vimtex_view_method = 'zathura_simple'  " need xdotool for zathura
 let g:vimtex_indent_enabled = 0              " disable automatic indenting
 let g:vimtex_imaps_enabled = 0               " disable insert mode mappings
-let g:vimtex_quickfix_mode = 0               " disable quickfix window opening automatically (I use trouble.nvim)
 " disable ']]' as it slows down the 'lr[]' snippet
 let g:vimtex_mappings_disable = {
     \ 'i': [']]'],
@@ -36,6 +35,12 @@ let g:vimtex_compiler_latexmk = {
     \   '-shell-escape',
     \ ],
     \}
+let g:vimtex_indent_ignored_envs = [
+    \ 'document',
+    \ '.*',
+    \]
+
+let g:tex_flavor = "latex"
 
 set conceallevel=2  " syntax concealing
 set wrap            " latex code lines tend to be longer so wrapping is more desirable

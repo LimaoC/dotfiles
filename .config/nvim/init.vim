@@ -13,6 +13,11 @@ lua require('treesitter-config')
 colorscheme tokyonight-night
 set signcolumn=yes            " set sign column to always be on
 
+" If there is a conda environment active, use that Python interpreter
+if !empty($CONDA_PREFIX)
+    let g:python3_host_prog = $CONDA_PREFIX . '/bin/python3'
+endif
+
 "{{ fzf.vim config
 " open in new tab, open in horizontal splits, open in vertical splits
 " (respectively)
@@ -46,6 +51,9 @@ noremap <leader>F :FZF <CR>
 let delimitMate_expand_cr = 2
 let delimitMate_expand_space = 1
 let delimitMate_jump_expansion = 1
+
+" Auto-insert closing docstring characters
+au FileType python,julia let b:delimitMate_nesting_quotes = ['"']
 "}}
 
 "{{ vim-commentary config

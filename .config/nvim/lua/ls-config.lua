@@ -45,7 +45,7 @@ end
 local capabilities = require("cmp_nvim_lsp").default_capabilities()
 
 -- Enable language servers
-local servers = { 'julials', 'pyright', 'texlab' }
+local servers = { 'clangd', 'julials', 'pyright', 'texlab' }
 for _, lsp in ipairs(servers) do
     lspconfig[lsp].setup {
         on_attach = on_attach,
@@ -54,8 +54,13 @@ for _, lsp in ipairs(servers) do
 end
 
 --}}
---{{ haskell-tools config
+--{{ haskell-tools and haskell-language-server config
 -- https://github.com/mrcjkb/haskell-tools.nvim
+-- https://github.com/haskell/haskell-language-server
+
+-- require('lspconfig')['hls'].setup{
+--     filetypes = { 'haskell', 'lhaskell', 'cabal' },
+-- }
 
 local ht = require('haskell-tools')
 local buffer = vim.api.nvim_get_current_buf()
@@ -69,8 +74,8 @@ ht.setup {
             vim.keymap.set('n', '<space>ca', vim.lsp.codelens.run, opts)
             vim.keymap.set('n', '<space>hs', ht.hoogle.hoogle_signature, opts)
             vim.keymap.set('n', '<space>ea', ht.lsp.buf_eval_all, opts)
-    end,
-  },
+        end,
+    },
 }
 
 -- Suggested keymaps that do not depend on haskell-language-server
