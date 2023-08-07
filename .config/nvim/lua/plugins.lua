@@ -14,17 +14,25 @@ local packer_bootstrap = ensure_packer()
 
 -- Automatically run :PackerCompile whenever plugins.lua is updated
 vim.cmd([[
-  augroup packer_user_config
-    autocmd!
-    autocmd BufWritePost plugins.lua source <afile> | PackerCompile
-  augroup end
+    augroup packer_user_config
+        autocmd!
+        autocmd BufWritePost plugins.lua source <afile> | PackerCompile
+    augroup end
 ]])
 
 return require('packer').startup(function(use)
     --{{ general plugins
     use 'wbthomason/packer.nvim'                   -- Package manager
+    use 'tpope/vim-surround'                       -- Surroundings plugin
     use 'Raimondi/delimitMate'                     -- Auto close quotes, brackets, etc.
-    use 'folke/trouble.nvim'                       -- Diagnostics, references, quickfix lists
+    use {                                          -- Diagnostics, references, quickfix lists
+        'folke/trouble.nvim',
+        requires = 'nvim-tree/nvim-web-devicons'
+    }
+    use {
+      "folke/todo-comments.nvim",
+      requires = "nvim-lua/plenary.nvim"
+    }
     use 'neovim/nvim-lspconfig'                    -- nvim LSP configs
     use 'hrsh7th/nvim-cmp'                         -- nvim completion engine
     use 'hrsh7th/cmp-nvim-lsp'                     -- nvim-cmp source for nvim LSP
