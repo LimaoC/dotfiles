@@ -154,10 +154,22 @@ snippet 'bb([a-zA-Z])' "mathbb" wrA
 \mathbb{`!p snip.rv=match.group(1)`}
 endsnippet
 
+# Turns bfx into \mathbb{x}.
+context "math()"
+snippet 'bf([a-zA-Z])' "mathbf" wrA
+\mathbf{`!p snip.rv=match.group(1)`}
+endsnippet
+
 # Turns calx into \mathcal{x}.
 context "math()"
 snippet 'cal([a-zA-Z])' "mathcal" wrA
 \mathcal{`!p snip.rv=match.group(1)`}
+endsnippet
+
+# Turns scrx into \mathscr{x}. Note that \mathscr requires the mathrsfs package.
+context "math()"
+snippet 'scr([a-zA-Z])' "mathscr" wrA
+\mathscr{`!p snip.rv=match.group(1)`}
 endsnippet
 
 # Turns Var into \mathbb{V}\text{ar}.
