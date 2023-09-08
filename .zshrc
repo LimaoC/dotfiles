@@ -53,11 +53,16 @@ ZLE_REMOVE_SUFFIX_CHARS=$' \t\n;&'  # These "eat" the auto prior space after a t
 setopt interactive_comments  # allow # comments in shell; good for copy/paste
 export BLOCK_SIZE="'1"       # Add commas to file sizes
 
-# Time zsh startup time; ref https://blog.mattclemente.com/2020/06/26/oh-my-zsh-slow-to-load/
+# Time zsh startup time
+# REF: https://blog.mattclemente.com/2020/06/26/oh-my-zsh-slow-to-load/
 timezsh() {
   shell=${1-$SHELL}
   for i in $(seq 1 10); do /usr/bin/time $shell -i -c exit; done
 }
+
+# Only add valid commands to history. This is nice when used in conjunction with zsh-autosuggestions
+# REF: https://www.zsh.org/mla/users//2014/msg00715.html
+zshaddhistory() { whence ${${(z)1}[1]} >| /dev/null || return 1 }
 
 # ===== Tool & Language configuration ============================================================ #
 
