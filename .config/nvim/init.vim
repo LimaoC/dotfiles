@@ -16,7 +16,19 @@ set signcolumn=yes            " set sign column to always be on
 " If there is a conda environment active, use that Python interpreter
 if !empty($CONDA_PREFIX)
     let g:python3_host_prog = $CONDA_PREFIX . '/bin/python3'
+else
+    let g:python3_host_prog = '/usr/bin/python3'
 endif
+
+"{{ black-nvim config
+" Format file on save
+autocmd BufWritePre *.py call BlackSync()
+
+let g:black#settings = {
+    \ 'fast': 1,
+    \ 'line_length': 100
+    \}
+"}}
 
 "{{ fzf.vim config
 " open in new tab, open in horizontal splits, open in vertical splits

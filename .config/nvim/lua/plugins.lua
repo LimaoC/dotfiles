@@ -60,6 +60,10 @@ return require('packer').startup(function(use)
     --}}
     --{{ language specific
     use 'lervag/vimtex'                      -- LaTeX in vim
+    use {                                    -- Black (Python autoformatter)
+        'averms/black-nvim',
+        run = ':UpdateRemotePlugins'
+    }
     use {                                    -- Configures `haskell-language-server`
         'mrcjkb/haskell-tools.nvim',         -- and integrates with other haskell tools
         requires = 'nvim-lua/plenary.nvim',
