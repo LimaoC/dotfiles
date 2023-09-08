@@ -63,7 +63,7 @@ return require('packer').startup(function(use)
     use {                                    -- Configures `haskell-language-server`
         'mrcjkb/haskell-tools.nvim',         -- and integrates with other haskell tools
         requires = 'nvim-lua/plenary.nvim',
-        branch = '1.x.x',                    -- recommended (stable branch)
+        branch = '2.x.x',                    -- recommended (stable branch)
     }
     --}}
     -- Automatically install and set up packer.nvim on any machine this config is cloned to
