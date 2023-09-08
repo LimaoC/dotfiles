@@ -70,6 +70,29 @@ export PATH=$PATH:$HOME/.yarn/bin                           # yarn path
 export PATH=$PATH:/usr/local/texlive/2022/bin/x86_64-linux  # texlive path
 export PATH=$PATH:$HOME/.spicetify                          # spicetify path
 
+# >>> juliaup initialize >>>
+
+# !! Contents within this block are managed by juliaup !!
+
+path=('/home/limao/.juliaup/bin' $path)
+export PATH
+
+# <<< juliaup initialize <<<
+
+# >>> conda initialize >>>
+# !! Contents within this block are managed by 'conda init' !!
+__conda_setup="$('/home/limao/miniconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
+if [ $? -eq 0 ]; then
+    eval "$__conda_setup"
+else
+    if [ -f "/home/limao/miniconda3/etc/profile.d/conda.sh" ]; then
+        . "/home/limao/miniconda3/etc/profile.d/conda.sh"
+    else
+        export PATH="/home/limao/miniconda3/bin:$PATH"
+    fi
+fi
+unset __conda_setup
+# <<< conda initialize <<<
 
 # ===== Welcome message ========================================================================== #
 
@@ -96,5 +119,3 @@ echo -e "
 @@@   /@@ @             @@       @/      @% 
   @@@@  @@             @@          @@@@@@   
                                             " | lolcat
-
-
