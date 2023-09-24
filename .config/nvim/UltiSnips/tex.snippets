@@ -113,13 +113,13 @@ endsnippet
 # Turns xbar into \overline{x}.
 priority 1
 context "math()"
-snippet '([a-zA-Z])bar' "Postfix bar" riA
+snippet '(\w)bar' "Postfix bar" riA
 \overline{`!p snip.rv=match.group(1)`}
 endsnippet
 
 # Turns yhat into \hat{y}.
 context "math()"
-snippet '([a-zA-Z])hat' "Postfix hat" riA
+snippet '(\w)hat' "Postfix hat" riA
 \hat{`!p snip.rv=match.group(1)`}
 endsnippet
 priority 0
@@ -146,30 +146,41 @@ snippet lr|| "\left| \right|" wA
 \left| ${1:${VISUAL}} \right|$0
 endsnippet
 
+context "math()"
+snippet lr<> "\left\langle \right\rangle" wA
+\left\langle ${1:${VISUAL}} \right\rangle$0
+endsnippet
+
 # ===== Maths symbols ============================================================================ #
 
 # Turns bbx into \mathbb{x}.
 context "math()"
-snippet 'bb([a-zA-Z])' "mathbb" wrA
+snippet 'bb(\w)' "mathbb" wrA
 \mathbb{`!p snip.rv=match.group(1)`}
 endsnippet
 
 # Turns bfx into \mathbb{x}.
 context "math()"
-snippet 'bf([a-zA-Z])' "mathbf" wrA
+snippet 'bf(\w)' "mathbf" wrA
 \mathbf{`!p snip.rv=match.group(1)`}
 endsnippet
 
 # Turns calx into \mathcal{x}.
 context "math()"
-snippet 'cal([a-zA-Z])' "mathcal" wrA
+snippet 'cal(\w)' "mathcal" wrA
 \mathcal{`!p snip.rv=match.group(1)`}
 endsnippet
 
 # Turns scrx into \mathscr{x}. Note that \mathscr requires the mathrsfs package.
 context "math()"
-snippet 'scr([a-zA-Z])' "mathscr" wrA
+snippet 'scr(\w)' "mathscr" wrA
 \mathscr{`!p snip.rv=match.group(1)`}
+endsnippet
+
+# Turns rmx into \mathrm{x}.
+context "math()"
+snippet 'rm(\w)' "mathrm" wrA
+\mathrm{`!p snip.rv=match.group(1)`}
 endsnippet
 
 # Turns Var into \mathbb{V}\text{ar}.
