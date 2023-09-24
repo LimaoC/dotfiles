@@ -43,6 +43,10 @@ setopt hist_verify         # Don't execute immediately upon history expansion
 setopt inc_append_history  # Write to history file immediately, not when shell quits
 setopt share_history       # Share history among all sessions
 
+# Only add valid commands to history. This is useful for zsh-autosuggestions
+# REF: https://www.zsh.org/mla/users//2014/msg00715.html
+zshaddhistory() { whence ${${(z)1}[1]} >| /dev/null || return 1 }
+
 # Tab completion
 autoload -Uz compinit && compinit
 setopt auto_menu                    # show completion menu on succesive tab presses
@@ -60,10 +64,6 @@ timezsh() {
   for i in $(seq 1 10); do /usr/bin/time $shell -i -c exit; done
 }
 
-# Only add valid commands to history. This is nice when used in conjunction with zsh-autosuggestions
-# REF: https://www.zsh.org/mla/users//2014/msg00715.html
-zshaddhistory() { whence ${${(z)1}[1]} >| /dev/null || return 1 }
-
 # ===== Tool & Language configuration ============================================================ #
 
 # ghcup-env
@@ -73,7 +73,6 @@ export GOPATH=$HOME/.go                                     # go path
 export PATH=$PATH:/usr/local/go/bin:$GOPATH/bin
 export PATH=$PATH:$HOME/.yarn/bin                           # yarn path
 export PATH=$PATH:/usr/local/texlive/2022/bin/x86_64-linux  # texlive path
-export PATH=$PATH:$HOME/.spicetify                          # spicetify path
 
 # >>> juliaup initialize >>>
 
