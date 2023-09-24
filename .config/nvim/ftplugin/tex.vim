@@ -22,7 +22,8 @@ let g:vimtex_syntax_conceal = {
     \ 'styles': 0,
     \}
 let g:vimtex_compiler_latexmk = {
-    \ 'build_dir' : 'build',
+    \ 'aux_dir': {-> "build-" .. expand("%:t:r")},
+    \ 'out_dir': {-> "build-" .. expand("%:t:r")},
     \ 'callback' : 1,
     \ 'continuous' : 1,
     \ 'executable' : 'latexmk',
