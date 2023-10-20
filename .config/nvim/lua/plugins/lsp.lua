@@ -1,3 +1,5 @@
+vim.cmd([[ let g:UltiSnipsExpandTrigger="<c-space>" ]])
+
 return {
     {
         'VonHeikemen/lsp-zero.nvim',
@@ -25,6 +27,7 @@ return {
                 'quangnguyen30192/cmp-nvim-ultisnips',
                 config = function() require("cmp_nvim_ultisnips").setup{} end
             },
+            { 'hrsh7th/cmp-nvim-lsp-signature-help' },
         },
         config = function()
             -- Configure autocompletion settings
@@ -49,6 +52,7 @@ return {
                 sources = {
                     { name = "nvim_lsp" },
                     { name = "ultisnips" },
+                    { name = "nvim_lsp_signature_help" },
                 },
                 mapping = cmp.mapping.preset.insert({
                     -- Scroll up and down in documentation
@@ -58,9 +62,13 @@ return {
                     ['<C-l>'] = cmp.mapping.close(),
                     ['<C-y>'] = cmp.mapping.complete(),
                     ['<C-Space>'] = cmp.mapping.confirm({ select = true }),
-                    -- Navigate between snippet placeholders
-                    ['<C-f>'] = cmp.mapping(function(fallback) cmp_ultisnips_mappings.jump_forwards(fallback) end, { 'i', 's' }),
-                    ['<C-b>'] = cmp.mapping(function(fallback) cmp_ultisnips_mappings.jump_backwards(fallback) end, { 'i', 's' }),
+                    -- Navigate between completion items
+                    ['<Tab>'] = cmp.mapping(function(fallback)
+                        cmp_ultisnips_mappings.compose { "jump_forwards", "select_next_item" }(fallback)
+                    end, { 'i', 's' }),
+                    ['<S-Tab>'] = cmp.mapping(function(fallback)
+                        cmp_ultisnips_mappings.compose { "jump_backwards", "select_prev_item" }(fallback)
+                    end, { 'i', 's' }),
                 }),
                 experimental = {
                     ghost_text = true
@@ -112,4 +120,15 @@ return {
             })
         end
     },
+
+    -- LSP Signatures
+    {
+        "ray-x/lsp_signature.nvim",
+        event = "VeryLazy",
+        config = function()
+            require("lsp_signature").setup({
+                hint_prefix = "",
+            })
+        end
+    }
 }
