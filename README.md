@@ -2,6 +2,9 @@
     <h1>Limao's Dotfiles</h1>
 </center>
 
+![desktop](/.assets/desktop.png)
+
+
 ## Overview
 
 - OS: Ubuntu
@@ -23,16 +26,18 @@ Tutorial for installing Gnome shell extensions [here](https://itsfoss.com/gnome-
 
 ## kitty
 
+![kitty](/.assets/kitty.png)
+
 ### Installation
 Installation instructions [here](https://sw.kovidgoyal.net/kitty/binary/). 
 
 ### Configuration
 My configuration files can be found [here](/.config/kitty) (`/.config/kitty/`). Notably:
 - Colour theme: Based on [Tokyo Night](https://github.com/davidmathers/tokyo-night-kitty-theme), with some minor changes
-- Font: [Fira Code](https://github.com/tonsky/FiraCode)
+- Font: [Caskaydia Cove (patched font for Cascadia Code)](https://github.com/ryanoasis/nerd-fonts/tree/master/patched-fonts/CascadiaCode)
 
 ### Keyboard Shortcuts
-The keyboard shortcuts are mostly based on the default Gnome Terminal shortcuts, with a few changes.
+The keyboard shortcuts are mostly based on the default Gnome Terminal shortcuts (with a few changes), and can be found [here](/.config/kitty/shortcuts.conf).
 
 <details>
 <summary>Copy/paste</summary>
@@ -78,16 +83,16 @@ The keyboard shortcuts are mostly based on the default Gnome Terminal shortcuts,
 
 | Action                                    | Shortcut             |
 | ----------------------------------------- | -------------------- |
-| Switch to tab 1                           | `alt + 1`            |
-| Switch to tab 2                           | `alt + 2`            |
-| Switch to tab 3                           | `alt + 3`            |
-| Switch to tab 4                           | `alt + 4`            |
-| Switch to tab 5                           | `alt + 5`            |
-| Switch to tab 6                           | `alt + 6`            |
-| Switch to tab 7                           | `alt + 7`            |
-| Switch to tab 8                           | `alt + 8`            |
-| Switch to tab 9                           | `alt + 9`            |
-| Switch to tab 10                          | `alt + 0`            |
+| Switch to tab 1                           | `ctrl + alt + 1`     |
+| Switch to tab 2                           | `ctrl + alt + 2`     |
+| Switch to tab 3                           | `ctrl + alt + 3`     |
+| Switch to tab 4                           | `ctrl + alt + 4`     |
+| Switch to tab 5                           | `ctrl + alt + 5`     |
+| Switch to tab 6                           | `ctrl + alt + 6`     |
+| Switch to tab 7                           | `ctrl + alt + 7`     |
+| Switch to tab 8                           | `ctrl + alt + 8`     |
+| Switch to tab 9                           | `ctrl + alt + 9`     |
+| Switch to tab 10                          | `ctrl + alt + 0`     |
 | Close current tab                         | `ctrl + shift + q`   |
 | Move current tab backward                 | `ctrl + shift + ,`   |
 | Move current tab forward                  | `ctrl + shift + .`   |
@@ -141,52 +146,68 @@ The keyboard shortcuts are mostly based on the default Gnome Terminal shortcuts,
     and select kitty (this assumes `kitty` is on your `$PATH`).
 
 ## Oh My Zsh
+
 ### Installation
 Installation instructions [here](https://github.com/ohmyzsh/ohmyzsh).
 
 ### Configuration
-My configuration files can be found in [here](/.zshrc) (`/.zshrc`) and [here](/.oh-my-zsh-custom) (`/.oh-my-zsh-custom`) (note that I use `$ZSH_CUSTOM = ~/.oh-my-zsh-custom`).
+Main config file for zsh is [here](/.zshrc) (`/.zshrc`). Custom Oh My Zsh config is [here](/.oh-my-zsh-custom) (note that I use `$ZSH_CUSTOM = ~/.oh-my-zsh-custom` for my custom Oh My Zsh directory).
 
 ### Plugins
 - [Git](https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/git): Provides some aliases and useful functions. Built-in to Oh My Zsh.
 - [zsh-autosuggestions](https://github.com/zsh-users/zsh-autosuggestions): Suggests commands as you type based on history and completions.
+- [zsh-nvm](https://github.com/lukechilds/zsh-nvm): Set up nvm once and never touch it again. Has a lazy-load setting for nvm which is very useful.
 - [zsh-syntax-highlighting](https://github.com/zsh-users/zsh-syntax-highlighting): Syntax highlighting for zsh.
 
 ### Theme
-- I use a custom theme which just changes the prompt. It can be found [here](/.oh-my-zsh-custom/themes/limao.zsh-theme) (`/.oh-my-zsh-custom/themes/limao.zsh-theme`).
+- I use a custom theme which has a pretty prompt that shows useful things, like
+  - Git info (if in a Git repository)
+  - Conda environment (if one is active)
+It can be found [here](/.oh-my-zsh-custom/themes/limao.zsh-theme) (`/.oh-my-zsh-custom/themes/limao.zsh-theme`). You can enable/disable parts of the prompt to your liking, or add more parts.
 
 ## Neovim
+
+![neovim](/.assets/nvim.png)
+![neovim2](/.assets/nvim2.png)
 
 ### Installation
 Installation instructions [here](https://github.com/neovim/neovim/wiki/Installing-Neovim).
 
 ### Configuration
-My configuration files can be found [here](/.config/nvim) (`/.config/nvim`). The basic configuration, with settings that are common to regular Vim, can be found in `.vimrc`.
+My configuration files can be found [here](/.config/nvim) (`/.config/nvim`). Settings that are common to regular Vim (though I rarely use regular Vim anyway) can be found in `.vimrc`.
 
 ### General Plugins
-- [packer.nvim](https://github.com/wbthomason/packer.nvim): Plugin/package management for Neovim.
-  - Note: Cloning my config will automatically install and set up `packer.nvim`.
-- [nvim-lspconfig](https://github.com/neovim/nvim-lspconfig): Configs for the Neovim LSP client.
-  - Make sure you install the language servers for the languages you actually use. Documentation on the LSP configs provided by `nvim-lspconfig` is provided [here](https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md).
-- [nvim-cmp](https://github.com/hrsh7th/nvim-cmp): Completion engine for Neovim.
-- [cmp-nvim-lsp](https://github.com/hrsh7th/cmp-nvim-lsp): `nvim-cmp` source for Neovim's built-in language server client.
-- [ultisnips](https://github.com/SirVer/ultisnips): Snippets engine plugin.
-- [cmp-nvim-ultisnips](https://github.com/quangnguyen30192/cmp-nvim-ultisnips): `ultisnips` source for `nvim-cmp`.
-- [delimitMate](https://github.com/Raimondi/delimitMate): Auto close quotes, brackets, etc.
-- [fzf.vim](https://github.com/junegunn/fzf.vim): Fuzzy finder for Vim
-- [trouble.nvim](https://github.com/folke/trouble.nvim): Diagnostics, references, quickfix lists
+- [folke/lazy.nvim](https://github.com/folke/lazy.nvim) - A modern plugin manager for Neovim.
+
+### Editor Plugins
+- [romgrk/barbar.nvim](https://github.com/romgrk/barbar.nvim) - The neovim tabline plugin.
+- [nvim-lualine/lualine.nvim](https://github.com/nvim-lualine/lualine.nvim) - A blazing fast and easy to configure neovim statusline plugin written in pure lua.
+- [nvim-tree/nvim-tree.lua](https://github.com/nvim-tree/nvim-tree.lua) - A file explorer tree for neovim written in lua.
+
+### LSP Plugins
+- [hrsh7th/cmp-nvim-lsp](https://github.com/hrsh7th/cmp-nvim-lsp) - nvim-cmp source for neovim builtin LSP client.
+- [ray-x/lsp_signature.nvim](https://github.com/ray-x/lsp_signature.nvim) - LSP signature hint as you type.
+- [VonHeikemen/lsp-zero.nvim](https://github.com/VonHeikemen/lsp-zero.nvim) - A starting point to setup some lsp related features in neovim.
+- [williamboman/mason.nvim](https://github.com/williamboman/mason.nvim) - Portable package manager for Neovim that runs everywhere Neovim runs. Easily install and manage LSP servers, DAP servers, linters, and formatters.
+- [williamboman/mason-lspconfig.nvim](https://github.com/williamboman/mason-lspconfig.nvim) - Extension to mason.nvim that makes it easier to use lspconfig with mason.nvim.
+- [hrsh7th/nvim-cmp](https://github.com/hrsh7th/nvim-cmp) - A completion plugin for neovim coded in Lua.
+- [neovim/nvim-lspconfig](https://github.com/neovim/nvim-lspconfig) - Quickstart configs for Nvim LSP.
+- [nvim-treesitter/nvim-treesitter](https://github.com/nvim-treesitter/nvim-treesitter) - Nvim Treesitter configurations and abstraction layer.
+
+### Code Plugins
+- [averms/black-nvim](https://github.com/averms/black-nvim) - A Neovim plugin to format your code using Black.
+- [lervag/vimtex](https://github.com/lervag/vimtex) - A modern Vim and neovim filetype plugin for LaTeX files. 
 
 ### Theme
 - [TokyoNight.nvim](https://github.com/folke/tokyonight.nvim/): Tokyo Night theme for Neovim.
 
 ### Language Specific
-- [haskell-tools.nvim](https://github.com/mrcjkb/haskell-tools.nvim): Configures `haskell-language-server` and integrates with other Haskell tools.
-- [vimtex](https://github.com/lervag/vimtex): LaTeX in (Neo)vim. I use [Zathura](https://pwmt.org/projects/zathura/) as a pdf viewer when editing LaTeX files.
+- [vimtex](https://github.com/lervag/vimtex): LaTeX in (Neo)vim. 
 
 ### Miscellaneous
 - If you're using Wayland (like me), you might need to `apt install wl-clipboard` to get copy/paste with the system clipboard working in Neovim.
 
 ## Other
-
+- [Zathura](https://pwmt.org/projects/zathura/) - PDF viewer with vim-esque bindings. Integrates with vimtex.
 - [Wallpaper](https://wall.alphacoders.com/big.php?i=1163116)
 
