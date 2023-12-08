@@ -41,7 +41,6 @@ setopt hist_ignore_space   # prefix command with a space to skip its recording
 setopt hist_reduce_blanks  # Remove extra blanks from each command added to history
 setopt hist_verify         # Don't execute immediately upon history expansion
 setopt inc_append_history  # Write to history file immediately, not when shell quits
-setopt share_history       # Share history among all sessions
 
 # Only add valid commands to history. This is useful for zsh-autosuggestions
 # REF: https://www.zsh.org/mla/users//2014/msg00715.html
