@@ -32,12 +32,12 @@ Tutorial for installing Gnome shell extensions [here](https://itsfoss.com/gnome-
 Installation instructions [here](https://sw.kovidgoyal.net/kitty/binary/). 
 
 ### Configuration
-My configuration files can be found [here](/.config/kitty) (`/.config/kitty/`). Notably:
+My configuration files can be found [here](/.config/kitty) (`.config/kitty`).
 - Colour theme: Based on [Tokyo Night](https://github.com/davidmathers/tokyo-night-kitty-theme), with some minor changes
 - Font: [Caskaydia Cove (patched font for Cascadia Code)](https://github.com/ryanoasis/nerd-fonts/tree/master/patched-fonts/CascadiaCode)
 
 ### Keyboard Shortcuts
-The keyboard shortcuts are mostly based on the default Gnome Terminal shortcuts (with a few changes), and can be found [here](/.config/kitty/shortcuts.conf).
+The keyboard shortcuts are mostly based on the default Gnome Terminal shortcuts, with a few changes. The configuration file can be found [here](/.config/kitty/shortcuts.conf) (`.config/kitty/shortcuts.conf`).
 
 <details>
 <summary>Copy/paste</summary>
@@ -143,15 +143,17 @@ The keyboard shortcuts are mostly based on the default Gnome Terminal shortcuts 
     sudo update-alternatives --install /usr/bin/x-terminal-emulator x-terminal-emulator `which kitty` 50
     sudo update-alternatives --config x-terminal-emulator
     ```
-    and select kitty (this assumes `kitty` is on your `$PATH`).
+    and select kitty. Note that this assumes `kitty` is on your `$PATH`. If you installed a pre-built binary of `kitty` using the default command, `kitty` is installed to `~/.local/kitty.app` on Linux, and you can add it to your path by e.g. adding a symlink for it in `/usr/local/bin`, which is what I have done.
 
 ## Oh My Zsh
 
 ### Installation
-Installation instructions [here](https://github.com/ohmyzsh/ohmyzsh).
+- Installation instructions for zsh [here](https://github.com/ohmyzsh/ohmyzsh/wiki/Installing-ZSH).
+- Installation instructions for Oh My Zsh [here](https://github.com/ohmyzsh/ohmyzsh). You'll need to have zsh installed first.
 
 ### Configuration
-Main config file for zsh is [here](/.zshrc) (`/.zshrc`). Custom Oh My Zsh config is [here](/.oh-my-zsh-custom) (note that I use `$ZSH_CUSTOM = ~/.oh-my-zsh-custom` for my custom Oh My Zsh directory).
+- Main config file for zsh is [here](/.zshrc) (`.zshrc`).
+- Custom Oh My Zsh config is [here](/.oh-my-zsh-custom) (I use `$ZSH_CUSTOM = ~/.oh-my-zsh-custom` for my custom Oh My Zsh directory).
 
 ### Plugins
 - [Git](https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/git): Provides some aliases and useful functions. Built-in to Oh My Zsh.
@@ -160,9 +162,10 @@ Main config file for zsh is [here](/.zshrc) (`/.zshrc`). Custom Oh My Zsh config
 - [zsh-syntax-highlighting](https://github.com/zsh-users/zsh-syntax-highlighting): Syntax highlighting for zsh.
 
 ### Theme
-- I use a custom theme which has a pretty prompt that shows useful things, like
+- I use a custom theme with a pretty prompt that displays useful things like
   - Git info (if in a Git repository)
   - Conda environment (if one is active)
+  - Timestamp (I don't use this personally, but the option is there if you'd like to use it)
 It can be found [here](/.oh-my-zsh-custom/themes/limao.zsh-theme) (`/.oh-my-zsh-custom/themes/limao.zsh-theme`). You can enable/disable parts of the prompt to your liking, or add more parts.
 
 ## Neovim
@@ -174,10 +177,14 @@ It can be found [here](/.oh-my-zsh-custom/themes/limao.zsh-theme) (`/.oh-my-zsh-
 Installation instructions [here](https://github.com/neovim/neovim/wiki/Installing-Neovim).
 
 ### Configuration
-My configuration files can be found [here](/.config/nvim) (`/.config/nvim`). Settings that are common to regular Vim (though I rarely use regular Vim anyway) can be found in `.vimrc`.
+My configuration files can be found [here](/.config/nvim) (`.config/nvim`). For compatibility's sake (and in the rare occasion where I do need to use regular vim), settings that are common to regular vim can be found in `.vimrc`, and my Neovim config is set up to first run everything that is in `.vimrc`.
 
 ### General Plugins
 - [folke/lazy.nvim](https://github.com/folke/lazy.nvim) - A modern plugin manager for Neovim.
+
+### Code Plugins
+- [averms/black-nvim](https://github.com/averms/black-nvim) - A Neovim plugin to format your code using Black.
+- [lervag/vimtex](https://github.com/lervag/vimtex) - A modern Vim and neovim filetype plugin for LaTeX files.
 
 ### Editor Plugins
 - [romgrk/barbar.nvim](https://github.com/romgrk/barbar.nvim) - The neovim tabline plugin.
@@ -194,15 +201,8 @@ My configuration files can be found [here](/.config/nvim) (`/.config/nvim`). Set
 - [neovim/nvim-lspconfig](https://github.com/neovim/nvim-lspconfig) - Quickstart configs for Nvim LSP.
 - [nvim-treesitter/nvim-treesitter](https://github.com/nvim-treesitter/nvim-treesitter) - Nvim Treesitter configurations and abstraction layer.
 
-### Code Plugins
-- [averms/black-nvim](https://github.com/averms/black-nvim) - A Neovim plugin to format your code using Black.
-- [lervag/vimtex](https://github.com/lervag/vimtex) - A modern Vim and neovim filetype plugin for LaTeX files. 
-
 ### Theme
 - [TokyoNight.nvim](https://github.com/folke/tokyonight.nvim/): Tokyo Night theme for Neovim.
-
-### Language Specific
-- [vimtex](https://github.com/lervag/vimtex): LaTeX in (Neo)vim. 
 
 ### Miscellaneous
 - If you're using Wayland (like me), you might need to `apt install wl-clipboard` to get copy/paste with the system clipboard working in Neovim.
