@@ -14,7 +14,7 @@ else
 endif
 ]])
 
--- Initialise lazy.nvim
+-- Initialise lazy.nvim (package manager)
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not vim.loop.fs_stat(lazypath) then
     vim.fn.system({
@@ -31,20 +31,20 @@ vim.opt.rtp:prepend(lazypath)
 -- Load plugins
 require("lazy").setup("plugins")
 
-vim.cmd([[
-colorscheme tokyonight-night  " must be done after tokyonight.nvim is loaded
-]])
+-- Set colour scheme (must be done after tokyonight.nvim is loaded)
+vim.cmd([[colorscheme tokyonight-night]])
 
+-- Format Python files with black on save. I only install black in my conda environments,
+-- so check that we're in a conda environment first - otherwise, we'll get an error when
+-- we attempt to call BlackSync()
 vim.cmd([[
-" Format file on save
-" I only install black on my conda environments, so check for this first
 if !empty($CONDA_PREFIX)
     autocmd BufWritePre *.py call BlackSync()
 endif
 
+" Skip AST check, which makes formatting faster
 let g:black#settings = {
     \ 'fast': 1,
-    \ 'line_length': 100,
     \}
 ]])
 

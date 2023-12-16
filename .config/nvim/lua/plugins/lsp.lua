@@ -1,5 +1,9 @@
 vim.cmd([[ let g:UltiSnipsExpandTrigger="<c-space>" ]])
 
+-- vim.diagnostic.config({
+--     virtual_text = false,
+-- })
+
 return {
     {
         'VonHeikemen/lsp-zero.nvim',
@@ -90,6 +94,9 @@ return {
             -- This is where all the LSP shenanigans live
             local lsp_zero = require("lsp-zero")
             lsp_zero.extend_lspconfig()
+            lsp_zero.configure("lua_ls", {
+                settings = { Lua = { diagnostics = { globals = { "vim" } } } }
+            })
 
             lsp_zero.on_attach(function(client, bufnr)
                 -- see :help lsp-zero-keybindings
@@ -98,16 +105,11 @@ return {
             end)
 
             require("mason-lspconfig").setup({
-                ensure_installed = { "lua_ls", "texlab" },
                 handlers = {
                     lsp_zero.default_setup,
                 }
             })
         end
-    },
-    {
-        "averms/black-nvim",
-        build = ":UpdateRemotePlugins",
     },
     {
         "nvim-treesitter/nvim-treesitter",
@@ -127,7 +129,7 @@ return {
         event = "VeryLazy",
         config = function()
             require("lsp_signature").setup({
-                hint_prefix = "",
+                hint_enable = false,
             })
         end
     }
