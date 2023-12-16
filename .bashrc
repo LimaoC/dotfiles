@@ -97,8 +97,20 @@ export PATH=$PATH:$HOME/.yarn/bin
 # texlive path
 export PATH=$PATH:/usr/local/texlive/2022/bin/x86_64-linux
 
-# spicetify path
-export PATH=$PATH:$HOME/.spicetify
+# >>> juliaup initialize >>>
+
+# !! Contents within this block are managed by juliaup !!
+
+case ":$PATH:" in
+    *:/home/limao/.juliaup/bin:*)
+        ;;
+
+    *)
+        export PATH=/home/limao/.juliaup/bin${PATH:+:${PATH}}
+        ;;
+esac
+
+# <<< juliaup initialize <<<
 
 # ----- WELCOME MESSAGE ---------------------------------------------------------------------------------------------- #
 
@@ -125,5 +137,4 @@ echo -e "
 @@@   /@@ @             @@       @/      @% 
   @@@@  @@             @@          @@@@@@   
                                             " | lolcat
-
 
