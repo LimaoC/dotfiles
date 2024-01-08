@@ -93,11 +93,7 @@ return {
         },
         config = function()
             require("gitsigns").setup()
-            require("barbar").setup({
-                sidebar_filetypes = {
-                    NvimTree = true,
-                }
-            })
+            require("barbar").setup()
             local map = vim.api.nvim_set_keymap
             local opts = { noremap = true, silent = true }
             -- Move to previous/next

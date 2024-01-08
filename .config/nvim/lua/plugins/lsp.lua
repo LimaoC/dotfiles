@@ -115,6 +115,10 @@ return {
         "nvim-treesitter/nvim-treesitter",
         build = ":TSUpdate",
         config = function()
+            -- Note:
+            -- https://github.com/nvim-treesitter/nvim-treesitter#i-get-query-error-invalid-node-type-at-position
+            -- This error can occur if you have more than one `parser` runtime directory. See above for details.
+            -- If the nvim parser is one of them, you can remove it by changing the directory name from `parser`.
             local configs = require("nvim-treesitter.configs")
             configs.setup({
                 highlight = { enable = true },
