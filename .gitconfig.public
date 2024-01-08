@@ -1,0 +1,10 @@
+[commit]
+	gpgsign = true
+[alias]
+    logp = log --graph --pretty=oneline --abbrev-commit  # log pretty
+[init]
+	defaultBranch = main
+[core]
+	pager = less -X -F
+[pull]
+	rebase = true
