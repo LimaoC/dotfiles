@@ -97,6 +97,11 @@ fi
 unset __conda_setup
 # <<< conda initialize <<<
 
+# gurobi
+export GUROBI_HOME=/opt/gurobi1100/linux64
+export PATH=$PATH:$GUROBI_HOME/bin
+export LD_LIBRARY_PATH=$GUROBI_HOME/lib
+
 # ===== Welcome message ========================================================================== #
 
 # note: you will need to install `lolcat` for this to work
