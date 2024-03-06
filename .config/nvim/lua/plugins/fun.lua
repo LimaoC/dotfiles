@@ -1,6 +1,6 @@
 return {
     {
         "eandrju/cellular-automaton.nvim",
-        event = 'InsertEnter',  -- lazy-load on entering insert mode
+        cmd = { 'CellularAutomaton' },  -- lazy-load on executing one of these commands
     }
 }
