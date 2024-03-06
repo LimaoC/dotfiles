@@ -33,6 +33,10 @@ return {
             },
             { 'hrsh7th/cmp-nvim-lsp-signature-help' },
         },
+        sources = {
+            { name = "nvim_lsp" },
+            { name = "nvim_lsp_signature_help" },
+        },
         config = function()
             -- Configure autocompletion settings
             local lsp_zero = require("lsp-zero")
@@ -83,6 +87,9 @@ return {
 
     -- LSP Support
     {
+        "folke/neodev.nvim", opts = {}
+    },
+    {
         'neovim/nvim-lspconfig',
         cmd = { 'LspInfo', 'LspInstall', 'LspStart' },  -- lazy-load on executing one of these commands
         event = {'BufReadPre', 'BufNewFile'},           -- or one of these events
@@ -92,10 +99,17 @@ return {
         },
         config = function()
             -- This is where all the LSP shenanigans live
+            require("neodev").setup({})
             local lsp_zero = require("lsp-zero")
             lsp_zero.extend_lspconfig()
-            lsp_zero.configure("lua_ls", {
-                settings = { Lua = { diagnostics = { globals = { "vim" } } } }
+            require("mason-lspconfig").setup({
+                ensure_installed = { "clangd", "lua_ls" },
+                handlers = {
+                    lsp_zero.default_setup,
+                }
+            })
+            lsp_zero.configure("clangd", {
+                settings = { clangd = { arguments = { "--background-index", "--clang-tidy", "--completion-style=bundled", "--header-insertion=iwyu" } } }
             })
 
             lsp_zero.on_attach(function(client, bufnr)
@@ -104,11 +118,6 @@ return {
                 lsp_zero.default_keymaps({buffer = bufnr})
             end)
 
-            require("mason-lspconfig").setup({
-                handlers = {
-                    lsp_zero.default_setup,
-                }
-            })
         end
     },
     {
@@ -126,15 +135,4 @@ return {
             })
         end
     },
-
-    -- LSP Signatures
-    {
-        "ray-x/lsp_signature.nvim",
-        event = "VeryLazy",
-        config = function()
-            require("lsp_signature").setup({
-                hint_enable = false,
-            })
-        end
-    }
 }
