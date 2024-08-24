@@ -1,7 +1,8 @@
 [commit]
 	gpgsign = true
 [alias]
-    logp = log --graph --pretty=oneline --abbrev-commit  # log pretty
+    logp = log --graph --oneline  # log pretty
+    logpf = log --graph --oneline --full-history --all  # log pretty full
 [init]
 	defaultBranch = main
 [core]
