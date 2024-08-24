@@ -5,7 +5,10 @@ let &packpath = &runtimepath
 source ~/.vimrc
 ]])
 
--- If there is an active conda environment, use that Python interpreter
+-- Set status column (git signs and diagnostics)
+vim.opt.statuscolumn = [[%!v:lua.require'user.statuscolumn'.statuscolumn()]]
+
+-- If there is an active conda environment, use its Python interpreter
 vim.cmd([[
 if !empty($CONDA_PREFIX)
     let g:python3_host_prog = $CONDA_PREFIX . '/bin/python3'
@@ -33,18 +36,3 @@ require("lazy").setup("plugins")
 
 -- Set colour scheme (must be done after tokyonight.nvim is loaded)
 vim.cmd([[colorscheme tokyonight-night]])
-
--- Format Python files with black on save. I only install black in my conda environments,
--- so check that we're in a conda environment first - otherwise, we'll get an error when
--- we attempt to call BlackSync()
-vim.cmd([[
-if !empty($CONDA_PREFIX)
-    autocmd BufWritePre *.py call BlackSync()
-endif
-
-" Skip AST check, which makes formatting faster
-let g:black#settings = {
-    \ 'fast': 1,
-    \}
-]])
-
