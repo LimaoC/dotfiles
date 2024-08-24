@@ -12,7 +12,3 @@ alias python=python3
 #   sleep 10; alert
 alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
 
-# Top 5 most frequently used comments
-# REF: https://old.reddit.com/r/archlinux/comments/t4ohgq/what_are_your_top_5_most_used_shell_commands/
-alias top5='print -l ${(o)history%% *} | uniq -c | sort -nr | head -n 5'
-
