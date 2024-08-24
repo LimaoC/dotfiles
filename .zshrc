@@ -4,7 +4,6 @@ export PATH=$HOME/bin:$PATH                   # May need to change $PATH if you 
 export ZSH="$HOME/.oh-my-zsh"                 # Path to my oh-my-zsh installation.
 export ZSH_CUSTOM="$HOME/.oh-my-zsh-custom"   # Path to my oh-my-zsh custom configuration.
 export NVM_LAZY_LOAD=true                     # Lazy load nvm (zsh-nvm).
-export NVM_LAZY_LOAD_EXTRA_COMMANDS=('nvim')  # Load nvm when nvim is invoked (required for pyright)
 
 zstyle ':omz:update' mode reminder  # Remind me to update when it's time
 
@@ -13,7 +12,7 @@ CASE_SENSITIVE="false"                # Case-sensitive completion
 HYPHEN_INSENSITIVE="true"             # Hyphen-insensitive competion
 DISABLE_UNTRACKED_FILES_DIRTY="true"  # Disable marking untracked files under VCS as dirty
 DISABLE_AUTO_TITLE="true"             # Disable auto-changing title
-plugins=(git zsh-autosuggestions zsh-nvm zsh-syntax-highlighting)
+plugins=(git zsh-autosuggestions zsh-nvm zsh-syntax-highlighting poetry)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -31,8 +30,8 @@ else
 fi
 
 # History settings
-HISTSIZE=10000
-SAVEHIST=10000
+HISTSIZE=50000
+SAVEHIST=50000
 setopt append_history      # allow multiple sessions to append to one history
 setopt bang_hist           # treat ! special during command expansion
 setopt extended_history    # Write history in :start:elasped;command format
@@ -59,8 +58,44 @@ export BLOCK_SIZE="'1"       # Add commas to file sizes
 # Time zsh startup time
 # REF: https://blog.mattclemente.com/2020/06/26/oh-my-zsh-slow-to-load/
 timezsh() {
-  shell=${1-$SHELL}
-  for i in $(seq 1 10); do /usr/bin/time $shell -i -c exit; done
+    shell=${1-$SHELL}
+    for i in $(seq 1 10); do /usr/bin/time $shell -i -c exit; done
+}
+
+# List n most frequently used comments
+# REF: https://old.reddit.com/r/archlinux/comments/t4ohgq/what_are_your_top_5_most_used_shell_commands/
+mostused() {
+    if [[ $# -eq 0 ]] then
+        print -l ${(o)history%% *} | uniq -c | sort -nr | head -n 5
+    else
+        print -l ${(o)history%% *} | uniq -c | sort -nr | head -n $1
+    fi
+}
+
+welcome() {
+    # note: you will need to install `lolcat` for this to work
+    echo -e "
+      @@@@      %@@                             
+        @@       @@                             
+        @@                                      
+        @@                                      
+        @@      @@@     @@@  /@@@@@ /@@@@@@     
+        @@       @@       @/@@/   @@@/    @@    
+        @@       @@       @@/     @@      @@@   
+        @@       @@       @@      @@      @@@   
+        @@       @@       @@      @@      @@@   
+        @@       @@       @@      @@      @@@   
+        @@       @@       @@      @@      @@@   
+      @@@@@@   @@@@@@   @@@@@@  @@@@@@  @@@@@@@ 
+                                                
+                           @@                   
+       @@@@                 @@         @@@@@    
+     &@/   @@                @@      @@      @  
+         @@@@    @@@@@@@@@@@@@@@@    @       #@ 
+     @@&/  @@                @@     .@       #@.
+    @@@   /@@ @             @@       @/      @% 
+      @@@@  @@             @@          @@@@@@   
+                                                " | lolcat
 }
 
 # ===== Tool & Language configuration ============================================================ #
@@ -97,33 +132,6 @@ fi
 unset __conda_setup
 # <<< conda initialize <<<
 
-# gurobi
-export GUROBI_HOME=/opt/gurobi1100/linux64
-export PATH=$PATH:$GUROBI_HOME/bin
-export LD_LIBRARY_PATH=$GUROBI_HOME/lib
+# ================================================================================================ #
 
-# ===== Welcome message ========================================================================== #
-
-# note: you will need to install `lolcat` for this to work
-echo -e "
-  @@@@      %@@                             
-    @@       @@                             
-    @@                                      
-    @@                                      
-    @@      @@@     @@@  /@@@@@ /@@@@@@     
-    @@       @@       @/@@/   @@@/    @@    
-    @@       @@       @@/     @@      @@@   
-    @@       @@       @@      @@      @@@   
-    @@       @@       @@      @@      @@@   
-    @@       @@       @@      @@      @@@   
-    @@       @@       @@      @@      @@@   
-  @@@@@@   @@@@@@   @@@@@@  @@@@@@  @@@@@@@ 
-                                            
-                       @@                   
-   @@@@                 @@         @@@@@    
- &@/   @@                @@      @@      @  
-     @@@@    @@@@@@@@@@@@@@@@    @       #@ 
- @@&/  @@                @@     .@       #@.
-@@@   /@@ @             @@       @/      @% 
-  @@@@  @@             @@          @@@@@@   
-                                            " | lolcat
+welcome
