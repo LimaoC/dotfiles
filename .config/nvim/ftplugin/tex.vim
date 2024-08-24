@@ -18,7 +18,7 @@ let g:vimtex_indent_ignored_envs = [
     \]
 let g:vimtex_mappings_disable = { 'i': [']]'] }  " disable ']]' as it slows down the 'lr[]' snippet
 let g:vimtex_syntax_conceal_disable = 1          " disable all syntax concealment
-let g:vimtex_view_method = 'zathura_simple'      " need xdotool for zathura
+let g:vimtex_view_method = 'zathura_simple'      " need xdotool for zathura, so use zathura_simple
 
 let g:tex_flavor = "latex"
 
