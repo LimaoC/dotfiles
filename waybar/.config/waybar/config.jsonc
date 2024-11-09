@@ -1,0 +1,35 @@
+// REF: https://github.com/Alexays/Waybar/blob/master/resources/config.jsonc
+// REF: https://github.com/mylinuxforwork/dotfiles/tree/main/share/dotfiles/.config/waybar/themes/ml4w
+
+{
+    "layer": "top",
+    "margin-bottom": 0,
+    "margin-left": 5,
+    "margin-right": 5,    
+    "spacing": 0,
+
+    "include": [
+        "~/.config/waybar/modules.jsonc"
+    ],
+
+    "modules-left": [
+        "custom/applauncher",
+        "hyprland/window",
+        "idle_inhibitor",
+        "custom/empty"
+    ],
+
+    "modules-center": [
+        "hyprland/workspaces"
+    ],
+
+    "modules-right": [
+        "tray",
+        "pulseaudio",
+        "temperature",
+        "battery",
+        "clock",
+        "custom/exit"
+    ]
+  }
+}

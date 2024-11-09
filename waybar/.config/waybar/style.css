@@ -1,0 +1,218 @@
+/* REF: https://github.com/mylinuxforwork/dotfiles/tree/main/share/dotfiles/.config/waybar/themes/ml4w */
+
+/*
+@define-color background #C0CAF5;
+@define-color workspacesbackground1 #1F2335;
+@define-color workspacesbackground2 #C0CAF5;
+@define-color textcolor #1F2335;
+@define-color iconcolor #FFFFFF;
+*/
+
+@define-color background #FFFFFF;
+@define-color workspacesbackground1 #FFFFFF;
+@define-color workspacesbackground2 #CCCCCC;
+@define-color textcolor #000000;
+@define-color iconcolor #FFFFFF;
+
+/* -----------------------------------------------------
+ * General
+ * ----------------------------------------------------- */
+
+* {
+    font-family: "JetBrainsMono NF", "Font Awesome 6 Free", FontAwesome, Roboto, Helvetica, Arial, sans-serif;
+    border: none;
+    border-radius: 0px;
+}
+
+window#waybar {
+    border-bottom: 0px solid #ffffff;
+    background-color: transparent;
+    transition-property: background-color;
+    transition-duration: .5s;
+}
+
+/* -----------------------------------------------------
+ * Workspaces 
+ * ----------------------------------------------------- */
+
+#workspaces {
+    background: @workspacesbackground1;
+    border: 0px;
+    border-radius: 15px;
+    color: @textcolor;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: bold;
+    margin: 2px 1px 3px 1px;
+    opacity: 0.8;
+    padding: 0px 1px;
+}
+
+#workspaces button {
+    background-color: @workspacesbackground2;
+    border: 0px;
+    border-radius: 15px;
+    color: @textcolor;
+    margin: 4px 3px;
+    opacity: 0.4;
+    padding: 0px 5px;
+    transition: all 0.3s ease-in-out;
+}
+
+#workspaces button.active {
+    background: @workspacesbackground2;
+    border-radius: 15px;
+    color: @textcolor;
+    min-width: 40px;
+    opacity: 1.0;
+    transition: all 0.3s ease-in-out;
+}
+
+#workspaces button:hover {
+    background: @workspacesbackground2;
+    border-radius: 15px;
+    color: @textcolor;
+    opacity: 0.7;
+}
+
+/* -----------------------------------------------------
+ * Tooltips
+ * ----------------------------------------------------- */
+
+tooltip {
+    background-color: @background;
+    border-radius: 10px;
+    margin: 0px;
+    opacity: 1.0;
+    padding: 20px;
+}
+
+tooltip label {
+    color: @textcolor;
+    font-weight: 400;
+}
+
+/* -----------------------------------------------------
+ * Modules
+ * ----------------------------------------------------- */
+
+.modules-left > widget:first-child > #workspaces {
+    margin-left: 0;
+}
+
+.modules-right > widget:last-child > #workspaces {
+    margin-right: 0;
+}
+
+/* ----------------------------------------------------- */
+
+#battery,
+#clock,
+#custom-applauncher,
+#pulseaudio,
+#temperature,
+#window {
+    border-radius: 15px;
+    font-size: 16px;
+    margin: 3px 17px 3px 0px;
+    opacity: 0.8;
+    padding: 0px 10px 0px 10px;
+}
+
+#battery {
+    background-color: @background;
+    color: @textcolor;
+}
+
+#battery.charging, #battery.plugged {
+    background-color: @background;
+    color: @textcolor;
+}
+
+@keyframes blink {
+    to {
+        background-color: @background;
+        color: @textcolor;
+    }
+}
+
+#battery.critical:not(.charging) {
+    background-color: #f53c3c;
+    color: #F53C3C;
+    animation-name: blink;
+    animation-duration: 0.5s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+}
+
+#clock {
+    background-color: @background;
+    color: @textcolor;
+}
+
+#custom-applauncher {
+    background-color: @background;
+    color: @textcolor;
+    font-weight: bold;
+}
+
+#custom-exit {
+    color: @iconcolor;
+    font-size: 20px;
+    margin: 0px 13px 0px 0px;
+    opacity: 0.8;
+    padding: 0px;
+}
+
+#idle_inhibitor {
+    color: @iconcolor;
+    font-size: 22px;
+    font-weight: bold;
+    margin-right: 20px;
+    opacity: 0.8;
+}
+
+#idle_inhibitor.activated {
+    color: #dc2f2f;
+}
+
+#pulseaudio {
+    background-color: @background;
+    border-radius: 15px;
+    color: @textcolor;
+}
+
+#pulseaudio.muted {
+    background-color: @background;
+    color: @textcolor;
+}
+
+#temperature {
+    background-color: @background;
+    color: @textcolor;
+}
+
+#tray {
+    padding: 0px 15px 0px 0px;
+}
+
+#tray > .passive {
+    -gtk-icon-effect: dim;
+}
+
+#tray > .needs-attention {
+    -gtk-icon-effect: highlight;
+}
+
+#window {
+    background: @background;
+    color: @textcolor;
+}
+
+window#waybar.empty #window {
+    background-color: transparent;
+    margin: 0px;
+    padding: 0px;
+}
+
