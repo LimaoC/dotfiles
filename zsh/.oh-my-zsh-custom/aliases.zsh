@@ -1,7 +1,3 @@
-# for managing my dotfiles repository, I use `config` instead of `git`
-# REF: https://www.atlassian.com/git/tutorials/dotfiles
-alias config='/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME'
-
 alias ,="cd .."
 alias ,,="cd ../.."
 alias ,,,="cd ../../.."
