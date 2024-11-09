@@ -1,11 +1,13 @@
 #!/bin/bash
 
+# Usage: ./install-omz-plugins.sh
+
 # Installs oh-my-zsh plugins TO $ZSH_CUSTOM/plugins
 
 repos=(
     "https://github.com/zsh-users/zsh-autosuggestions"
-    "https://github.com/lukechilds/zsh-nvm"
     "https://github.com/zsh-users/zsh-syntax-highlighting"
+    "https://github.com/lukechilds/zsh-nvm"
 )
 
 # Install each plugin in their respective directory, if not already installed
