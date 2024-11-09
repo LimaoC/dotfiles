@@ -1,25 +1,39 @@
 #!/bin/bash
 
+# Usage: ./install-dotfiles.sh [--clean]
+
 # NOTE: This install script assumes that it is in a subdirectory
 # NOTE: in ~, e.g. ~/.dotfiles. This is so that the config files
 # NOTE: can be correctly symlinked to the parent directory ~.
 # NOTE: For more info, see `man stow`
 
-stow_cmd="stow --verbose=1"
+dirs=(
+    "git"
+    "kitty"
+    "misc"
+    "nvim"
+    "vim"
 
-$stow_cmd git
-$stow_cmd kitty
-$stow_cmd misc
-$stow_cmd nvim
-$stow_cmd vim
+    # "bash"
+    "zsh"
 
-# $stow_cmd bash
-$stow_cmd zsh
+    "hypr"
+    "waybar"
+    "wlogout"
+    "wofi"
 
-$stow_cmd hypr
-$stow_cmd waybar
-$stow_cmd wlogout
+    # "conda"
+    "zathura"
+)
 
-# $stow_cmd conda
-# $stow_cmd zathura
-
+if [ -z "$1" ]; then
+    for dir in "${dirs[@]}"; do
+        stow --verbose=1 $dir
+    done
+elif [[ "$1" == "--clean" ]]; then
+    for dir in "${dirs[@]}"; do
+        stow --verbose=1 -D $dir
+    done
+else
+    echo "install-dotfiles: Unknown argument: $1"
+fi
