@@ -95,19 +95,20 @@ map("n", "<Space>bw", "<Cmd>BufferOrderByWindowNumber<CR>", barbar_map_opts)
 return {
     {
         "https://git.0x7be.net/dirk/boxdash",
-        version = "*",
+        version = "*", -- latest stable release
         config = function()
             require("neovim-boxdash").setup({
-                title = "Neovim",   -- box title (set to "" to hide)
-                align = {
-                    horizontal = 0, -- horizontal box alignment
-                    vertical = 0,   -- vertical box alignment
+                title = "\\lim_{a\\to0}",
+                align = { -- box alignment
+                    horizontal = 0,
+                    vertical = 0,
                 },
-                style = 1,          -- One of the available styles (see below)
-                entries = {         -- Menu entries
-                    { "i", "Switch to insert mode", "insert_mode" },
-                    { "e", "Get an empty buffer",   "empty_buffer" },
-                    { "t", "Open NvimTree",         function() vim.api.nvim_command("NvimTreeOpen") end },
+                style = 5,
+                entries = {
+                    { "i", "Switch to insert mode",         "insert_mode" },
+                    { "e", "Get an empty buffer",           "empty_buffer" },
+                    { "t", "Open NvimTree",                 function() vim.api.nvim_command("NvimTreeOpen") end },
+                    { "u", "Sync/update lazy.nvim plugins", "lazy_sync" },
                     "----------------------------------------------",
                     { "q", "Quit Neovim", "quit_neovim" },
                 }
@@ -116,7 +117,7 @@ return {
     },
     {
         "nvim-tree/nvim-tree.lua",
-        version = "*",
+        version = "*", -- latest stable release
         cmd = "NvimTreeOpen",
         dependencies = { "nvim-tree/nvim-web-devicons" },
         opts = {
@@ -144,7 +145,9 @@ return {
         version = "^1.0.0", -- (optional) only update when a new 1.x version is released
         -- lazy = false,
         priority = 100,
-        dependencies = { "nvim-tree/nvim-web-devicons" }, -- (optional) for file icons
+        dependencies = {
+            "nvim-tree/nvim-web-devicons" -- (optional) for file icons
+        },
         init = function() vim.g.barbar_auto_setup = false end,
         opts = {
             sidebar_filetypes = {

@@ -8,15 +8,6 @@ source ~/.vimrc
 -- Set status column (git signs and diagnostics)
 vim.opt.statuscolumn = [[%!v:lua.require'user.statuscolumn'.statuscolumn()]]
 
--- If there is an active conda environment, use its Python interpreter
-vim.cmd([[
-if !empty($CONDA_PREFIX)
-    let g:python3_host_prog = $CONDA_PREFIX . '/bin/python3'
-else
-    let g:python3_host_prog = '/usr/bin/python3'
-endif
-]])
-
 -- Initialise lazy.nvim (package manager)
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not vim.loop.fs_stat(lazypath) then
@@ -35,4 +26,4 @@ vim.opt.rtp:prepend(lazypath)
 require("lazy").setup("plugins")
 
 -- Set colour scheme (must be done after tokyonight.nvim is loaded)
-vim.cmd([[colorscheme tokyonight-night]])
+vim.cmd([[colorscheme tokyonight-moon]])

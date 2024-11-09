@@ -158,7 +158,7 @@ return {
             })
 
             require("mason-lspconfig").setup({
-                ensure_installed = { "clangd", "julials", "lua_ls", "pylsp", "rust_analyzer", "texlab" },
+                -- ensure_installed = { "clangd", "julials", "lua_ls", "pylsp", "rust_analyzer", "texlab" },
                 handlers = {
                     -- This first function is the default handler
                     -- It applies to every language server without a custom handler
