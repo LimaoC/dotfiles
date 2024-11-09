@@ -1,0 +1,6 @@
+# I maintain a .gitconfig.public mirror that filters out unnecessary fields,
+# so don't commit this one
+git/.gitconfig
+
+# OMZ plugins should be installed separately, see install-omz-plugins.sh
+zsh/.oh-my-zsh-custom/plugins
