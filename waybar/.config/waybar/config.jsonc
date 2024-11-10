@@ -4,8 +4,6 @@
 {
     "layer": "top",
     "margin-bottom": 0,
-    "margin-left": 5,
-    "margin-right": 5,    
     "spacing": 0,
 
     "include": [
@@ -14,21 +12,21 @@
 
     "modules-left": [
         "custom/applauncher",
+        "hyprland/workspaces",
         "hyprland/window",
-        "idle_inhibitor",
         "custom/empty"
     ],
 
     "modules-center": [
-        "hyprland/workspaces"
+        "clock"
     ],
 
     "modules-right": [
         "tray",
+        "idle_inhibitor",
         "pulseaudio",
         "temperature",
         "battery",
-        "clock",
         "custom/exit"
     ]
   }

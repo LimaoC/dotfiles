@@ -26,7 +26,7 @@
 
 window#waybar {
     border-bottom: 0px solid #ffffff;
-    background-color: transparent;
+    background: rgba(0, 0, 0, 0.5);
     transition-property: background-color;
     transition-duration: .5s;
 }
@@ -38,14 +38,8 @@ window#waybar {
 #workspaces {
     background: @workspacesbackground1;
     border: 0px;
-    border-radius: 15px;
     color: @textcolor;
-    font-size: 16px;
-    font-style: normal;
     font-weight: bold;
-    margin: 2px 1px 3px 1px;
-    opacity: 0.8;
-    padding: 0px 1px;
 }
 
 #workspaces button {
@@ -109,9 +103,11 @@ tooltip label {
 #battery,
 #clock,
 #custom-applauncher,
+#idle_inhibitor,
 #pulseaudio,
 #temperature,
-#window {
+#window,
+#workspaces {
     border-radius: 15px;
     font-size: 16px;
     margin: 3px 17px 3px 0px;
@@ -154,7 +150,8 @@ tooltip label {
 #custom-applauncher {
     background-color: @background;
     color: @textcolor;
-    font-weight: bold;
+    font-size: 20px;
+    font-weight: 900;
 }
 
 #custom-exit {
@@ -169,8 +166,6 @@ tooltip label {
     color: @iconcolor;
     font-size: 22px;
     font-weight: bold;
-    margin-right: 20px;
-    opacity: 0.8;
 }
 
 #idle_inhibitor.activated {
@@ -194,7 +189,7 @@ tooltip label {
 }
 
 #tray {
-    padding: 0px 15px 0px 0px;
+    padding: 0px 10px 0px 10px;
 }
 
 #tray > .passive {
