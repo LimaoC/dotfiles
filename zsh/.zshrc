@@ -72,6 +72,11 @@ mostused() {
     fi
 }
 
+# Open file with preferred app and return back to terminal prompt
+open() {
+    (&>/dev/null xdg-open "$*" &)
+}
+
 welcome() {
     # note: you will need to install `lolcat` for this to work
     echo -e "
