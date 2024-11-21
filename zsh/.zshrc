@@ -139,4 +139,8 @@ unset __conda_setup
 
 # ================================================================================================ #
 
-welcome
+# Only show welcome message for first terminal window
+terminal_count=$(ps a | awk '{print $2}' | grep -vi "tty*" | uniq | wc -l);
+if [[ $terminal_count -eq 1 ]] then
+    welcome
+fi
