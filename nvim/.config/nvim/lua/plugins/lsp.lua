@@ -6,8 +6,7 @@ return {
         event = { "BufRead" },
         build = ":TSUpdate",
         config = function()
-            -- NOTE:
-            -- https://github.com/nvim-treesitter/nvim-treesitter#i-get-query-error-invalid-node-type-at-position
+            -- REF: https://github.com/nvim-treesitter/nvim-treesitter#i-get-query-error-invalid-node-type-at-position
             -- This error can occur if you have more than one `parser` runtime directory. See above for details.
             -- If the nvim parser is one of them, you can remove it by changing the directory name from `parser`.
             local configs = require("nvim-treesitter.configs")
@@ -19,7 +18,7 @@ return {
     },
     {
         "VonHeikemen/lsp-zero.nvim",
-        branch = "v3.x",
+        branch = "v4.x",
         lazy = true,
         config = false,
         init = function()
@@ -42,7 +41,6 @@ return {
             { "L3MON4D3/LuaSnip" },
             { "saadparwaiz1/cmp_luasnip" }, -- completion source for luasnip
             { "windwp/nvim-autopairs" },
-            --{ "evesdropper/luasnip-latex-snippets.nvim" },
         },
         config = function()
             -- Autocompletion settings
@@ -126,14 +124,20 @@ return {
         config = function()
             -- This is where all the LSP shenanigans live
             local lsp_zero = require("lsp-zero")
-            lsp_zero.extend_lspconfig()
 
-            lsp_zero.on_attach(function(client, bufnr)
+            -- REF: https://lsp-zero.netlify.app/docs/guide/migrate-from-v3-branch.html
+            local lsp_attach = function(client, bufnr)
                 -- See :h lsp-zero-keybindings to learn the available actions
                 lsp_zero.default_keymaps({ buffer = bufnr })
-            end)
+            end
 
-            -- REF: https://lsp-zero.netlify.app/v3.x/language-server-configuration.html#explicit-setup
+            lsp_zero.extend_lspconfig({
+                capabilities = require("cmp_nvim_lsp").default_capabilities(),
+                lsp_attach = lsp_attach,
+                float_border = "rounded",
+                sign_text = true,
+            })
+
             lsp_zero.format_on_save({
                 format_opts = {
                     async = false,
@@ -149,15 +153,21 @@ return {
                 }
             })
 
-            -- REF: https://lsp-zero.netlify.app/v3.x/language-server-configuration.html#diagnostics
-            lsp_zero.set_sign_icons({
-                error = '✘',
-                warn = '▲',
-                hint = '⚑',
-                info = '»'
+            -- REF: https://lsp-zero.netlify.app/docs/language-server-configuration.html#diagnostics
+            vim.diagnostic.config({
+                signs = {
+                    text = {
+                        [vim.diagnostic.severity.ERROR] = '✘',
+                        [vim.diagnostic.severity.WARN] = '▲',
+                        [vim.diagnostic.severity.HINT] = '⚑',
+                        [vim.diagnostic.severity.INFO] = '»',
+                    },
+                },
             })
 
+            require("mason").setup({})
             require("mason-lspconfig").setup({
+                ensure_installed = { "pylsp" },
                 -- ensure_installed = { "clangd", "julials", "lua_ls", "pylsp", "rust_analyzer", "texlab" },
                 handlers = {
                     -- This first function is the default handler

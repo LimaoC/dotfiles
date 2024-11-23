@@ -8,14 +8,10 @@ return {
             local npairs = require("nvim-autopairs")
             local rule = require("nvim-autopairs.rule")
             local cond = require("nvim-autopairs.conds")
-            local ts_conds = require("nvim-autopairs.ts-conds")
 
             npairs.setup(opts)
             npairs.add_rules({
                 rule("$", "$", { "tex", "latex" })
-                -- add a pair if it's not already in an inline_formula (example 2)
-                -- TODO: need latex treesitter parser for this one to work
-                    :with_pair(ts_conds.is_not_ts_node({ "inline_formula" }))
                 -- move right when repeating $
                     :with_move(cond.done())
                 -- disable adding a newline when you press <cr>
