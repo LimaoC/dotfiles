@@ -23,5 +23,5 @@ PROMPT="%B%F{magenta}λ %F{yellow}%n@%m %F{blue}%(4~|…/%3~|%~)"
 PROMPT+='$(git_prompt_info)'                     # *Git info
 PROMPT+='$(conda_prompt_info)'                   # *Conda environment name
 PROMPT+="${NEWLINE}%F{magenta}»%b%f "            # Prompt suffix
-RPROMPT="%B%F{7}%T"                              # *Timestamp on right of prompt
+# RPROMPT="%B%F{7}%T"                            # *Timestamp on right of prompt
 
