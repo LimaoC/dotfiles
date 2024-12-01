@@ -167,7 +167,6 @@ return {
 
             require("mason").setup({})
             require("mason-lspconfig").setup({
-                ensure_installed = { "pylsp" },
                 -- ensure_installed = { "clangd", "julials", "lua_ls", "pylsp", "rust_analyzer", "texlab" },
                 handlers = {
                     -- This first function is the default handler
