@@ -1,0 +1,60 @@
+@import "/home/limao/.cache/wal/colors-waybar.css";
+
+#window {
+    border: 0px;
+    border-radius: 15px;
+    font-family: "JetBrainsMono NF", monospace;
+    font-size: 16px;
+    background-color: @foreground;
+}
+
+#outer-box {
+    background-color: @background;
+    border-radius: 10px;
+    color: @foreground;
+}
+
+/* Search bar */
+#input {
+    background-color: @background;
+    border: 0px;
+    border-radius: 10px 10px 0px 0px;
+    box-shadow: none;
+    color: @foreground;
+    font-size: 20px;
+    margin: 5px;
+}
+
+/* Scrolled window containing all entries */
+#scroll {
+	margin: 5px;
+	background-color: @background;
+}
+
+/* Box containing all entries */
+#inner-box {
+    background-color: @background;
+    color: @foreground;
+    margin: 0px;
+}
+
+#img {
+    font-size: 24px;
+}
+
+#text {
+	margin: 0px;
+	padding: 2px 2px 2px 10px;
+}
+
+#entry {
+	padding: 0px;
+    margin: 0px;
+	background-color: @background;
+}
+
+#entry:selected {
+    background-color: @color1;
+    font-weight: bold;
+}
+
