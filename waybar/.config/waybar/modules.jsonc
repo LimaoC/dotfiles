@@ -56,9 +56,8 @@
     },
 
     "clock": {
-        "format": "{:%H:%M %a}",
-        "format-alt": "{:%Y-%m-%d}",
-        "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>"
+        "format": "{:%H:%M %a, %d %b %Y}",
+        "tooltip": false
     },
 
     "idle_inhibitor": {

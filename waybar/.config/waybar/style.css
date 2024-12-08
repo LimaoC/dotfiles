@@ -19,7 +19,7 @@
  * ----------------------------------------------------- */
 
 * {
-    font-family: "JetBrainsMono NF", "Font Awesome 6 Free", FontAwesome, Roboto, Helvetica, Arial, sans-serif;
+    font-family: "CaskaydiaCove Nerd Font", "Font Awesome 6 Free";
     border: none;
     border-radius: 0px;
 }
@@ -133,7 +133,7 @@ tooltip label {
 }
 
 #battery.critical:not(.charging) {
-    background-color: #f53c3c;
+    background-color: #F53C3C;
     color: #F53C3C;
     animation-name: blink;
     animation-duration: 0.5s;
@@ -151,7 +151,7 @@ tooltip label {
     background-color: @background;
     color: @textcolor;
     font-size: 20px;
-    font-weight: 900;
+    font-weight: 700;
 }
 
 #custom-exit {
