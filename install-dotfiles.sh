@@ -26,14 +26,20 @@ dirs=(
     "zathura"
 )
 
-if [ -z "$1" ]; then
+if ! command -v stow 2>&1 >/dev/null; then
+    echo "install-dotfiles: stow not found"
+    exit 1
+fi
+
+if [[ -z "$1" ]] then
     for dir in "${dirs[@]}"; do
         stow --verbose=1 $dir
     done
-elif [[ "$1" == "--clean" ]]; then
+elif [[ "$1" == "--clean" ]] then
     for dir in "${dirs[@]}"; do
         stow --verbose=1 -D $dir
     done
 else
     echo "install-dotfiles: Unknown argument: $1"
+    exit 1
 fi
