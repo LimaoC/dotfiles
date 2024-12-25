@@ -40,7 +40,6 @@ return {
         dependencies = {
             { "L3MON4D3/LuaSnip" },
             { "saadparwaiz1/cmp_luasnip" }, -- completion source for luasnip
-            { "windwp/nvim-autopairs" },
         },
         config = function()
             -- Autocompletion settings
@@ -50,12 +49,6 @@ return {
             -- Cmp settings
             local cmp = require("cmp")
             local cmp_action = lsp_zero.cmp_action()
-            -- Insert '()' after selecting a function/method completion item
-            local cmp_autopairs = require("nvim-autopairs.completion.cmp")
-            cmp.event:on(
-                "confirm_done",
-                cmp_autopairs.on_confirm_done()
-            )
 
             -- Snippet settings
             local luasnip = require("luasnip")
