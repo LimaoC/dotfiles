@@ -160,7 +160,9 @@ return {
 
             require("mason").setup({})
             require("mason-lspconfig").setup({
-                -- ensure_installed = { "clangd", "julials", "lua_ls", "pylsp", "rust_analyzer", "texlab" },
+                -- Use rust_analyzer@2024-10-21
+                -- REF: https://www.reddit.com/r/rust/comments/1geyfld/rustanalyzer_server_cancelled_the_request_in/
+                -- ensure_installed = { "clangd", "julials", "lua_ls", "pylsp", "rust_analyzer@2024-10-21", "texlab" },
                 handlers = {
                     -- This first function is the default handler
                     -- It applies to every language server without a custom handler
