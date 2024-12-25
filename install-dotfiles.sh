@@ -17,11 +17,6 @@ dirs=(
     # "bash"
     "zsh"
 
-    "hypr"
-    "waybar"
-    "wlogout"
-    "wofi"
-
     # "conda"
     "zathura"
 )
