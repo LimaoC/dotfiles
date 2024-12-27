@@ -122,6 +122,7 @@ return {
         dependencies = {
             { "hrsh7th/cmp-nvim-lsp" },
             { "williamboman/mason-lspconfig.nvim" },
+            { "stevearc/conform.nvim" },
             -- { "jose-elias-alvarez/null-ls.nvim" },
             -- { "jay-babu/mason-null-ls.nvim" },
             -- { "nvim-lua/plenary.nvim" }, -- needed for null-ls
@@ -141,23 +142,6 @@ return {
                 require("cmp_nvim_lsp").default_capabilities()
             )
 
-            -- Format on save
-            local buffer_autoformat = function(bufnr)
-                local group = "lsp_autoformat"
-                vim.api.nvim_create_augroup(group, { clear = false })
-                vim.api.nvim_clear_autocmds({ group = group, buffer = bufnr })
-
-                vim.api.nvim_create_autocmd("BufWritePre", {
-                    buffer = bufnr,
-                    group = group,
-                    desc = "LSP format on save",
-                    callback = function()
-                        -- Do not enable async formatting
-                        vim.lsp.buf.format({async = false, timeout_ms = 10000})
-                    end,
-                })
-            end
-
             -- LspAttach is where you enable features that only work
             -- if there is a language server active in the file
             vim.api.nvim_create_autocmd("LspAttach", {
@@ -173,20 +157,8 @@ return {
                     vim.keymap.set("n", "gr", "<cmd>lua vim.lsp.buf.references()<cr>", opts)
                     vim.keymap.set("n", "gs", "<cmd>lua vim.lsp.buf.signature_help()<cr>", opts)
                     vim.keymap.set("n", "<F2>", "<cmd>lua vim.lsp.buf.rename()<cr>", opts)
-                    vim.keymap.set({"n", "x"}, "<F3>", "<cmd>lua vim.lsp.buf.format({async = true})<cr>", opts)
+                    vim.keymap.set({"n", "x"}, "<F3>", "<cmd>lua require('conform').format({async = true})<cr>", opts)
                     vim.keymap.set("n", "<F4>", "<cmd>lua vim.lsp.buf.code_action()<cr>", opts)
-
-                    -- Attach autoformatter to buffer
-                    local id = vim.tbl_get(event, "data", "client_id")
-                    local client = id and vim.lsp.get_client_by_id(id)
-                    if client == nil then
-                        return
-                    end
-
-                    -- Make sure there is at least one client with formatting capabilities
-                    if client.supports_method("textDocument/formatting") then
-                        buffer_autoformat(event.buf)
-                    end
                 end,
             })
 
@@ -235,19 +207,23 @@ return {
                     end
                 },
             })
-
-            -- -- null-ls settings
-            -- require("mason-null-ls").setup({
-            --     ensure_installed = { "black", "isort" },
-            -- })
-
-            -- local null_ls = require("null-ls")
-            -- require("null-ls").setup({
-            --     sources = {
-            --         null_ls.builtins.formatting.black,
-            --         null_ls.builtins.formatting.isort,
-            --     }
-            -- })
         end,
     },
+
+    -- Formatting
+    {
+        -- REF: https://github.com/stevearc/conform.nvim/blob/master/doc/recipes.md#lazy-loading-with-lazynvim
+        "stevearc/conform.nvim",
+        event = { "BufWritePre" },
+        cmd = { "ConformInfo" },
+        opts = {
+            formatters_by_ft = {
+                python = { "isort", "black" },
+            },
+            format_on_save = {
+                timeout_ms = 500,
+                lsp_format = "fallback",
+            },
+        },
+    }
 }
