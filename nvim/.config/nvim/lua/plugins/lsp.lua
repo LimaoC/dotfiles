@@ -1,4 +1,6 @@
--- REF: https://lsp-zero.netlify.app/v3.x/guide/lazy-loading-with-lazy-nvim
+-- REF: Most of this configuration is adapted from https://lsp-zero.netlify.app/docs/
+-- REF: To get rid of the `vim` global variable warnings, and add basic completions for Neovim's lua api,
+-- REF: see https://lsp-zero.netlify.app/docs/autocomplete.html#basic-completions-for-neovim-s-lua-api
 
 return {
     {
@@ -9,28 +11,17 @@ return {
             -- REF: https://github.com/nvim-treesitter/nvim-treesitter#i-get-query-error-invalid-node-type-at-position
             -- This error can occur if you have more than one `parser` runtime directory. See above for details.
             -- If the nvim parser is one of them, you can remove it by changing the directory name from `parser`.
-            local configs = require("nvim-treesitter.configs")
-            configs.setup({
+            require("nvim-treesitter.configs").setup({
+                -- ensure_installed = { "lua", "markdown", "markdown_inline", "python", "query", "rust", "vim", "vimdoc" },
                 highlight = { enable = true },
                 indent = { enable = true },
             })
         end,
     },
     {
-        "VonHeikemen/lsp-zero.nvim",
-        branch = "v4.x",
-        lazy = true,
-        config = false,
-        init = function()
-            -- Disable automatic setup, we are doing it manually
-            vim.g.lsp_zero_extend_cmp = 0
-            vim.g.lsp_zero_extend_lspconfig = 0
-        end,
-    },
-    {
         "williamboman/mason.nvim",
         lazy = false,
-        config = true,
+        opts = {},
     },
 
     -- Autocompletion
@@ -42,13 +33,8 @@ return {
             { "saadparwaiz1/cmp_luasnip" }, -- completion source for luasnip
         },
         config = function()
-            -- Autocompletion settings
-            local lsp_zero = require("lsp-zero")
-            lsp_zero.extend_cmp()
-
             -- Cmp settings
             local cmp = require("cmp")
-            local cmp_action = lsp_zero.cmp_action()
 
             -- Snippet settings
             local luasnip = require("luasnip")
@@ -71,21 +57,47 @@ return {
                     -- Close, complete and accept selected item in completion menu
                     ["<C-e>"] = cmp.mapping.abort(),
                     ["<C-Space>"] = cmp.mapping.confirm({ select = true }),
-                    -- Navigate between completion items
-                    ["<Tab>"] = cmp_action.luasnip_supertab(),
-                    ["<S-Tab>"] = cmp_action.luasnip_shift_supertab(),
+                    -- Navigate between completion items using "super tab"
+                    ["<Tab>"] = cmp.mapping(function(fallback)
+                        local luasnip = require("luasnip")
+                        local col = vim.fn.col(".") - 1
+
+                        if cmp.visible() then
+                            cmp.select_next_item({ behaviour = "select" })
+                        elseif luasnip.expand_or_locally_jumpable() then
+                            luasnip.expand_or_jump()
+                        elseif col == 0 or vim.fn.getline("."):sub(col, col):match("%s") then
+                            fallback()
+                        else
+                            cmp.complete()
+                        end
+                    end, {"i", "s"}),
+                    ["<S-Tab>"] = cmp.mapping(function(fallback)
+                        local luasnip = require("luasnip")
+
+                        if cmp.visible() then
+                            cmp.select_prev_item({ behaviour = "select" })
+                        elseif luasnip.locally_jumpable(-1) then
+                            luasnip.jump(-1)
+                        else
+                            fallback()
+                        end
+                    end, {"i", "s"}),
                 }),
                 snippet = {
                     expand = function(args)
                         luasnip.lsp_expand(args.body)
                     end,
                 },
-                -- Show source name in completion menu
-                formatting = lsp_zero.cmp_format({ details = true }),
                 -- Preselect the first item in the completion menu
                 preselect = "item",
                 completion = {
                     completeopt = "menu,menuone,noinsert"
+                },
+                -- Bordered completion menus
+                window = {
+                    completion = cmp.config.window.bordered(),
+                    documentation = cmp.config.window.bordered(),
                 },
                 -- Disable completion in comments
                 enabled = function()
@@ -110,54 +122,90 @@ return {
         dependencies = {
             { "hrsh7th/cmp-nvim-lsp" },
             { "williamboman/mason-lspconfig.nvim" },
-            { "jose-elias-alvarez/null-ls.nvim" },
-            { "jay-babu/mason-null-ls.nvim" },
-            { "nvim-lua/plenary.nvim" }, -- needed for null-ls
+            -- { "jose-elias-alvarez/null-ls.nvim" },
+            -- { "jay-babu/mason-null-ls.nvim" },
+            -- { "nvim-lua/plenary.nvim" }, -- needed for null-ls
         },
+        init = function()
+            vim.opt.signcolumn = "yes"
+        end,
         config = function()
             -- This is where all the LSP shenanigans live
-            local lsp_zero = require("lsp-zero")
 
-            -- REF: https://lsp-zero.netlify.app/docs/guide/migrate-from-v3-branch.html
-            local lsp_attach = function(client, bufnr)
-                -- See :h lsp-zero-keybindings to learn the available actions
-                lsp_zero.default_keymaps({ buffer = bufnr })
+            -- Add cmp_nvim_lsp capabilities to lspconfig
+            -- This should be executed before you configure any language server
+            local lsp_defaults = require("lspconfig").util.default_config
+            lsp_defaults.capabilities = vim.tbl_deep_extend(
+                "force",
+                lsp_defaults.capabilities,
+                require("cmp_nvim_lsp").default_capabilities()
+            )
+
+            -- Format on save
+            local buffer_autoformat = function(bufnr)
+                local group = "lsp_autoformat"
+                vim.api.nvim_create_augroup(group, { clear = false })
+                vim.api.nvim_clear_autocmds({ group = group, buffer = bufnr })
+
+                vim.api.nvim_create_autocmd("BufWritePre", {
+                    buffer = bufnr,
+                    group = group,
+                    desc = "LSP format on save",
+                    callback = function()
+                        -- Do not enable async formatting
+                        vim.lsp.buf.format({async = false, timeout_ms = 10000})
+                    end,
+                })
             end
 
-            lsp_zero.extend_lspconfig({
-                capabilities = require("cmp_nvim_lsp").default_capabilities(),
-                lsp_attach = lsp_attach,
-                float_border = "rounded",
-                sign_text = true,
+            -- LspAttach is where you enable features that only work
+            -- if there is a language server active in the file
+            vim.api.nvim_create_autocmd("LspAttach", {
+                desc = "LSP actions",
+                callback = function(event)
+                    local opts = { buffer = event.buf }
+
+                    vim.keymap.set("n", "K", "<cmd>lua vim.lsp.buf.hover()<cr>", opts)
+                    vim.keymap.set("n", "gd", "<cmd>lua vim.lsp.buf.definition()<cr>", opts)
+                    vim.keymap.set("n", "gD", "<cmd>lua vim.lsp.buf.declaration()<cr>", opts)
+                    vim.keymap.set("n", "gi", "<cmd>lua vim.lsp.buf.implementation()<cr>", opts)
+                    vim.keymap.set("n", "go", "<cmd>lua vim.lsp.buf.type_definition()<cr>", opts)
+                    vim.keymap.set("n", "gr", "<cmd>lua vim.lsp.buf.references()<cr>", opts)
+                    vim.keymap.set("n", "gs", "<cmd>lua vim.lsp.buf.signature_help()<cr>", opts)
+                    vim.keymap.set("n", "<F2>", "<cmd>lua vim.lsp.buf.rename()<cr>", opts)
+                    vim.keymap.set({"n", "x"}, "<F3>", "<cmd>lua vim.lsp.buf.format({async = true})<cr>", opts)
+                    vim.keymap.set("n", "<F4>", "<cmd>lua vim.lsp.buf.code_action()<cr>", opts)
+
+                    -- Attach autoformatter to buffer
+                    local id = vim.tbl_get(event, "data", "client_id")
+                    local client = id and vim.lsp.get_client_by_id(id)
+                    if client == nil then
+                        return
+                    end
+
+                    -- Make sure there is at least one client with formatting capabilities
+                    if client.supports_method("textDocument/formatting") then
+                        buffer_autoformat(event.buf)
+                    end
+                end,
             })
 
-            lsp_zero.format_on_save({
-                format_opts = {
-                    async = false,
-                    timeout_ms = 10000,
-                },
-                servers = {
-                    ["clangd"] = { "c" },
-                    ["julials"] = { "julia" },
-                    ["lua_ls"] = { "lua" },
-                    ["null-ls"] = { "python" }, -- black is installed with null-ls
-                    ["rust_analyzer"] = { "rust" },
-                    ["texlab"] = { "tex" },
-                }
-            })
+            -- If we need to save a file without formatting...
+            vim.api.nvim_create_user_command("Write", "noautocmd write", {})
 
-            -- REF: https://lsp-zero.netlify.app/docs/language-server-configuration.html#diagnostics
+            -- Diagnostics
             vim.diagnostic.config({
                 signs = {
                     text = {
-                        [vim.diagnostic.severity.ERROR] = '✘',
-                        [vim.diagnostic.severity.WARN] = '▲',
-                        [vim.diagnostic.severity.HINT] = '⚑',
-                        [vim.diagnostic.severity.INFO] = '»',
+                        [vim.diagnostic.severity.ERROR] = "✘",
+                        [vim.diagnostic.severity.WARN] = "▲",
+                        [vim.diagnostic.severity.HINT] = "⚑",
+                        [vim.diagnostic.severity.INFO] = "»",
                     },
                 },
             })
 
+            -- Automatic installs of language servers
             require("mason").setup({})
             require("mason-lspconfig").setup({
                 -- Use rust_analyzer@2024-10-21
@@ -188,21 +236,18 @@ return {
                 },
             })
 
-            -- null-ls settings
-            require("mason-null-ls").setup({
-                ensure_installed = { "black", "isort" },
-            })
+            -- -- null-ls settings
+            -- require("mason-null-ls").setup({
+            --     ensure_installed = { "black", "isort" },
+            -- })
 
-            local null_ls = require("null-ls")
-            require("null-ls").setup({
-                sources = {
-                    null_ls.builtins.formatting.black,
-                    null_ls.builtins.formatting.isort,
-                }
-            })
-
-            -- To get rid of the warnings around the `vim` global variable, see:
-            -- REF: https://lsp-zero.netlify.app/v3.x/getting-started.html#lua-language-server-and-neovim
+            -- local null_ls = require("null-ls")
+            -- require("null-ls").setup({
+            --     sources = {
+            --         null_ls.builtins.formatting.black,
+            --         null_ls.builtins.formatting.isort,
+            --     }
+            -- })
         end,
     },
 }
