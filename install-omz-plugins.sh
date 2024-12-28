@@ -11,8 +11,7 @@ repos=(
 )
 
 # Install each plugin in their respective directory, if not already installed
-for i in "${!repos[@]}"; do
-    repo="${repos[$i]}"
+for repo in "${repos[@]}"; do
     repo_name=$(basename "$repo")
     target_dir="$ZSH_CUSTOM/plugins/$repo_name"
 
