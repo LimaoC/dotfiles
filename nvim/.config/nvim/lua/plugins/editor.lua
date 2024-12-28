@@ -8,30 +8,20 @@ vim.opt.termguicolors = true
 -- Disable diagnostic virtual text (in favour of trouble.nvim)
 vim.diagnostic.config({ virtual_text = false })
 
--- Decide how to open nvim tree depending on how we're opening nvim.
--- Startup on VimEnter event
--- For files and [No Name] buffers, open the tree, find (highlight in nvim-tree) the file,
---   and don't focus nvim-tree.
--- vim.api.nvim_create_autocmd("VimEnter", {
---     callback = function(data)
---         -- buffer is a real file on the disk
---         local real_file = vim.fn.filereadable(data.file) == 1
---
---         -- buffer is a [No Name]
---         local no_name = data.file == '' and vim.bo[data.buf].buftype == ''
---
---         -- only files please
---         if not real_file and not no_name then
---             return
---         end
---
---         -- open the tree but dont focus it
---         require('nvim-tree.api').tree.toggle({ focus = false })
---         -- This is needed for barbar's `sidebar_filetypes` option to work
---         -- REF: https://github.com/romgrk/barbar.nvim/issues/421
---         vim.api.nvim_exec_autocmds('BufWinEnter', { buffer = require('nvim-tree.view').get_bufnr() })
---     end
--- })
+-- Open nvim-tree for directories and change Neovim's directory
+-- REF: https://github.com/nvim-tree/nvim-tree.lua/wiki/Open-At-Startup#open-for-directories-and-change-neovims-directory
+vim.api.nvim_create_autocmd("VimEnter", {
+    callback = function(data)
+        -- Buffer is a directory
+        local directory = vim.fn.isdirectory(data.file) == 1
+        if not directory then
+            return
+        end
+
+        vim.cmd.cd(data.file)
+        require("nvim-tree.api").tree.open()
+    end
+})
 
 -- Decide behaviour for auto-closing nvim-tree on QuitPre
 -- REF: https://github.com/nvim-tree/nvim-tree.lua/wiki/Auto-Close#marvinth01
@@ -96,7 +86,7 @@ return {
     {
         "nvim-tree/nvim-tree.lua",
         version = "*", -- latest stable release
-        cmd = "NvimTreeOpen",
+        event = "VeryLazy",
         dependencies = { "nvim-tree/nvim-web-devicons" },
         opts = {
             sort = { sorter = "case_sensitive" },
@@ -117,6 +107,13 @@ return {
                 },
             },
         },
+        config = function(_, opts)
+            local api = require("nvim-tree.api")
+            local map_opts = { noremap = true, silent = true }
+
+            vim.api.nvim_set_keymap("n", "<S-t>", "<Cmd>NvimTreeToggle<CR>", map_opts)
+            require("nvim-tree").setup(opts)
+        end
     },
     {
         "romgrk/barbar.nvim",
