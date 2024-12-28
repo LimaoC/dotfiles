@@ -150,7 +150,8 @@ return {
             options = {
                 disabled_filetypes = { "NvimTree" },
             },
-        }
+            extensions = { "mason", "quickfix", "trouble" },
+        },
     },
 
     {

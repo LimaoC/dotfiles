@@ -39,7 +39,7 @@ return {
 
             -- Snippet settings
             local luasnip = require("luasnip")
-            local texsnippets = require("user.luasnippets.tex")
+            local texsnippets = require("snippets.tex")
             -- We want every text change to trigger an update
             -- This makes it easier to see repeat nodes in "real time"
             -- REF: https://github.com/L3MON4D3/LuaSnip/issues/248
@@ -72,7 +72,7 @@ return {
                         else
                             cmp.complete()
                         end
-                    end, {"i", "s"}),
+                    end, { "i", "s" }),
                     ["<S-Tab>"] = cmp.mapping(function(fallback)
                         local luasnip = require("luasnip")
 
@@ -83,7 +83,7 @@ return {
                         else
                             fallback()
                         end
-                    end, {"i", "s"}),
+                    end, { "i", "s" }),
                 }),
                 snippet = {
                     expand = function(args)
@@ -158,7 +158,7 @@ return {
                     vim.keymap.set("n", "gr", "<cmd>lua vim.lsp.buf.references()<cr>", opts)
                     vim.keymap.set("n", "gs", "<cmd>lua vim.lsp.buf.signature_help()<cr>", opts)
                     vim.keymap.set("n", "<F2>", "<cmd>lua vim.lsp.buf.rename()<cr>", opts)
-                    vim.keymap.set({"n", "x"}, "<F3>", "<cmd>lua require('conform').format({async = true})<cr>", opts)
+                    vim.keymap.set({ "n", "x" }, "<F3>", "<cmd>lua require('conform').format({async = true})<cr>", opts)
                     vim.keymap.set("n", "<F4>", "<cmd>lua vim.lsp.buf.code_action()<cr>", opts)
                 end,
             })

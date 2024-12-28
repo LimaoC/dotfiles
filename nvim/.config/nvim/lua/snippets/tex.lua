@@ -29,7 +29,7 @@ local parse = require("luasnip.util.parser").parse_snippet
 local ms = ls.multi_snippet
 local k = require("luasnip.nodes.key_indexer").new_key
 
-local tex_conds = require("user.luasnippets.tex_conditions")
+local tex_conds = require("snippets.tex_conditions")
 local autosnippet = ls.extend_decorator.apply(s, { snippetType = "autosnippet" })
 local automathsnippet = ls.extend_decorator.apply(autosnippet,
     { condition = tex_conds.in_math, show_condition = tex_conds.in_math })
