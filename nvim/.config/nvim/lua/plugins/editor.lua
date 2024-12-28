@@ -53,7 +53,6 @@ return {
     {
         "nvim-tree/nvim-tree.lua",
         version = "*", -- latest stable release
-        event = "VeryLazy",
         dependencies = { "nvim-tree/nvim-web-devicons" },
         opts = {
             sort = { sorter = "case_sensitive" },
@@ -74,13 +73,13 @@ return {
                 },
             },
         },
-        config = function(_, opts)
-            local api = require("nvim-tree.api")
-            local map_opts = { noremap = true, silent = true }
-
-            vim.api.nvim_set_keymap("n", "<S-t>", "<Cmd>NvimTreeToggle<CR>", map_opts)
-            require("nvim-tree").setup(opts)
-        end
+        keys = {
+            {
+                "<S-t>",
+                "<Cmd>NvimTreeToggle<CR>",
+                desc = "Toggle NvimTree",
+            },
+        },
     },
 
     {
