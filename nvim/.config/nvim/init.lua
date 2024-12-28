@@ -23,7 +23,22 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 -- Load plugins
-require("lazy").setup("plugins")
+require("lazy").setup(
+    "plugins",
+    {
+        checker = { enabled = true },
+        ui = { border = "rounded" },
+        rtp = {
+            disabled_plugins = {
+                "netrwPlugin",
+                "gzip",
+                "tarPlugin",
+                "tohtml",
+                "tutor",
+            }
+        }
+    }
+)
 
 -- Set colour scheme (must be done after tokyonight.nvim is loaded)
 vim.cmd([[colorscheme tokyonight-moon]])
