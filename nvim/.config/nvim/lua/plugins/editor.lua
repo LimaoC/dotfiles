@@ -94,26 +94,6 @@ map("n", "<Space>bw", "<Cmd>BufferOrderByWindowNumber<CR>", barbar_map_opts)
 
 return {
     {
-        "https://git.0x7be.net/dirk/boxdash",
-        version = "*", -- latest stable release
-        opts = {
-            title = "\\lim_{a\\to0}",
-            align = { -- box alignment
-                horizontal = 0,
-                vertical = 0,
-            },
-            style = 5,
-            entries = {
-                { "i", "Switch to insert mode",         "insert_mode" },
-                { "e", "Get an empty buffer",           "empty_buffer" },
-                { "t", "Open NvimTree",                 function() vim.api.nvim_command("NvimTreeOpen") end },
-                { "u", "Sync/update lazy.nvim plugins", "lazy_sync" },
-                "----------------------------------------------",
-                { "q", "Quit Neovim", "quit_neovim" },
-            },
-        },
-    },
-    {
         "nvim-tree/nvim-tree.lua",
         version = "*", -- latest stable release
         cmd = "NvimTreeOpen",
