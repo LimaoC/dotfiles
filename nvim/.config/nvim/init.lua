@@ -5,9 +5,6 @@ let &packpath = &runtimepath
 source ~/.vimrc
 ]])
 
--- Set status column (git signs and diagnostics)
-vim.opt.statuscolumn = [[%!v:lua.require'user.statuscolumn'.statuscolumn()]]
-
 -- Initialise lazy.nvim (package manager)
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not vim.loop.fs_stat(lazypath) then
