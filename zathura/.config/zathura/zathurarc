@@ -21,8 +21,8 @@ set notification-error-fg       "#f7768e"
 set notification-warning-bg     "#1a1b26"
 set notification-warning-fg     "#f7768e"
 
-set highlight-color             "#e0af68"
-set highlight-active-color      "#9aa5ce"
+set highlight-color             rgba(224,175,104,0.5)  # needs to be transparent
+set highlight-active-color      rgba(154,165,206,0.5)  # needs to be transparent
 
 set completion-bg               "#24283b"
 set completion-fg               "#a9b1d6"
@@ -33,9 +33,22 @@ set completion-highlight-bg     "24283b"
 set recolor-lightcolor          "#16161e"
 set recolor-darkcolor           "#a9b1d6"
 
-#set recolor                     "false"
-set recolor-keephue             "false"
+set recolor                     false  # should Zathura open with inverted colours?
+set recolor-keephue             true
 
+# Misc settings
+
+set statusbar-home-tilde   true
+set statusbar-page-percent true
+
+set window-title-basename true
+set window-title-page true
+
+set database "sqlite"
+set font "monospace normal 12"
+set incremental-search true
+set guioptions "csv"  # command line, status bar, vertical scrollbar
+set selection-clipboard clipboard
 set synctex true
 #set synctex-editor-command "nvim --remote-silent +%{line} %{input}"
 
