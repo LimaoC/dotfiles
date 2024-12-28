@@ -49,39 +49,6 @@ vim.api.nvim_create_autocmd("QuitPre", {
     end
 })
 
--- barbar mappings
-local barbar_map_opts = { noremap = true, silent = true }
-local map = vim.api.nvim_set_keymap
--- Move to previous/next
-map("n", "<A-h>", "<Cmd>BufferPrevious<CR>", barbar_map_opts)
-map("n", "<A-l>", "<Cmd>BufferNext<CR>", barbar_map_opts)
--- Re-order to previous/next
-map("n", "<A-H>", "<Cmd>BufferMovePrevious<CR>", barbar_map_opts)
-map("n", "<A-L>", "<Cmd>BufferMoveNext<CR>", barbar_map_opts)
--- Goto buffer in position...
-map("n", "<A-1>", "<Cmd>BufferGoto 1<CR>", barbar_map_opts)
-map("n", "<A-2>", "<Cmd>BufferGoto 2<CR>", barbar_map_opts)
-map("n", "<A-3>", "<Cmd>BufferGoto 3<CR>", barbar_map_opts)
-map("n", "<A-4>", "<Cmd>BufferGoto 4<CR>", barbar_map_opts)
-map("n", "<A-5>", "<Cmd>BufferGoto 5<CR>", barbar_map_opts)
-map("n", "<A-6>", "<Cmd>BufferGoto 6<CR>", barbar_map_opts)
-map("n", "<A-7>", "<Cmd>BufferGoto 7<CR>", barbar_map_opts)
-map("n", "<A-8>", "<Cmd>BufferGoto 8<CR>", barbar_map_opts)
-map("n", "<A-9>", "<Cmd>BufferGoto 9<CR>", barbar_map_opts)
-map("n", "<A-0>", "<Cmd>BufferLast<CR>", barbar_map_opts)
--- Pin/unpin buffer
-map("n", "<A-p>", "<Cmd>BufferPin<CR>", barbar_map_opts)
--- Close buffer
-map("n", "<A-c>", "<Cmd>BufferClose<CR>", barbar_map_opts)
--- Magic buffer-picking mode
-map("n", "<C-p>", "<Cmd>BufferPick<CR>", barbar_map_opts)
--- Sort automatically by...
-map("n", "<Space>bb", "<Cmd>BufferOrderByBufferNumber<CR>", barbar_map_opts)
-map('n', '<Space>bn', '<Cmd>BufferOrderByName<CR>', barbar_map_opts)
-map("n", "<Space>bd", "<Cmd>BufferOrderByDirectory<CR>", barbar_map_opts)
-map("n", "<Space>bl", "<Cmd>BufferOrderByLanguage<CR>", barbar_map_opts)
-map("n", "<Space>bw", "<Cmd>BufferOrderByWindowNumber<CR>", barbar_map_opts)
-
 return {
     {
         "nvim-tree/nvim-tree.lua",
@@ -119,24 +86,61 @@ return {
     {
         "romgrk/barbar.nvim",
         version = "^1.0.0", -- (optional) only update when a new 1.x version is released
-        -- lazy = false,
+        lazy = false,
         priority = 100,
         dependencies = {
             "nvim-tree/nvim-web-devicons" -- (optional) for file icons
         },
         init = function() vim.g.barbar_auto_setup = false end,
         opts = {
-            sidebar_filetypes = {
-                NvimTree = { text = " NvimTree" }
-            },
+            focus_on_close = "previous",
             icons = {
                 diagnostics = {
                     [vim.diagnostic.severity.ERROR] = { enabled = true },
                     [vim.diagnostic.severity.HINT] = { enabled = true },
                 },
             },
+            sidebar_filetypes = {
+                NvimTree = { text = " NvimTree" }
+            },
             no_name_title = "[unnamed buffer]",
         },
+        config = function(_, opts)
+            require("barbar").setup(opts)
+
+            -- barbar mappings
+            local map_opts = { noremap = true, silent = true }
+            local map = vim.api.nvim_set_keymap
+            -- Move to previous/next
+            map("n", "<A-h>", "<Cmd>BufferPrevious<CR>", map_opts)
+            map("n", "<A-l>", "<Cmd>BufferNext<CR>", map_opts)
+            -- Re-order to previous/next
+            map("n", "<A-H>", "<Cmd>BufferMovePrevious<CR>", map_opts)
+            map("n", "<A-L>", "<Cmd>BufferMoveNext<CR>", map_opts)
+            -- Goto buffer in position...
+            map("n", "<A-1>", "<Cmd>BufferGoto 1<CR>", map_opts)
+            map("n", "<A-2>", "<Cmd>BufferGoto 2<CR>", map_opts)
+            map("n", "<A-3>", "<Cmd>BufferGoto 3<CR>", map_opts)
+            map("n", "<A-4>", "<Cmd>BufferGoto 4<CR>", map_opts)
+            map("n", "<A-5>", "<Cmd>BufferGoto 5<CR>", map_opts)
+            map("n", "<A-6>", "<Cmd>BufferGoto 6<CR>", map_opts)
+            map("n", "<A-7>", "<Cmd>BufferGoto 7<CR>", map_opts)
+            map("n", "<A-8>", "<Cmd>BufferGoto 8<CR>", map_opts)
+            map("n", "<A-9>", "<Cmd>BufferGoto 9<CR>", map_opts)
+            map("n", "<A-0>", "<Cmd>BufferLast<CR>", map_opts)
+            -- Pin/unpin buffer
+            map("n", "<A-p>", "<Cmd>BufferPin<CR>", map_opts)
+            -- Close buffer
+            map("n", "<A-c>", "<Cmd>BufferClose<CR>", map_opts)
+            -- Magic buffer-picking mode
+            map("n", "<C-p>", "<Cmd>BufferPick<CR>", map_opts)
+            -- Sort automatically by...
+            map("n", "<Space>bb", "<Cmd>BufferOrderByBufferNumber<CR>", map_opts)
+            map('n', '<Space>bn', '<Cmd>BufferOrderByName<CR>', map_opts)
+            map("n", "<Space>bd", "<Cmd>BufferOrderByDirectory<CR>", map_opts)
+            map("n", "<Space>bl", "<Cmd>BufferOrderByLanguage<CR>", map_opts)
+            map("n", "<Space>bw", "<Cmd>BufferOrderByWindowNumber<CR>", map_opts)
+        end
     },
 
     {
