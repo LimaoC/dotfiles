@@ -18,6 +18,7 @@ return {
             })
         end,
     },
+
     {
         "williamboman/mason.nvim",
         lazy = false,

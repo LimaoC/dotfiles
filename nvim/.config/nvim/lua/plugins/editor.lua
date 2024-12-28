@@ -115,6 +115,7 @@ return {
             require("nvim-tree").setup(opts)
         end
     },
+
     {
         "romgrk/barbar.nvim",
         version = "^1.0.0", -- (optional) only update when a new 1.x version is released
@@ -137,6 +138,7 @@ return {
             no_name_title = "[unnamed buffer]",
         },
     },
+
     {
         "nvim-lualine/lualine.nvim",
         lazy = false,
@@ -147,11 +149,13 @@ return {
             },
         }
     },
+
     {
         "lewis6991/gitsigns.nvim",
         event = { "BufReadPre", "BufNewFile" },
         opts = { current_line_blame = true }
     },
+
     {
         "folke/trouble.nvim",
         dependencies = { "nvim-tree/nvim-web-devicons" },
