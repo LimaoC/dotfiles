@@ -1,11 +1,11 @@
 [commit]
-	gpgsign = true
+    gpgsign = true
 [alias]
     logp = log --graph --oneline  # log pretty
     logpf = log --graph --oneline --full-history --all  # log pretty full
 [init]
-	defaultBranch = main
+    defaultBranch = main
 [core]
-	pager = less -X -F
+    pager = less -X -F
 [pull]
-	rebase = true
+    rebase = true
