@@ -166,7 +166,10 @@ return {
         lazy = false,
         opts = {
             indent = { enabled = true },
-            notifier = { enabled = true },
+            notifier = {
+                enabled = true,
+                top_down = false,
+            },
             statuscolumn = { enabled = true },
         },
         keys = {
