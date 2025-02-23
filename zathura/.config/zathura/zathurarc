@@ -52,3 +52,7 @@ set selection-clipboard clipboard
 set synctex true
 #set synctex-editor-command "nvim --remote-silent +%{line} %{input}"
 
+# Smooth scroll only works for ^Down and ^Up, so map j and k to those
+# REF: https://www.reddit.com/r/archlinux/comments/oh0m6n/zathura_smooth_scrolling/
+map j feedkeys "<C-Down>"
+map k feedkeys "<C-Up>"
