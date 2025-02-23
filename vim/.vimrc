@@ -13,6 +13,7 @@ set t_Co=256                    " allow vim to display all colours
 set wildmenu                    " turn on autocomplete menu
 set nowrap                      " no word wrapping (this is my preference)
 set nofoldenable                " disable folding
+set scrolloff=5                 " keep at least this many lines above and below the cursor
 
 " Toggle between relative and absolute line numbers
 " REF: https://jeffkreeftmeijer.com/vim-number/
