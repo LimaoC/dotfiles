@@ -39,3 +39,6 @@ require("lazy").setup(
 
 -- Set colour scheme (must be done after tokyonight.nvim is loaded)
 vim.cmd([[colorscheme tokyonight-moon]])
+
+-- Use block cursor in all modes
+vim.opt.guicursor = "i:block"
