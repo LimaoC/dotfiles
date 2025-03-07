@@ -60,7 +60,6 @@ return {
                     ["<C-Space>"] = cmp.mapping.confirm({ select = true }),
                     -- Navigate between completion items using "super tab"
                     ["<Tab>"] = cmp.mapping(function(fallback)
-                        local luasnip = require("luasnip")
                         local col = vim.fn.col(".") - 1
 
                         if cmp.visible() then
@@ -74,8 +73,6 @@ return {
                         end
                     end, { "i", "s" }),
                     ["<S-Tab>"] = cmp.mapping(function(fallback)
-                        local luasnip = require("luasnip")
-
                         if cmp.visible() then
                             cmp.select_prev_item({ behaviour = "select" })
                         elseif luasnip.locally_jumpable(-1) then
@@ -124,9 +121,6 @@ return {
             { "hrsh7th/cmp-nvim-lsp" },
             { "williamboman/mason-lspconfig.nvim" },
             { "stevearc/conform.nvim" },
-            -- { "jose-elias-alvarez/null-ls.nvim" },
-            -- { "jay-babu/mason-null-ls.nvim" },
-            -- { "nvim-lua/plenary.nvim" }, -- needed for null-ls
         },
         init = function()
             vim.opt.signcolumn = "yes"
