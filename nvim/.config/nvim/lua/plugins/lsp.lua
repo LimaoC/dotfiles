@@ -2,6 +2,30 @@
 -- REF: To get rid of the `vim` global variable warnings, and add basic completions for Neovim's lua api,
 -- REF: see https://lsp-zero.netlify.app/docs/autocomplete.html#basic-completions-for-neovim-s-lua-api
 
+local treesitter_ensure_installed = {
+    "lua",
+    -- "markdown",
+    -- "markdown_inline",
+    "python",
+    -- "rust",
+    -- "vim",
+    -- "vimdoc"
+}
+
+local mason_ensure_installed = {
+    -- These aren't supported in ensure_installed as they aren't LSPs,
+    -- but are still useful to note
+    -- "black",
+    -- "isort",
+
+    -- "clangd",
+    "lua_ls",
+    -- "julials",
+    "pylsp",
+    -- "rust_analyzer",  -- rust_analyzer@2024-10-21
+    -- "texlab",
+}
+
 return {
     {
         "nvim-treesitter/nvim-treesitter",
@@ -12,7 +36,7 @@ return {
             -- This error can occur if you have more than one `parser` runtime directory. See above for details.
             -- If the nvim parser is one of them, you can remove it by changing the directory name from `parser`.
             require("nvim-treesitter.configs").setup({
-                -- ensure_installed = { "lua", "markdown", "markdown_inline", "python", "query", "rust", "vim", "vimdoc" },
+                ensure_installed = treesitter_ensure_installed,
                 highlight = { enable = true },
                 indent = { enable = true },
             })
@@ -175,9 +199,7 @@ return {
             -- Automatic installs of language servers
             require("mason").setup({})
             require("mason-lspconfig").setup({
-                -- Use rust_analyzer@2024-10-21
-                -- REF: https://www.reddit.com/r/rust/comments/1geyfld/rustanalyzer_server_cancelled_the_request_in/
-                -- ensure_installed = { "clangd", "julials", "lua_ls", "pylsp", "rust_analyzer@2024-10-21", "texlab" },
+                ensure_installed = mason_ensure_installed,
                 handlers = {
                     -- This first function is the default handler
                     -- It applies to every language server without a custom handler
