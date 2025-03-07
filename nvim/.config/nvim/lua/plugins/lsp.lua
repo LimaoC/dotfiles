@@ -221,7 +221,14 @@ return {
                         require("lspconfig").pylsp.setup({
                             settings = { pylsp = { plugins = { pycodestyle = { maxLineLength = 88 } } } }
                         })
-                    end
+                    end,
+                    texlab = function()
+                        require("lspconfig").texlab.setup({
+                            -- Disable texlab formatter, I don't like auto-indenting
+                            -- REF: https://github.com/latex-lsp/texlab/wiki/Configuration#texlablatexformatter
+                            settings = { texlab = { latexFormatter = "texlab" } }
+                        })
+                    end,
                 },
             })
         end,
