@@ -20,8 +20,13 @@ let g:vimtex_mappings_disable = { 'i': [']]'] }  " disable ']]' as it slows down
 let g:vimtex_syntax_conceal_disable = 1          " disable all syntax concealment
 let g:vimtex_view_method = 'zathura_simple'      " need xdotool for zathura, so use zathura_simple
 
+let g:vimtex_grammar_textidote = {
+    \ 'jar': '~/.local/bin/textidote.jar',
+    \}
+
 let g:tex_flavor = "latex"
 
 set wrap  " latex code lines tend to be longer so wrapping is more desirable
+setlocal spell spelllang=en_au
 
 filetype indent off  " disable filetype indentation
