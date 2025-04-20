@@ -103,15 +103,9 @@ welcome() {
                                                 " | lolcat
 }
 
-# ===== Tool & Language configuration ============================================================ #
+# ===== Tool configuration ======================================================================= #
 
-# ghcup-env
-[ -f "/home/limao/.ghcup/env" ] && source "/home/limao/.ghcup/env"
-
-export GOPATH=$HOME/.go                                     # go path
-export PATH=$PATH:/usr/local/go/bin:$GOPATH/bin
-export PATH=$PATH:$HOME/.yarn/bin                           # yarn path
-export PATH=$PATH:/usr/local/texlive/2022/bin/x86_64-linux  # texlive path
+export PATH=$PATH:/usr/local/go/bin
 
 # >>> juliaup initialize >>>
 
