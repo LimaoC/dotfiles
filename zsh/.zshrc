@@ -116,20 +116,33 @@ export PATH
 
 # <<< juliaup initialize <<<
 
-# >>> conda initialize >>>
-# !! Contents within this block are managed by 'conda init' !!
-__conda_setup="$('/home/limao/miniconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
-if [ $? -eq 0 ]; then
-    eval "$__conda_setup"
-else
-    if [ -f "/home/limao/miniconda3/etc/profile.d/conda.sh" ]; then
-        . "/home/limao/miniconda3/etc/profile.d/conda.sh"
+# Lazy load Conda
+# REF: https://www.reddit.com/r/zsh/comments/qmd25q/lazy_loading_conda/
+load_conda() {
+    unalias conda
+
+    __conda_prefix="$HOME/.miniconda3" # Set your conda Location
+
+    # >>> conda initialize >>>
+    # !! Contents within this block are managed by 'conda init' !!
+    __conda_setup="$('/home/limao/miniconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
+    if [ $? -eq 0 ]; then
+        eval "$__conda_setup"
     else
-        export PATH="/home/limao/miniconda3/bin:$PATH"
+        if [ -f "/home/limao/miniconda3/etc/profile.d/conda.sh" ]; then
+            . "/home/limao/miniconda3/etc/profile.d/conda.sh"
+        else
+            export PATH="/home/limao/miniconda3/bin:$PATH"
+        fi
     fi
-fi
-unset __conda_setup
-# <<< conda initialize <<<
+    unset __conda_setup
+    # <<< conda initialize <<<
+
+    unset __conda_prefix
+    unfunction load_conda
+}
+
+alias conda="load_conda && conda"
 
 # ================================================================================================ #
 
