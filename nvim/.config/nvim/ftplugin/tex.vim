@@ -18,8 +18,11 @@ let g:vimtex_indent_ignored_envs = [
     \]
 let g:vimtex_mappings_disable = { 'i': [']]'] }  " disable ']]' as it slows down the 'lr[]' snippet
 let g:vimtex_syntax_conceal_disable = 1          " disable all syntax concealment
-let g:vimtex_view_method = 'zathura_simple'      " need xdotool for zathura, so use zathura_simple
-
+if has("macunix")
+    let g:vimtex_view_method = "sioyek"
+elseif has("unix")
+    let g:vimtex_view_method = "zathura_simple"  " need xdotool for zathura, so use zathura_simple
+endif
 let g:vimtex_grammar_textidote = {
     \ 'jar': '~/.local/bin/textidote.jar',
     \}
