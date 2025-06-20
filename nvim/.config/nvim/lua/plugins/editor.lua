@@ -93,6 +93,7 @@ return {
         init = function() vim.g.barbar_auto_setup = false end,
         opts = {
             focus_on_close = "previous",
+            highlight_visible = false,
             icons = {
                 diagnostics = {
                     [vim.diagnostic.severity.ERROR] = { enabled = true },
@@ -135,7 +136,7 @@ return {
             map("n", "<C-p>", "<Cmd>BufferPick<CR>", map_opts)
             -- Sort automatically by...
             map("n", "<Space>bb", "<Cmd>BufferOrderByBufferNumber<CR>", map_opts)
-            map('n', '<Space>bn', '<Cmd>BufferOrderByName<CR>', map_opts)
+            map("n", "<Space>bn", "<Cmd>BufferOrderByName<CR>", map_opts)
             map("n", "<Space>bd", "<Cmd>BufferOrderByDirectory<CR>", map_opts)
             map("n", "<Space>bl", "<Cmd>BufferOrderByLanguage<CR>", map_opts)
             map("n", "<Space>bw", "<Cmd>BufferOrderByWindowNumber<CR>", map_opts)
@@ -157,7 +158,15 @@ return {
     {
         "lewis6991/gitsigns.nvim",
         event = { "BufReadPre", "BufNewFile" },
-        opts = { current_line_blame = true }
+        opts = { current_line_blame = true },
+        config = function()
+            local map_opts = { noremap = true, silent = true }
+            local map = vim.api.nvim_set_keymap
+
+            map("n", "<Leader>hi", "<Cmd>Gitsigns preview_hunk_inline<CR>", map_opts)
+            map("n", "<Leader>bb", "<Cmd>Gitsigns blame<CR>", map_opts)
+            map("n", "<Leader>bl", "<Cmd>Gitsigns blame_line<CR>", map_opts)
+        end,
     },
 
     {
