@@ -56,6 +56,7 @@ return {
         dependencies = {
             { "L3MON4D3/LuaSnip" },
             { "saadparwaiz1/cmp_luasnip" }, -- completion source for luasnip
+            { "hrsh7th/cmp-nvim-lsp-signature-help" }
         },
         config = function()
             -- Cmp settings
@@ -74,6 +75,7 @@ return {
                 sources = {
                     { name = "nvim_lsp" },
                     { name = "luasnip" },
+                    { name = "nvim_lsp_signature_help" },
                 },
                 mapping = cmp.mapping.preset.insert({
                     -- Scroll up and down in documentation
