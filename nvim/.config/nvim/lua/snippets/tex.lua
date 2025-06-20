@@ -54,7 +54,14 @@ M = {
         .\]
         <>]], { i(1), i(0) })),
     ---- Environments
-    autosnippet(
+    s(
+        { trig = "beg", name = "begin/end", desc = "begin/end environment (generic)" },
+        fmta([[
+        \begin{<>}
+        <>
+        \end{<>}]], { i(1), i(0), rep(1) })
+    ),
+    automathsnippet(
         { trig = "beg", name = "begin/end", desc = "begin/end environment (generic)" },
         fmta([[
         \begin{<>}
