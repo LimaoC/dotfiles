@@ -24,8 +24,12 @@ elseif has("unix")
     let g:vimtex_view_method = "zathura_simple"  " need xdotool for zathura, so use zathura_simple
 endif
 let g:vimtex_grammar_textidote = {
-    \ 'jar': '~/.local/bin/textidote.jar',
+    \ "jar": "~/.local/bin/textidote.jar",
     \}
+let g:vimtex_quickfix_ignore_filters = [
+      \ "Underfull",
+      \ "Overfull",
+      \]
 
 let g:tex_flavor = "latex"
 
