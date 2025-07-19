@@ -187,6 +187,35 @@ return {
     },
 
     {
+        "rmagatti/auto-session",
+        dependencies = { "nvim-tree/nvim-tree.lua" },
+        lazy = false,
+        opts = {
+            suppressed_dirs = { "~/", "~/Downloads", "/" },
+            show_auto_restore_notif = true,
+            pre_save_cmds = {
+                -- Execute User SessionSavePre before :mksession to restore barbar tab order
+                -- REF: https://github.com/romgrk/barbar.nvim?tab=readme-ov-file#sessions
+                function() vim.api.nvim_exec_autocmds("User", { pattern = "SessionSavePre" }) end
+            }
+        },
+        config = function(_, opts)
+            require("auto-session").setup(opts)
+            -- Set globals in sessionoptions to restore barbar tab order
+            -- REF: https://github.com/romgrk/barbar.nvim?tab=readme-ov-file#sessions
+            vim.o.sessionoptions =
+            "blank,buffers,curdir,folds,help,tabpages,winsize,winpos,terminal,localoptions,globals"
+        end,
+        keys = {
+            -- Will use Telescope if installed or a vim.ui.select picker otherwise
+            { "<leader>wr", "<cmd>SessionSearch<CR>",         desc = "Session search" },
+            { "<leader>ws", "<cmd>SessionSave<CR>",           desc = "Save session" },
+            { "<leader>wd", "<cmd>SessionDelete<CR>",         desc = "Delete session" },
+            { "<leader>wa", "<cmd>SessionToggleAutoSave<CR>", desc = "Toggle autosave" },
+        },
+    },
+
+    {
         "folke/trouble.nvim",
         dependencies = { "nvim-tree/nvim-web-devicons" },
         opts = {
