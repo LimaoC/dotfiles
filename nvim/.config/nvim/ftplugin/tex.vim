@@ -1,22 +1,18 @@
 " vimtex config
 let g:vimtex_compiler_latexmk = {
-    \ 'aux_dir': {-> "build-" .. expand("%:t:r")},
-    \ 'out_dir': {-> "build-" .. expand("%:t:r")},
-    \ 'options' : [
-    \   '-verbose',
-    \   '-file-line-error',
-    \   '-synctex=1',
-    \   '-interaction=nonstopmode',
-    \   '-shell-escape',
+    \ "aux_dir": {-> "build-" .. expand("%:t:r")},
+    \ "out_dir": {-> "build-" .. expand("%:t:r")},
+    \ "options" : [
+    \   "-verbose",
+    \   "-file-line-error",
+    \   "-synctex=1",
+    \   "-interaction=nonstopmode",
+    \   "-shell-escape",
     \ ],
     \}
 let g:vimtex_imaps_enabled = 0                   " disable insert mode mappings
 let g:vimtex_indent_enabled = 0                  " disable automatic indenting
-let g:vimtex_indent_ignored_envs = [
-    \ 'document',
-    \ '.*',
-    \]
-let g:vimtex_mappings_disable = { 'i': [']]'] }  " disable ']]' as it slows down the 'lr[]' snippet
+let g:vimtex_mappings_disable = { "i": ["]]"] }  " disable "]]" as it slows down the "lr[]" snippet
 let g:vimtex_syntax_conceal_disable = 1          " disable all syntax concealment
 if has("macunix")
     let g:vimtex_view_method = "sioyek"
