@@ -246,10 +246,18 @@ return {
             formatters_by_ft = {
                 python = { "isort", "black" },
             },
-            format_on_save = {
-                timeout_ms = 500,
-                lsp_format = "fallback",
-            },
+            format_on_save = function(bufnr)
+                -- Disable on certain filetypes
+                local ignore_filetypes = { "bib" }
+                if vim.tbl_contains(ignore_filetypes, vim.bo[bufnr].filetype) then
+                    return
+                end
+                -- Disable with a global or buffer-local variable
+                if vim.g.disable_autoformat or vim.b[bufnr].disable_autoformat then
+                    return
+                end
+                return { timeout_ms = 500, lsp_format = "fallback" }
+            end
         },
     }
 }
