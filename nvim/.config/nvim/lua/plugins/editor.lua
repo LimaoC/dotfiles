@@ -1,13 +1,3 @@
--- Disable netrw (recommended for nvim-tree and barbar). See :h nvim-tree-netrw for details.
-vim.g.loaded_netrw = 1
-vim.g.loaded_netrwPlugin = 1
-
--- Set termguicolors to enable highlight groups (for nvim-tree)
-vim.opt.termguicolors = true
-
--- Disable diagnostic virtual text (in favour of trouble.nvim)
-vim.diagnostic.config({ virtual_text = false })
-
 -- Open nvim-tree for directories and change Neovim's directory
 -- REF: https://github.com/nvim-tree/nvim-tree.lua/wiki/Open-At-Startup#open-for-directories-and-change-neovims-directory
 vim.api.nvim_create_autocmd("VimEnter", {
@@ -54,6 +44,14 @@ return {
         "nvim-tree/nvim-tree.lua",
         version = "*", -- latest stable release
         dependencies = { "nvim-tree/nvim-web-devicons" },
+        init = function()
+            -- Disable netrw (recommended for nvim-tree and barbar). See :h nvim-tree-netrw for details.
+            vim.g.loaded_netrw = 1
+            vim.g.loaded_netrwPlugin = 1
+
+            -- Set termguicolors to enable highlight groups (for nvim-tree)
+            vim.opt.termguicolors = true
+        end,
         opts = {
             sort = { sorter = "case_sensitive" },
             view = { side = "right" },
@@ -214,6 +212,10 @@ return {
     {
         "folke/trouble.nvim",
         dependencies = { "nvim-tree/nvim-web-devicons" },
+        init = function()
+            -- Disable diagnostic virtual text (in favour of trouble.nvim)
+            vim.diagnostic.config({ virtual_text = false })
+        end,
         opts = {
             modes = {
                 symbols = {
