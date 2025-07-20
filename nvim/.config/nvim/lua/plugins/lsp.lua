@@ -168,18 +168,26 @@ return {
             vim.api.nvim_create_autocmd("LspAttach", {
                 desc = "LSP actions",
                 callback = function(event)
-                    local opts = { buffer = event.buf }
-
-                    vim.keymap.set("n", "K", "<cmd>lua vim.lsp.buf.hover()<cr>", opts)
-                    vim.keymap.set("n", "gd", "<cmd>lua vim.lsp.buf.definition()<cr>", opts)
-                    vim.keymap.set("n", "gD", "<cmd>lua vim.lsp.buf.declaration()<cr>", opts)
-                    vim.keymap.set("n", "gi", "<cmd>lua vim.lsp.buf.implementation()<cr>", opts)
-                    vim.keymap.set("n", "go", "<cmd>lua vim.lsp.buf.type_definition()<cr>", opts)
-                    vim.keymap.set("n", "gr", "<cmd>lua vim.lsp.buf.references()<cr>", opts)
-                    vim.keymap.set("n", "gs", "<cmd>lua vim.lsp.buf.signature_help()<cr>", opts)
-                    vim.keymap.set("n", "<F2>", "<cmd>lua vim.lsp.buf.rename()<cr>", opts)
-                    vim.keymap.set({ "n", "x" }, "<F3>", "<cmd>lua require('conform').format({async = true})<cr>", opts)
-                    vim.keymap.set("n", "<F4>", "<cmd>lua vim.lsp.buf.code_action()<cr>", opts)
+                    vim.keymap.set("n", "K", "<Cmd>lua vim.lsp.buf.hover()<CR>",
+                        { buffer = event.buf, desc = "Display hover information (lsp)" })
+                    vim.keymap.set("n", "gd", "<Cmd>lua vim.lsp.buf.definition()<CR>",
+                        { buffer = event.buf, desc = "Jump to definition (lsp)" })
+                    vim.keymap.set("n", "gD", "<Cmd>lua vim.lsp.buf.declaration()<CR>",
+                        { buffer = event.buf, desc = "Jump to declaration (lsp)" })
+                    vim.keymap.set("n", "gi", "<Cmd>lua vim.lsp.buf.implementation()<CR>",
+                        { buffer = event.buf, desc = "List all implementations (lsp)" })
+                    vim.keymap.set("n", "go", "<Cmd>lua vim.lsp.buf.type_definition()<CR>",
+                        { buffer = event.buf, desc = "Jump to definition of type (lsp)" })
+                    vim.keymap.set("n", "gr", "<Cmd>lua vim.lsp.buf.references()<CR>",
+                        { buffer = event.buf, desc = "List all references (lsp)" })
+                    vim.keymap.set("n", "gs", "<Cmd>lua vim.lsp.buf.signature_help()<CR>",
+                        { buffer = event.buf, desc = "Display signature information (lsp)" })
+                    vim.keymap.set("n", "<F2>", "<Cmd>lua vim.lsp.buf.rename()<CR>",
+                        { buffer = event.buf, desc = "Rename all references (lsp)" })
+                    vim.keymap.set({ "n", "x" }, "<F3>", "<Cmd>lua require('conform').format({async = true})<CR>",
+                        { buffer = event.buf, desc = "Format current buffer (conform)" })
+                    vim.keymap.set("n", "<F4>", "<Cmd>lua vim.lsp.buf.code_action()<CR>",
+                        { buffer = event.buf, desc = "Selects an available code action (lsp)" })
                 end,
             })
 

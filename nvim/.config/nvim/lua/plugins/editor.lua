@@ -74,11 +74,7 @@ return {
             },
         },
         keys = {
-            {
-                "<Leader>t",
-                "<Cmd>NvimTreeToggle<CR>",
-                desc = "Toggle NvimTree",
-            },
+            { "<Leader>t", "<Cmd>NvimTreeToggle<CR>", desc = "Toggle tree (NvimTree)" },
         },
     },
 
@@ -105,42 +101,30 @@ return {
             },
             no_name_title = "[unnamed buffer]",
         },
-        config = function(_, opts)
-            require("barbar").setup(opts)
-
-            -- barbar mappings
-            local map_opts = { noremap = true, silent = true }
-            local map = vim.api.nvim_set_keymap
-            -- Move to previous/next
-            map("n", "<A-h>", "<Cmd>BufferPrevious<CR>", map_opts)
-            map("n", "<A-l>", "<Cmd>BufferNext<CR>", map_opts)
-            -- Re-order to previous/next
-            map("n", "<A-H>", "<Cmd>BufferMovePrevious<CR>", map_opts)
-            map("n", "<A-L>", "<Cmd>BufferMoveNext<CR>", map_opts)
-            -- Goto buffer in position...
-            map("n", "<A-1>", "<Cmd>BufferGoto 1<CR>", map_opts)
-            map("n", "<A-2>", "<Cmd>BufferGoto 2<CR>", map_opts)
-            map("n", "<A-3>", "<Cmd>BufferGoto 3<CR>", map_opts)
-            map("n", "<A-4>", "<Cmd>BufferGoto 4<CR>", map_opts)
-            map("n", "<A-5>", "<Cmd>BufferGoto 5<CR>", map_opts)
-            map("n", "<A-6>", "<Cmd>BufferGoto 6<CR>", map_opts)
-            map("n", "<A-7>", "<Cmd>BufferGoto 7<CR>", map_opts)
-            map("n", "<A-8>", "<Cmd>BufferGoto 8<CR>", map_opts)
-            map("n", "<A-9>", "<Cmd>BufferGoto 9<CR>", map_opts)
-            map("n", "<A-0>", "<Cmd>BufferLast<CR>", map_opts)
-            -- Pin/unpin buffer
-            map("n", "<A-p>", "<Cmd>BufferPin<CR>", map_opts)
-            -- Close buffer
-            map("n", "<A-c>", "<Cmd>BufferClose<CR>", map_opts)
-            -- Magic buffer-picking mode
-            map("n", "<C-p>", "<Cmd>BufferPick<CR>", map_opts)
-            -- Sort automatically by...
-            map("n", "<Space>bb", "<Cmd>BufferOrderByBufferNumber<CR>", map_opts)
-            map("n", "<Space>bn", "<Cmd>BufferOrderByName<CR>", map_opts)
-            map("n", "<Space>bd", "<Cmd>BufferOrderByDirectory<CR>", map_opts)
-            map("n", "<Space>bl", "<Cmd>BufferOrderByLanguage<CR>", map_opts)
-            map("n", "<Space>bw", "<Cmd>BufferOrderByWindowNumber<CR>", map_opts)
-        end
+        keys = {
+            { "<A-h>",     "<Cmd>BufferPrevious<CR>",            desc = "Change to previous buffer (barbar)" },
+            { "<A-l>",     "<Cmd>BufferNext<CR>",                desc = "Change to next buffer (barbar)" },
+            { "<A-H>",     "<Cmd>BufferMovePrevious<CR>",        desc = "Switch with previous buffer (barbar)" },
+            { "<A-L>",     "<Cmd>BufferMoveNext<CR>",            desc = "Switch with next buffer (barbar)" },
+            { "<A-1>",     "<Cmd>BufferGoto 1<CR>",              desc = "Change to buffer 1 (barbar)" },
+            { "<A-2>",     "<Cmd>BufferGoto 2<CR>",              desc = "Change to buffer 2 (barbar)" },
+            { "<A-3>",     "<Cmd>BufferGoto 3<CR>",              desc = "Change to buffer 3 (barbar)" },
+            { "<A-4>",     "<Cmd>BufferGoto 4<CR>",              desc = "Change to buffer 4 (barbar)" },
+            { "<A-5>",     "<Cmd>BufferGoto 5<CR>",              desc = "Change to buffer 5 (barbar)" },
+            { "<A-6>",     "<Cmd>BufferGoto 6<CR>",              desc = "Change to buffer 6 (barbar)" },
+            { "<A-7>",     "<Cmd>BufferGoto 6<CR>",              desc = "Change to buffer 7 (barbar)" },
+            { "<A-8>",     "<Cmd>BufferGoto 7<CR>",              desc = "Change to buffer 8 (barbar)" },
+            { "<A-9>",     "<Cmd>BufferGoto 8<CR>",              desc = "Change to buffer 9 (barbar)" },
+            { "<A-0>",     "<Cmd>BufferLast<CR>",                desc = "Change to last buffer (barbar)" },
+            { "<A-p>",     "<Cmd>BufferPin<CR>",                 desc = "Pin/unpin buffer  (barbar)" },
+            { "<A-c>",     "<Cmd>BufferClose<CR>",               desc = "Close buffer (barbar)" },
+            { "<C-p>",     "<Cmd>BufferPick<CR>",                desc = "Magic buffer-picking mode (barbar)" },
+            { "<Space>bb", "<Cmd>BufferOrderByBufferNumber<CR>", desc = "Order buffers by buffer number (barbar)" },
+            { "<Space>bn", "<Cmd>BufferOrderByName<CR>",         desc = "Order buffers by name (barbar)" },
+            { "<Space>bd", "<Cmd>BufferOrderByDirectory<CR>",    desc = "Order buffers by directory (barbar)" },
+            { "<Space>bl", "<Cmd>BufferOrderByLanguage<CR>",     desc = "Order buffers by language (barbar)" },
+            { "<Space>bw", "<Cmd>BufferOrderByWindowNumber<CR>", desc = "Order buffers by window number (barbar)" },
+        }
     },
 
     {
@@ -159,14 +143,24 @@ return {
         "lewis6991/gitsigns.nvim",
         event = { "BufReadPre", "BufNewFile" },
         opts = { current_line_blame = true },
-        config = function()
-            local map_opts = { noremap = true, silent = true }
-            local map = vim.api.nvim_set_keymap
+        keys = {
+            { "<Leader>hs", "<Cmd>Gitsigns stage_hunk<CR>",          desc = "Stage hunk (Gitsigns)" },
+            { "<Leader>hr", "<Cmd>Gitsigns reset_hunk<CR>",          desc = "Reset hunk (Gitsigns)" },
+            { "<Leader>hi", "<Cmd>Gitsigns preview_hunk_inline<CR>", desc = "Preview hunk inline (Gitsigns)" },
+            { "<Leader>bb", "<Cmd>Gitsigns blame<CR>",               desc = "Blame window (Gitsigns)" },
+            { "<Leader>bl", "<Cmd>Gitsigns blame_line<CR>",          desc = "Blame for current line (Gitsigns)" },
+        }
+    },
 
-            map("n", "<Leader>hi", "<Cmd>Gitsigns preview_hunk_inline<CR>", map_opts)
-            map("n", "<Leader>bb", "<Cmd>Gitsigns blame<CR>", map_opts)
-            map("n", "<Leader>bl", "<Cmd>Gitsigns blame_line<CR>", map_opts)
-        end,
+    {
+        "folke/which-key.nvim",
+        event = "VeryLazy",
+        opts = {
+            plugins = { spelling = { enabled = false } }
+        },
+        keys = {
+            { "<Leader>?", function() require("which-key").show({ global = false }) end, desc = "Buffer local keymaps (which-key)" },
+        },
     },
 
     {
@@ -175,6 +169,7 @@ return {
         lazy = false,
         opts = {
             indent = { enabled = true },
+            picker = { enabled = true },
             notifier = {
                 enabled = true,
                 top_down = false,
@@ -182,7 +177,8 @@ return {
             statuscolumn = { enabled = true },
         },
         keys = {
-            { "<leader>n", function() Snacks.notifier.show_history() end, desc = "Notification History" },
+            { "<leader>n", function() require("snacks").notifier.show_history() end, desc = "Notification history (snacks)" },
+            { "z=",        function() require("snacks").picker.spelling() end,       desc = "Spelling suggestions (snacks)" },
         }
     },
 
@@ -208,10 +204,10 @@ return {
         end,
         keys = {
             -- Will use Telescope if installed or a vim.ui.select picker otherwise
-            { "<leader>wr", "<cmd>SessionSearch<CR>",         desc = "Session search" },
-            { "<leader>ws", "<cmd>SessionSave<CR>",           desc = "Save session" },
-            { "<leader>wd", "<cmd>SessionDelete<CR>",         desc = "Delete session" },
-            { "<leader>wa", "<cmd>SessionToggleAutoSave<CR>", desc = "Toggle autosave" },
+            { "<Leader>wr", "<Cmd>SessionSearch<CR>",         desc = "Session search (auto-session)" },
+            { "<Leader>ws", "<Cmd>SessionSave<CR>",           desc = "Save session (auto-session)" },
+            { "<Leader>wd", "<Cmd>SessionDelete<CR>",         desc = "Delete session (auto-session)" },
+            { "<Leader>wa", "<Cmd>SessionToggleAutoSave<CR>", desc = "Toggle autosave (auto-session)" },
         },
     },
 
@@ -228,36 +224,12 @@ return {
         config = true,
         cmd = "Trouble",
         keys = {
-            {
-                "<Leader>xx",
-                "<Cmd>Trouble diagnostics toggle<CR>",
-                desc = "Diagnostics (Trouble)",
-            },
-            {
-                "<Leader>xX",
-                "<Cmd>Trouble diagnostics toggle filter.buf=0<CR>",
-                desc = "Buffer Diagnostics (Trouble)",
-            },
-            {
-                "<Leader>cs",
-                "<Cmd>Trouble symbols toggle focus=false<CR>",
-                desc = "Symbols (Trouble)",
-            },
-            {
-                "<Leader>cl",
-                "<Cmd>Trouble lsp toggle focus=false win.position=right<CR>",
-                desc = "LSP Definitions / references / ... (Trouble)",
-            },
-            {
-                "<Leader>xL",
-                "<Cmd>Trouble loclist toggle<CR>",
-                desc = "Location List (Trouble)",
-            },
-            {
-                "<Leader>xQ",
-                "<Cmd>Trouble qflist toggle<CR>",
-                desc = "Quickfix List (Trouble)",
-            },
+            { "<Leader>xx", "<Cmd>Trouble diagnostics toggle<CR>",                        desc = "Diagnostics (Trouble)" },
+            { "<Leader>xX", "<Cmd>Trouble diagnostics toggle filter.buf=0<CR>",           desc = "Buffer diagnostics (Trouble)" },
+            { "<Leader>cs", "<Cmd>Trouble symbols toggle focus=false<CR>",                desc = "Symbols (Trouble)" },
+            { "<Leader>cl", "<Cmd>Trouble lsp toggle focus=false win.position=right<CR>", desc = "LSP definitions/references/... (Trouble)" },
+            { "<Leader>xL", "<Cmd>Trouble loclist toggle<CR>",                            desc = "Location list (Trouble)" },
+            { "<Leader>xQ", "<Cmd>Trouble qflist toggle<CR>",                             desc = "Quickfix list (Trouble)" },
         },
     },
 }
