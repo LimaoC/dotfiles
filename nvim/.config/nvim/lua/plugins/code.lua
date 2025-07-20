@@ -28,6 +28,14 @@ return {
     },
 
     {
+        "folke/todo-comments.nvim",
+        dependencies = { "nvim-lua/plenary.nvim" },
+        opts = {
+            signs = false,
+        }
+    },
+
+    {
         "Vimjas/vim-python-pep8-indent",
         ft = "python",
         config = function() end,
