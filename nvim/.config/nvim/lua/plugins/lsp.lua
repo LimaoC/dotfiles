@@ -4,20 +4,15 @@
 
 local treesitter_ensure_installed = {
     "lua",
-    -- "markdown",
-    -- "markdown_inline",
+    "markdown",
+    "markdown_inline",
     "python",
     -- "rust",
-    -- "vim",
-    -- "vimdoc"
+    "vim",
+    "vimdoc"
 }
 
 local mason_ensure_installed = {
-    -- These aren't supported in ensure_installed as they aren't LSPs,
-    -- but are still useful to note
-    -- "black",
-    -- "isort",
-
     -- "clangd",
     "lua_ls",
     -- "julials",
@@ -246,9 +241,8 @@ return {
 
     -- Formatting
     {
-        -- REF: https://github.com/stevearc/conform.nvim/blob/master/doc/recipes.md#lazy-loading-with-lazynvim
         "stevearc/conform.nvim",
-        event = { "BufWritePre" },
+        event = { "BufWritePre" }, -- REF: https://github.com/stevearc/conform.nvim/blob/master/doc/recipes.md#lazy-loading-with-lazynvim
         cmd = { "ConformInfo" },
         opts = {
             formatters_by_ft = {
@@ -267,5 +261,5 @@ return {
                 return { timeout_ms = 500, lsp_format = "fallback" }
             end
         },
-    }
+    },
 }

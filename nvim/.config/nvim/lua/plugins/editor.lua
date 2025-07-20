@@ -78,11 +78,11 @@ return {
 
     {
         "romgrk/barbar.nvim",
-        version = "^1.0.0", -- (optional) only update when a new 1.x version is released
+        version = "^1.0.0", -- only update when a new 1.x version is released
         lazy = false,
         priority = 100,
         dependencies = {
-            "nvim-tree/nvim-web-devicons" -- (optional) for file icons
+            "nvim-tree/nvim-web-devicons" -- for file icons
         },
         init = function() vim.g.barbar_auto_setup = false end,
         opts = {
@@ -91,12 +91,14 @@ return {
             icons = {
                 diagnostics = {
                     [vim.diagnostic.severity.ERROR] = { enabled = true },
-                    [vim.diagnostic.severity.HINT] = { enabled = true },
+                },
+                gitsigns = {
+                    added = { enabled = true, icon = "+" },
+                    changed = { enabled = true, icon = "~" },
+                    deleted = { enabled = true, icon = "-" },
                 },
             },
-            sidebar_filetypes = {
-                NvimTree = { text = " NvimTree" }
-            },
+            sidebar_filetypes = { NvimTree = { text = " NvimTree" } },
             no_name_title = "[unnamed buffer]",
         },
         keys = {
@@ -130,9 +132,7 @@ return {
         lazy = false,
         dependencies = { "nvim-tree/nvim-web-devicons" },
         opts = {
-            options = {
-                disabled_filetypes = { "NvimTree" },
-            },
+            options = { disabled_filetypes = { "NvimTree" } },
             extensions = { "mason", "quickfix", "trouble" },
         },
     },
@@ -217,13 +217,8 @@ return {
             vim.diagnostic.config({ virtual_text = false })
         end,
         opts = {
-            modes = {
-                symbols = {
-                    win = { position = "left" },
-                },
-            },
+            modes = { symbols = { win = { position = "left" } } },
         },
-        config = true,
         cmd = "Trouble",
         keys = {
             { "<Leader>xx", "<Cmd>Trouble diagnostics toggle<CR>",                        desc = "Diagnostics (Trouble)" },
