@@ -43,6 +43,7 @@ return {
     {
         "nvim-tree/nvim-tree.lua",
         version = "*", -- latest stable release
+        lazy = false,
         dependencies = { "nvim-tree/nvim-web-devicons" },
         init = function()
             -- Disable netrw (recommended for nvim-tree and barbar). See :h nvim-tree-netrw for details.
@@ -82,6 +83,7 @@ return {
         lazy = false,
         priority = 100,
         dependencies = {
+            "lewis6991/gitsigns.nvim",    -- for git status
             "nvim-tree/nvim-web-devicons" -- for file icons
         },
         init = function() vim.g.barbar_auto_setup = false end,
@@ -139,9 +141,12 @@ return {
 
     {
         "lewis6991/gitsigns.nvim",
+        version = "*",
         event = { "BufReadPre", "BufNewFile" },
         opts = { current_line_blame = true },
         keys = {
+            { "<Leader>hn", "<Cmd>Gitsigns nav_hunk next<CR>",       desc = "Go to next hunk (Gitsigns)" },
+            { "<Leader>hp", "<Cmd>Gitsigns nav_hunk prev<CR>",       desc = "Go to prev hunk (Gitsigns)" },
             { "<Leader>hs", "<Cmd>Gitsigns stage_hunk<CR>",          desc = "Stage hunk (Gitsigns)" },
             { "<Leader>hr", "<Cmd>Gitsigns reset_hunk<CR>",          desc = "Reset hunk (Gitsigns)" },
             { "<Leader>hi", "<Cmd>Gitsigns preview_hunk_inline<CR>", desc = "Preview hunk inline (Gitsigns)" },
@@ -182,7 +187,6 @@ return {
 
     {
         "rmagatti/auto-session",
-        dependencies = { "nvim-tree/nvim-tree.lua" },
         lazy = false,
         opts = {
             suppressed_dirs = { "~/", "~/Downloads", "/" },
@@ -202,10 +206,10 @@ return {
         end,
         keys = {
             -- Will use Telescope if installed or a vim.ui.select picker otherwise
-            { "<Leader>wr", "<Cmd>SessionSearch<CR>",         desc = "Session search (auto-session)" },
-            { "<Leader>ws", "<Cmd>SessionSave<CR>",           desc = "Save session (auto-session)" },
-            { "<Leader>wd", "<Cmd>SessionDelete<CR>",         desc = "Delete session (auto-session)" },
-            { "<Leader>wa", "<Cmd>SessionToggleAutoSave<CR>", desc = "Toggle autosave (auto-session)" },
+            { "<Leader>wr", "<Cmd>AutoSession search<CR>", desc = "Session search (auto-session)" },
+            { "<Leader>ws", "<Cmd>AutoSession save<CR>",   desc = "Save session (auto-session)" },
+            { "<Leader>wd", "<Cmd>AutoSession delete<CR>", desc = "Delete session (auto-session)" },
+            { "<Leader>wa", "<Cmd>AutoSession toggle<CR>", desc = "Toggle autosave (auto-session)" },
         },
     },
 

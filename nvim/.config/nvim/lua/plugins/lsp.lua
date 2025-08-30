@@ -250,7 +250,7 @@ return {
             },
             format_on_save = function(bufnr)
                 -- Disable on certain filetypes
-                local ignore_filetypes = { "bib" }
+                local ignore_filetypes = {}
                 if vim.tbl_contains(ignore_filetypes, vim.bo[bufnr].filetype) then
                     return
                 end

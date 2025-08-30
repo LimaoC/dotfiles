@@ -36,12 +36,6 @@ return {
     },
 
     {
-        "Vimjas/vim-python-pep8-indent",
-        ft = "python",
-        config = function() end,
-    },
-
-    {
         "lervag/vimtex",
         version = "*", -- latest stable release
         lazy = false,  -- vimtex shouldn't be lazy-loaded
