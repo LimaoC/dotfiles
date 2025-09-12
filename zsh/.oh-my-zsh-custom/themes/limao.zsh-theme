@@ -11,7 +11,7 @@ ZSH_THEME_GIT_PROMPT_CLEAN=""
 
 # Show conda environment name only if an environment is activated
 conda_prompt_info() {
-    if [[ -v CONDA_DEFAULT_ENV ]]; then
+    if [[ -n "$CONDA_DEFAULT_ENV" ]]; then
         echo " %B%F{magenta}[%F{green}$CONDA_DEFAULT_ENV%F{magenta}]"
     fi
 }
