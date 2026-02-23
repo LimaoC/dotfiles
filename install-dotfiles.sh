@@ -26,11 +26,11 @@ if ! command -v stow 2>&1 >/dev/null; then
     exit 1
 fi
 
-if [[ -z "$1" ]] then
+if [[ -z "$1" ]]; then
     for dir in "${dirs[@]}"; do
         stow --verbose=1 $dir
     done
-elif [[ "$1" == "--clean" ]] then
+elif [[ "$1" -eq "--clean" ]]; then
     for dir in "${dirs[@]}"; do
         stow --verbose=1 -D $dir
     done
