@@ -19,7 +19,9 @@ conda_prompt_info() {
 NEWLINE=$'\n'
 
 # Comment and uncomment the optional lines below to your liking. Optional lines are marked with an asterisk *.
-PROMPT="%B%F{magenta}λ %F{yellow}%n@%m %F{blue}%(4~|…/%3~|%~)"
+PROMPT="%B%F{magenta}λ %F{yellow}%n"
+# PROMPT+='@%m'                                  # *Hostname
+PROMPT+=' %F{blue}%(4~|…/%3~|%~)'                # Current directory
 PROMPT+='$(git_prompt_info)'                     # *Git info
 PROMPT+='$(conda_prompt_info)'                   # *Conda environment name
 PROMPT+="${NEWLINE}%F{magenta}»%b%f "            # Prompt suffix
