@@ -1,6 +1,7 @@
 alias ,="cd .."
 alias ,,="cd ../.."
 alias ,,,="cd ../../.."
+alias ,,,,="cd ../../../.."
 
 # Add an "alert" alias for long running commands, use like so:
 #   sleep 10; alert

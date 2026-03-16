@@ -12,7 +12,7 @@ CASE_SENSITIVE="false"                # Case-sensitive completion
 HYPHEN_INSENSITIVE="true"             # Hyphen-insensitive competion
 DISABLE_UNTRACKED_FILES_DIRTY="true"  # Disable marking untracked files under VCS as dirty
 DISABLE_AUTO_TITLE="true"             # Disable auto-changing title
-plugins=(git zsh-autosuggestions zsh-nvm zsh-syntax-highlighting poetry)
+plugins=(aliases git zsh-autosuggestions zsh-nvm zsh-syntax-highlighting poetry)
 
 source $ZSH/oh-my-zsh.sh
 
