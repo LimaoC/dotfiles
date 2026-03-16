@@ -65,7 +65,7 @@ timezsh() {
 # List n most frequently used comments
 # REF: https://old.reddit.com/r/archlinux/comments/t4ohgq/what_are_your_top_5_most_used_shell_commands/
 mostused() {
-    if [[ $# -eq 0 ]] then
+    if [[ $# -eq 0 ]]; then
         print -l ${(o)history%% *} | uniq -c | sort -nr | head -n 5
     else
         print -l ${(o)history%% *} | uniq -c | sort -nr | head -n $1
@@ -148,6 +148,6 @@ alias conda="load_conda && conda"
 
 # Only show welcome message for first terminal window
 terminal_count=$(ps a | awk '{print $2}' | grep -vi "tty*" | uniq | wc -l);
-if [[ $terminal_count -eq 1 ]] then
+if [[ $terminal_count -eq 1 ]]; then
     welcome
 fi
