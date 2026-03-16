@@ -39,7 +39,8 @@ return {
     },
 
     {
-        "williamboman/mason.nvim",
+        "mason-org/mason.nvim",
+        version = "*",
         lazy = false,
         opts = {},
     },
@@ -47,9 +48,13 @@ return {
     -- Autocompletion
     {
         "hrsh7th/nvim-cmp",
+        version = "*",
         event = "InsertEnter",
         dependencies = {
-            { "L3MON4D3/LuaSnip" },
+            {
+                "L3MON4D3/LuaSnip",
+                version = "*",
+            },
             { "saadparwaiz1/cmp_luasnip" }, -- completion source for luasnip
             { "hrsh7th/cmp-nvim-lsp-signature-help" }
         },
@@ -136,11 +141,12 @@ return {
     -- LSP
     {
         "neovim/nvim-lspconfig",
+        version = "*",
         cmd = { "LspInfo", "LspInstall", "LspStart" }, -- lazy-load on one of these commands
         event = { "BufReadPre", "BufNewFile" },        -- or one of these events
         dependencies = {
             { "hrsh7th/cmp-nvim-lsp" },
-            { "williamboman/mason-lspconfig.nvim" },
+            { "williamboman/mason-lspconfig.nvim", version = "*" },
             { "stevearc/conform.nvim" },
         },
         init = function()
@@ -242,6 +248,7 @@ return {
     -- Formatting
     {
         "stevearc/conform.nvim",
+        version = "*",
         event = { "BufWritePre" }, -- REF: https://github.com/stevearc/conform.nvim/blob/master/doc/recipes.md#lazy-loading-with-lazynvim
         cmd = { "ConformInfo" },
         opts = {
@@ -262,4 +269,22 @@ return {
             end
         },
     },
+
+    -- Linting
+    {
+        "mfussenegger/nvim-lint",
+        event = { "BufReadPre", "BufNewFile" },
+        config = function()
+            local lint = require("lint")
+            lint.linters_by_ft = {
+                python = { "mypy" },
+            }
+
+            vim.api.nvim_create_autocmd({ "BufWritePost", "BufReadPost", "InsertLeave" }, {
+                callback = function()
+                    lint.try_lint()
+                end,
+            })
+        end,
+    }
 }

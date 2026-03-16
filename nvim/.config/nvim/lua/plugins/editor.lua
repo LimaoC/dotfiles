@@ -157,6 +157,7 @@ return {
 
     {
         "folke/which-key.nvim",
+        version = "*",
         event = "VeryLazy",
         opts = {
             plugins = { spelling = { enabled = false } }
@@ -168,6 +169,7 @@ return {
 
     {
         "folke/snacks.nvim",
+        version = "*",
         priority = 1000,
         lazy = false,
         opts = {
@@ -215,6 +217,7 @@ return {
 
     {
         "folke/trouble.nvim",
+        version = "*",
         dependencies = { "nvim-tree/nvim-web-devicons" },
         init = function()
             -- Disable diagnostic virtual text (in favour of trouble.nvim)

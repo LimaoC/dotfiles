@@ -29,6 +29,7 @@ return {
 
     {
         "folke/todo-comments.nvim",
+        version = "*", -- latest stable release
         dependencies = { "nvim-lua/plenary.nvim" },
         opts = {
             signs = false,
@@ -37,7 +38,7 @@ return {
 
     {
         "lervag/vimtex",
-        version = "*", -- latest stable release
-        lazy = false,  -- vimtex shouldn't be lazy-loaded
+        version = "v2.16", -- latest stable release
+        lazy = false,      -- vimtex shouldn't be lazy-loaded
     },
 }
