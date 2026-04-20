@@ -1,11 +1,23 @@
-[commit]
-    gpgsign = true
 [alias]
     logp = log --graph --oneline  # log pretty
     logpf = log --graph --oneline --full-history --all  # log pretty full
+[commit]
+    gpgsign = true
+    verbose = true
+[core]
+    editor = nvim
+    pager = less -X -F
+[fetch]
+    prune = true
 [init]
     defaultBranch = main
-[core]
-    pager = less -X -F
+[merge]
+    conflictstyle = zdiff3
 [pull]
     rebase = true
+[transfer]
+    fsckobjects = true
+[fetch]
+    fsckobjects = true
+[receive]
+    fsckObjects = true
