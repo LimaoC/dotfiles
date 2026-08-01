@@ -22,14 +22,14 @@ return {
 
     {
         "kylechui/nvim-surround",
-        version = "*", -- latest stable release
+        version = "*",
         event = "InsertEnter",
         opts = {},
     },
 
     {
         "folke/todo-comments.nvim",
-        version = "*", -- latest stable release
+        version = "*",
         dependencies = { "nvim-lua/plenary.nvim" },
         opts = {
             signs = false,
@@ -38,7 +38,7 @@ return {
 
     {
         "lervag/vimtex",
-        version = "v2.16", -- latest stable release
-        lazy = false,      -- vimtex shouldn't be lazy-loaded
+        version = "v2.16",
+        lazy = false, -- vimtex shouldn't be lazy-loaded
     },
 }

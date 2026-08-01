@@ -7,7 +7,6 @@ local treesitter_ensure_installed = {
     "markdown",
     "markdown_inline",
     "python",
-    -- "rust",
     "vim",
     "vimdoc"
 }
@@ -24,17 +23,11 @@ local mason_ensure_installed = {
 return {
     {
         "nvim-treesitter/nvim-treesitter",
-        event = { "BufRead" },
+        lazy = false, -- Lazy loading not supported
+        branch = "main",
         build = ":TSUpdate",
         config = function()
-            -- REF: https://github.com/nvim-treesitter/nvim-treesitter#i-get-query-error-invalid-node-type-at-position
-            -- This error can occur if you have more than one `parser` runtime directory. See above for details.
-            -- If the nvim parser is one of them, you can remove it by changing the directory name from `parser`.
-            require("nvim-treesitter.configs").setup({
-                ensure_installed = treesitter_ensure_installed,
-                highlight = { enable = true },
-                indent = { enable = true },
-            })
+            require("nvim-treesitter").install(treesitter_ensure_installed)
         end,
     },
 

@@ -1,18 +1,3 @@
--- Open nvim-tree for directories and change Neovim's directory
--- REF: https://github.com/nvim-tree/nvim-tree.lua/wiki/Open-At-Startup#open-for-directories-and-change-neovims-directory
-vim.api.nvim_create_autocmd("VimEnter", {
-    callback = function(data)
-        -- Buffer is a directory
-        local directory = vim.fn.isdirectory(data.file) == 1
-        if not directory then
-            return
-        end
-
-        vim.cmd.cd(data.file)
-        require("nvim-tree.api").tree.open()
-    end
-})
-
 -- Decide behaviour for auto-closing nvim-tree on QuitPre
 -- REF: https://github.com/nvim-tree/nvim-tree.lua/wiki/Auto-Close#marvinth01
 vim.api.nvim_create_autocmd("QuitPre", {
@@ -42,7 +27,7 @@ vim.api.nvim_create_autocmd("QuitPre", {
 return {
     {
         "nvim-tree/nvim-tree.lua",
-        version = "*", -- latest stable release
+        version = "*",
         lazy = false,
         dependencies = { "nvim-tree/nvim-web-devicons" },
         init = function()
