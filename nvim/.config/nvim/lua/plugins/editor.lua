@@ -238,6 +238,13 @@ return {
                 desc = "Find in files (fzf)"
             },
             {
+                "<D-O>",
+                function()
+                    require("fzf-lua").files({ resume = true, git_icons = true })
+                end,
+                desc = "Find files by name (fzf)"
+            },
+            {
                 "<D-e>",
                 function()
                     require("fzf-lua").oldfiles({ prompt = "» ", cwd_only = true, include_current_session = true })
