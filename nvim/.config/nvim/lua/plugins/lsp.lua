@@ -3,6 +3,7 @@
 -- REF: see https://lsp-zero.netlify.app/docs/autocomplete.html#basic-completions-for-neovim-s-lua-api
 
 local treesitter_ensure_installed = {
+    "go",
     "lua",
     "markdown",
     "markdown_inline",
@@ -14,6 +15,7 @@ local treesitter_ensure_installed = {
 local mason_ensure_installed = {
     -- "clangd",
     "lua_ls",
+    "gopls",
     -- "julials",
     "pylsp",
     -- "rust_analyzer",  -- rust_analyzer@2024-10-21
@@ -164,6 +166,8 @@ return {
                 callback = function(event)
                     vim.keymap.set("n", "K", "<Cmd>lua vim.lsp.buf.hover()<CR>",
                         { buffer = event.buf, desc = "Display hover information (lsp)" })
+                    vim.keymap.set("n", "gl", '<Cmd>lua vim.diagnostic.open_float()<CR>',
+                        { buffer = event.buf, desc = "Show line diagnostics (lsp)" })
                     vim.keymap.set("n", "gd", "<Cmd>lua vim.lsp.buf.definition()<CR>",
                         { buffer = event.buf, desc = "Jump to definition (lsp)" })
                     vim.keymap.set("n", "gD", "<Cmd>lua vim.lsp.buf.declaration()<CR>",
