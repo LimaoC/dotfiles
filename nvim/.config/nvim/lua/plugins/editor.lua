@@ -229,13 +229,21 @@ return {
             "borderless-full",
             fzf_colors = true, -- automatically generate colour scheme from nvim colour scheme
         },
-        -- config = function(_, opts)
-        --     require("fzf-lua").setup({ "borderless-full", fzf_colors = true })
-        -- end,
         keys = {
-            { "<Leader>ff", "<Cmd>FzfLua live_grep<CR>", desc = "Live grep (fzf)" },
-            { "<Leader>fg", "<Cmd>FzfLua global<CR>",    desc = "Global picker (fzf)" },
-            { "<Leader>fr", "<Cmd>FzfLua resume<CR>",    desc = "Resume previous search (fzf)" }
+            {
+                "<D-F>",
+                function()
+                    require("fzf-lua").live_grep({ prompt = '» ', resume = true, git_icons = true })
+                end,
+                desc = "Find in files (fzf)"
+            },
+            {
+                "<D-e>",
+                function()
+                    require("fzf-lua").oldfiles({ prompt = "» ", cwd_only = true, include_current_session = true })
+                end,
+                desc = "Recent files (fzf)"
+            }
         }
     }
 }
