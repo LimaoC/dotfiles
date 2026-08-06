@@ -31,13 +31,13 @@ return {
         config = function()
             require("nvim-treesitter").install(treesitter_ensure_installed)
 
-            -- Enable treesitter highlighting & folding
+            -- Use treesitter highlighting only for filetypes with available parsers
             vim.api.nvim_create_autocmd('FileType', {
-                pattern = { '<filetype>' },
-                callback = function()
-                    vim.treesitter.start()
-                    vim.wo[0][0].foldexpr = 'v:lua.vim.treesitter.foldexpr()'
-                    vim.wo[0][0].foldmethod = 'expr'
+                callback = function(opts)
+                    local lang = vim.treesitter.language.get_lang(vim.bo[opts.buf].filetype)
+                    if lang and vim.treesitter.language.add(lang) then
+                        vim.treesitter.start()
+                    end
                 end,
             })
         end,
