@@ -40,7 +40,10 @@ return {
         end,
         opts = {
             sort = { sorter = "case_sensitive" },
-            view = { side = "right" },
+            view = {
+                side = "right",
+                width = { max = 100 }
+            },
             renderer = {
                 group_empty = true,
                 full_name = true,
