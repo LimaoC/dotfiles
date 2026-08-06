@@ -30,6 +30,16 @@ return {
         build = ":TSUpdate",
         config = function()
             require("nvim-treesitter").install(treesitter_ensure_installed)
+
+            -- Enable treesitter highlighting & folding
+            vim.api.nvim_create_autocmd('FileType', {
+                pattern = { '<filetype>' },
+                callback = function()
+                    vim.treesitter.start()
+                    vim.wo[0][0].foldexpr = 'v:lua.vim.treesitter.foldexpr()'
+                    vim.wo[0][0].foldmethod = 'expr'
+                end,
+            })
         end,
     },
 
@@ -283,5 +293,5 @@ return {
                 end,
             })
         end,
-    }
+    },
 }
